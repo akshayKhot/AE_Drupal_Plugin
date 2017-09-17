@@ -1,0 +1,12 @@
+ae.demo:
+  title: 'Welcome'
+  route_name: ae.content
+  description: 'Welcome Message'
+  parent: main
+  menu_name: main
+
+ae.admin_settings:
+  route_name: ae.adminForm
+  title: 'AE Configuration'
+  description: 'Set up AE on your website'
+  parent: system.admin_config_system

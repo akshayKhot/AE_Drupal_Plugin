@@ -1,0 +1,17 @@
+ae.content:
+  path: '/welcome'
+  defaults: 
+    _controller: '\Drupal\ae\Controller\AeController::welcome'
+    _title: 'Welcome'
+  requirements:
+    _permission: 'access content'
+
+ae.adminForm:
+  path: '/admin/config/ae/adminsettings'
+  defaults: 
+    _form: '\Drupal\ae\Form\ConfigurationForm'
+    _title: 'Configuration Form'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
