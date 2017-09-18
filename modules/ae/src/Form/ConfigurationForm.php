@@ -42,14 +42,15 @@ class ConfigurationForm extends ConfigFormBase {
         parent::submitForm($form, $form_state);
 
         $api_key = $form_state->getValue('api_key');
-        
+        $socials = $form_state->getValue('socials');
+        $value = implode("|", $socials);
         db_insert('ae_config')->fields([
-            'api_key' => $api_key
+            'api_key' => $api_key,
+            'social_logins' => $value
           ])->execute();
 
-        //$config = $this->getConfig($api_key);
 
-        drupal_set_message("config saved successfully..");
+        drupal_set_message("Config has been saved..");
     }
 
     private function getConfig($api_key) {

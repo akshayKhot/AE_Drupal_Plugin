@@ -12,6 +12,11 @@ function ae_schema() {
        'length' => 60,
        'not null' => TRUE,
      ),
+     'social_logins'=>array(
+       'type' => 'varchar',
+       'length' => 100,
+       'not null' => TRUE,
+     ),
    ),
    'primary key' => array('id'),
  );

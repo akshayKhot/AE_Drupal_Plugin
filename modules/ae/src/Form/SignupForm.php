@@ -33,10 +33,19 @@ class SignupForm extends FormBase {
 
         $settings = $this->ae_get_settings();
         $api_key = $settings['api_key'];
+        $socials = explode("|", $settings['socials']);
+        $socials = array_diff($socials, [0]);
 
+        foreach ($socials as $social) {
+            $form['socials'][$social] = [
+                '#type' => 'button',
+                '#value' => $social
+              ];
+        }
+       
         $form['email'] = [
             '#type' => 'email',
-            '#title' => $api_key//$this->t('Email')
+            '#title' => $this->t('Email')
         ];
 
         $form['password'] = [
@@ -59,9 +68,10 @@ class SignupForm extends FormBase {
           $settings = array();
         
           // Read settings.
-          $results = db_query("SELECT api_key FROM {ae_config}");
+          $results = db_query("SELECT api_key, social_logins FROM {ae_config}");
           foreach ($results as $result) {
             $settings['api_key'] = $result->api_key;
+            $settings['socials'] = $result->social_logins;
           }
           return $settings;
         }
