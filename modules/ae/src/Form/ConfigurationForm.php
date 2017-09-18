@@ -23,18 +23,7 @@ class ConfigurationForm extends ConfigFormBase {
             '#title' => $this->t('API Key')
         ];
 
-        // $form['socials'] = [
-        //     '#type' => 'checkboxes',
-        //     '#options' => [
-        //         'spotify' => $this->t('spotify'), 
-        //         'facebook' => $this->t('facebook'), 
-        //         'twitter' => $this->t('twitter'),
-        //         'Gmail' => $this->t('gmail'), 
-        //         'linkedin' => $this->t('linkedin'), 
-        //         'yahoo' => $this->t('yahoo')
-        //     ],
-        //     '#title' => $this->t('Select the social logins you want')
-        // ];
+        
         return parent::buildForm($form, $form_state);
     }
 
@@ -43,8 +32,6 @@ class ConfigurationForm extends ConfigFormBase {
 
         $api_key = $form_state->getValue('api_key');
         $config_str = $this->getConfig($api_key);
-        // $socials = $form_state->getValue('socials');
-        // $value = implode("|", $socials);
         
         $state = \Drupal::state();
         $state->set('api_key', $api_key);

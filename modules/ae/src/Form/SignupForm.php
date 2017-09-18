@@ -33,22 +33,16 @@ class SignupForm extends FormBase {
 
         $state = \Drupal::state();
 
-        $config = json_decode($state->get('config'));
-        $urls = $config->Urls;
-
-        // $socials = $state->get('socials');
-        // $socials = explode("|", $socials);
-        // $socials = array_diff($socials, [0]);
+        $socials = $state->get('socials');
+        $urls = explode("|", $socials);
 
         foreach ($urls as $url) {
-            $form['socials'][$url->Name] = [
+            $form['socials'][$url] = [
                 '#type' => 'button',
-                '#value' => $url->Name
+                '#value' => $url
               ];
         }
 
-        
-       
         $form['email'] = [
             '#type' => 'email',
             '#title' => $this->t('Email')
