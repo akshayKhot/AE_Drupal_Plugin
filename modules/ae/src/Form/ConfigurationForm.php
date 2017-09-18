@@ -23,18 +23,18 @@ class ConfigurationForm extends ConfigFormBase {
             '#title' => $this->t('API Key')
         ];
 
-        $form['socials'] = [
-            '#type' => 'checkboxes',
-            '#options' => [
-                'spotify' => $this->t('spotify'), 
-                'facebook' => $this->t('facebook'), 
-                'twitter' => $this->t('twitter'),
-                'Gmail' => $this->t('gmail'), 
-                'linkedin' => $this->t('linkedin'), 
-                'yahoo' => $this->t('yahoo')
-            ],
-            '#title' => $this->t('Select the social logins you want')
-        ];
+        // $form['socials'] = [
+        //     '#type' => 'checkboxes',
+        //     '#options' => [
+        //         'spotify' => $this->t('spotify'), 
+        //         'facebook' => $this->t('facebook'), 
+        //         'twitter' => $this->t('twitter'),
+        //         'Gmail' => $this->t('gmail'), 
+        //         'linkedin' => $this->t('linkedin'), 
+        //         'yahoo' => $this->t('yahoo')
+        //     ],
+        //     '#title' => $this->t('Select the social logins you want')
+        // ];
         return parent::buildForm($form, $form_state);
     }
 
@@ -42,15 +42,14 @@ class ConfigurationForm extends ConfigFormBase {
         parent::submitForm($form, $form_state);
 
         $api_key = $form_state->getValue('api_key');
-        $socials = $form_state->getValue('socials');
-        $value = implode("|", $socials);
-        db_insert('ae_config')->fields([
-            'api_key' => $api_key,
-            'social_logins' => $value
-          ])->execute();
+        $config_str = $this->getConfig($api_key);
+        // $socials = $form_state->getValue('socials');
+        // $value = implode("|", $socials);
+        
+        $state = \Drupal::state();
+        $state->set('api_key', $api_key);
+        $state->set('config', $config_str);
 
-
-        drupal_set_message("Config has been saved..");
     }
 
     private function getConfig($api_key) {

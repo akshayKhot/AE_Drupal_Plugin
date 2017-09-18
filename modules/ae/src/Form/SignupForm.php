@@ -31,17 +31,23 @@ class SignupForm extends FormBase {
     */
     public function buildForm(array $form, FormStateInterface $form_state) {
 
-        $settings = $this->ae_get_settings();
-        $api_key = $settings['api_key'];
-        $socials = explode("|", $settings['socials']);
-        $socials = array_diff($socials, [0]);
+        $state = \Drupal::state();
 
-        foreach ($socials as $social) {
-            $form['socials'][$social] = [
+        $config = json_decode($state->get('config'));
+        $urls = $config->Urls;
+
+        // $socials = $state->get('socials');
+        // $socials = explode("|", $socials);
+        // $socials = array_diff($socials, [0]);
+
+        foreach ($urls as $url) {
+            $form['socials'][$url->Name] = [
                 '#type' => 'button',
-                '#value' => $social
+                '#value' => $url->Name
               ];
         }
+
+        
        
         $form['email'] = [
             '#type' => 'email',

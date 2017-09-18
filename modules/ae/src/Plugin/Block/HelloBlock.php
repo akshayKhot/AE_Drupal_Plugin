@@ -9,7 +9,7 @@ use Drupal\Core\Block\BlockBase;
  *
  * @Block(
  *   id = "hello_block",
- *   admin_label = @Translation("Hello block"),
+ *   admin_label = @Translation("Sign Up"),
  *   category = @Translation("Hello World"),
  * )
  */
