@@ -42,14 +42,25 @@ class ConfigurationForm extends ConfigFormBase {
         parent::submitForm($form, $form_state);
 
         $api_key = $form_state->getValue('api_key');
+        
+        db_insert('ae_config')->fields([
+            'api_key' => $api_key
+          ])->execute();
+
+        //$config = $this->getConfig($api_key);
+
+        drupal_set_message("config saved successfully..");
+    }
+
+    private function getConfig($api_key) {
+
         $url = 'https://akshay.dev.appreciationengine.com/v1.1/app/info?apiKey=' . $api_key . '&turnoffdebug=1';
         
         $client = \Drupal::httpClient();
         $request = $client->get($url);   
         $response = (string) $request->getBody();
-        
 
-        drupal_set_message($response);
+        return $response;
     }
 }
 

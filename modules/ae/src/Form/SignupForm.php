@@ -30,9 +30,13 @@ class SignupForm extends FormBase {
     * Form constructor.
     */
     public function buildForm(array $form, FormStateInterface $form_state) {
+
+        $settings = $this->ae_get_settings();
+        $api_key = $settings['api_key'];
+
         $form['email'] = [
             '#type' => 'email',
-            '#title' => $this->t('Email')
+            '#title' => $api_key//$this->t('Email')
         ];
 
         $form['password'] = [
@@ -48,4 +52,19 @@ class SignupForm extends FormBase {
         return $form;
 
     }
+
+    private function ae_get_settings() {
+        
+          // Container.
+          $settings = array();
+        
+          // Read settings.
+          $results = db_query("SELECT api_key FROM {ae_config}");
+          foreach ($results as $result) {
+            $settings['api_key'] = $result->api_key;
+          }
+          return $settings;
+        }
+
+
 }
