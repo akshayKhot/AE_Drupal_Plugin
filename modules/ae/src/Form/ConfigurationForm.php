@@ -46,7 +46,7 @@ class ConfigurationForm extends ConfigFormBase {
         
         $client = \Drupal::httpClient();
         $request = $client->get($url);   
-        $response = $request->getBody();
+        $response = (string) $request->getBody();
         
 
         drupal_set_message($response);
