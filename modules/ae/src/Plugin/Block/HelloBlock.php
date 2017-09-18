@@ -15,13 +15,9 @@ use Drupal\Core\Block\BlockBase;
  */
 class HelloBlock extends BlockBase {
 
-  /**
-   * {@inheritdoc}
-   */
+
   public function build() {
-    return array(
-      '#markup' => $this->t('Hello, World!'),
-    );
+    return \Drupal::formBuilder()->getForm('Drupal\ae\Form\SignupForm');
   }
 
 }

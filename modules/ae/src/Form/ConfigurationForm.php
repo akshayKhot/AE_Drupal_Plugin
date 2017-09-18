@@ -19,8 +19,21 @@ class ConfigurationForm extends ConfigFormBase {
 
     public function buildForm(array $form, FormStateInterface $form_state) {
         $form['api_key'] = [
-            '#type' => 'textarea',
-            '#title' => $this->t('Hello World')
+            '#type' => 'textfield',
+            '#title' => $this->t('API Key')
+        ];
+
+        $form['socials'] = [
+            '#type' => 'checkboxes',
+            '#options' => [
+                'spotify' => $this->t('spotify'), 
+                'facebook' => $this->t('facebook'), 
+                'twitter' => $this->t('twitter'),
+                'Gmail' => $this->t('gmail'), 
+                'linkedin' => $this->t('linkedin'), 
+                'yahoo' => $this->t('yahoo')
+            ],
+            '#title' => $this->t('Select the social logins you want')
         ];
         return parent::buildForm($form, $form_state);
     }
@@ -28,9 +41,16 @@ class ConfigurationForm extends ConfigFormBase {
     public function submitForm(array&$form, FormStateInterface $form_state) {
         parent::submitForm($form, $form_state);
 
-        drupal_set_message($form_state->getValue('api_key'));
-    }
+        $api_key = $form_state->getValue('api_key');
+        $url = 'https://akshay.dev.appreciationengine.com/v1.1/app/info?apiKey=' . $api_key . '&turnoffdebug=1';
+        
+        $client = \Drupal::httpClient();
+        $request = $client->get($url);   
+        $response = $request->getBody();
+        
 
+        drupal_set_message($response);
+    }
 }
 
 
