@@ -771,7 +771,7 @@ $databases['default']['default'] = array (
   'host' => 'localhost',
   'port' => '3306',
   'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql',
+  'driver' => 'mysql'
 );
 $settings['install_profile'] = 'standard';
 $config_directories['sync'] = 'sites/default/files/config_p7WJO8-emk1fENBuXv7tvGMEOlvWsf8ye3cj4Oz4hSm3n10-fmT5CyoYCtTH2cfrVffeLUKg2g/sync';

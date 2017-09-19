@@ -47,7 +47,12 @@ class HelloBlock extends BlockBase {
     }
 
     public function build() {
-        return \Drupal::formBuilder()->getForm('Drupal\ae\Form\SignupForm');
+        //return \Drupal::formBuilder()->getForm('Drupal\ae\Form\SignupForm');
+
+        return [
+            '#theme' => 'signup',
+            '#name' => $this->t('Jason Fried'),
+          ];
     }
 
     public function getSocialsFromConfig() {
