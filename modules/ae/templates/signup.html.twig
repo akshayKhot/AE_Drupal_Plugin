@@ -1,14 +1,26 @@
-<h1>Sign Up</h1>
- 
-<a href='#'>Spotify</a>
-<a href='#'>Facebook</a>
-<a href='#'>LinkedIn</a>
+<script type="text/javascript" charset="utf-8" src="https://akshay.dev.appreciationengine.com/framework/js/429"></script>
 
-<br>
-<input type="text" placeholder="email"><br>
-<input type="password">
 
-<br>
-
-<button> Sign Up Now..</button>
+<div id="signup">
+            <div style="background: #000; color:#fff;">Social Signup</div>
+            <div style="padding: 15px 30px;">
+                {% for social in socials %}
+                    <a href="#" data-ae-register-link="{{ social }}" class="ae-btn btn btn-default">{{ social }}</a>
+                {% endfor %}
+            </div>
+            <div style="background: #000; color:#fff;">Email Signup</div>
+            <div style="padding: 15px 30px;">
+                <form id="email-signup" data-ae-register-form="email" method="post">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                        
+                    </div>
+                    <div>
+                        <label for="password">Password</label>
+                        <input type="password" id="password" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up!</button>
+                </form>
+            </div>
 
