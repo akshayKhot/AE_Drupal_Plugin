@@ -6,6 +6,12 @@ use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
 
 class SignupForm extends FormBase {
+
+    public function __construct()
+    {
+        $this->state = \Drupal::state();
+    }
+
     /**
     * Determines the ID of the form.
     */
@@ -31,16 +37,16 @@ class SignupForm extends FormBase {
     */
     public function buildForm(array $form, FormStateInterface $form_state) {
 
-        $state = \Drupal::state();
-
-        $socials = $state->get('socials');
+        $socials = $this->state->get('socials');
         $urls = explode("|", $socials);
 
-        foreach ($urls as $url) {
-            $form['socials'][$url] = [
-                '#type' => 'button',
-                '#value' => $url
-              ];
+        if(!empty($urls)) {
+            foreach ($urls as $url) {
+                $form['socials'][$url] = [
+                    '#type' => 'button',
+                    '#value' => $url
+                ];
+            }
         }
 
         $form['email'] = [
@@ -74,7 +80,7 @@ class SignupForm extends FormBase {
             $settings['socials'] = $result->social_logins;
           }
           return $settings;
-        }
+    }
 
 
 }

@@ -18,7 +18,7 @@ class HelloBlock extends BlockBase {
 
     public function __construct()
     {
-        //$state = \Drupal::state();
+        $this->state = \Drupal::state();
     }
 
     public function blockForm($form, FormStateInterface $form_state) {
@@ -42,9 +42,8 @@ class HelloBlock extends BlockBase {
 
     public function blockSubmit($form, FormStateInterface $form_state) {
 
-        $state = \Drupal::state();
         $socials = $this->getSelectedSocials($form_state); 
-        $state->set('socials', $socials);
+        $this->state->set('socials', $socials);
     }
 
     public function build() {
@@ -52,13 +51,13 @@ class HelloBlock extends BlockBase {
     }
 
     public function getSocialsFromConfig() {
-        $state = \Drupal::state();
-        $config = json_decode($state->get('config'));
+        $config = json_decode($this->state->get('config'));
         $urls = $config->Urls;
         $socials = [];
         foreach($urls as $url) {
             $socials[] = $url->Name;
         }
+        $socials[] = "linkedin";
         return $socials;
     }
 
