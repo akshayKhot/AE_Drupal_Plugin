@@ -38,13 +38,14 @@ function AEJSReady(aeJS) {
     {% for social in socials %}
         social_logins += '{{ social|lower }}{% if not loop.last %},{% endif %}';
     {% endfor %}
-    console.log( social_logins);
+
+    var auth_window = {{auth_window}} == 0 ? false : true;
 
 	globalAEJS = aeJS;
 
 	console.log("AEJS READY, hello world from AE twig");
 	
-	aeJS.settings['auth_window'] = true;
+	aeJS.settings['auth_window'] = auth_window;
 	aeJS.settings['services'] = social_logins;
 
     console.log(aeJS.settings['services']);

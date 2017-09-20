@@ -37,12 +37,19 @@ class HelloBlock extends BlockBase {
             '#title' => $this->t('Select the social logins that you want to add'),
         );
 
+        $form['auth_window'] = array(
+            '#type' => 'radios',
+            '#title' => $this->t('Open modal pop-up?'),
+            '#default_value' => 0,
+            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
+        );
+
         $form['email_signup'] = array(
             '#type' => 'radios',
             '#title' => $this->t('Do you want email registration?'),
             '#default_value' => 1,
             '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
-          );
+        );
 
         return $form;
       }
@@ -50,9 +57,11 @@ class HelloBlock extends BlockBase {
     public function blockSubmit($form, FormStateInterface $form_state) {
 
         $socials = $this->getSelectedSocials($form_state);
+        $auth_window = $form_state->getValue('auth_window'); 
         $want_email = $form_state->getValue('email_signup');
         $this->state->set('socials', $socials);
         $this->state->set('email_signup', $want_email);
+        $this->state->set('auth_window', $auth_window);
     }
 
     public function build() {
@@ -65,6 +74,7 @@ class HelloBlock extends BlockBase {
             '#theme' => 'signup',
             '#socials' => $urls,
             '#want_email' => $this->state->get('email_signup'),
+            '#auth_window' => $this->state->get('auth_window'),
             '#attached' => array(
                 'library' => array(
                   'ae/script',
