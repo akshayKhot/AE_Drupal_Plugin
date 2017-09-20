@@ -39,7 +39,7 @@ function AEJSReady(aeJS) {
         social_logins += '{{ social|lower }}{% if not loop.last %},{% endif %}';
     {% endfor %}
 
-    var auth_window = {{auth_window}} == 0 ? false : true;
+    var auth_window = {{auth_window}} == 0 ? true : false;
 
 	globalAEJS = aeJS;
 
