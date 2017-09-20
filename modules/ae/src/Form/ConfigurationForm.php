@@ -23,6 +23,11 @@ class ConfigurationForm extends ConfigFormBase {
             '#title' => $this->t('API Key')
         ];
 
+        $form['base_url'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Base URL')
+        ];
+
         
         return parent::buildForm($form, $form_state);
     }
@@ -31,17 +36,19 @@ class ConfigurationForm extends ConfigFormBase {
         parent::submitForm($form, $form_state);
 
         $api_key = $form_state->getValue('api_key');
-        $config_str = $this->getConfig($api_key);
+        $base_url = $form_state->getValue('base_url');
+        
+        $config_str = $this->getConfig($base_url, $api_key);
         
         $state = \Drupal::state();
         $state->set('api_key', $api_key);
         $state->set('config', $config_str);
-
+        drupal_set_message($config_str);
     }
 
-    private function getConfig($api_key) {
+    private function getConfig($base_url, $api_key) {
 
-        $url = 'https://akshay.dev.appreciationengine.com/v1.1/app/info?apiKey=' . $api_key . '&turnoffdebug=1';
+        $url = $base_url . '/v1.1/app/info?apiKey=' . $api_key . '&turnoffdebug=1';
         
         $client = \Drupal::httpClient();
         $request = $client->get($url);   

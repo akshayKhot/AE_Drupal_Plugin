@@ -1,0 +1,13 @@
+<?php
+
+function ae_theme($existing, $type, $theme, $path) {
+  return [
+    'signup' => [
+      'variables' => [
+          'socials' => [],
+          'want_email' => NULL,
+          'auth_window' => NULL
+          ],
+    ],
+  ];
+}

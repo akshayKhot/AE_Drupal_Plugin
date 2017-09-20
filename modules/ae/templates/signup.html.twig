@@ -1,0 +1,66 @@
+<script type="text/javascript" charset="utf-8" src="https://akshay.dev.appreciationengine.com/framework/js/429"></script>
+
+
+<div id="signup">
+            <div style="background: #000; color:#fff;">Social Signup</div>
+            <div style="padding: 15px 30px;">
+                {% for social in socials %}
+                    <a href="#" data-ae-register-link="{{ social|lower }}" class="ae-btn btn btn-default">{{social}}</a>
+                {% endfor %}
+            </div>
+
+            {% if want_email == 0 %}
+
+                <div style="background: #000; color:#fff;">Email Signup</div>
+                <div style="padding: 15px 30px;">
+                    <form id="email-signup" data-ae-register-form="email" method="post">
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            
+                        </div>
+                        <div>
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up!</button>
+                    </form>
+                </div>
+            {% endif %}
+
+
+<script type="text/javascript">
+
+
+function AEJSReady(aeJS) {
+
+    var social_logins = "";
+    {% for social in socials %}
+        social_logins += '{{ social|lower }}{% if not loop.last %},{% endif %}';
+    {% endfor %}
+
+    var auth_window = {{auth_window}} == 0 ? false : true;
+
+	globalAEJS = aeJS;
+
+	console.log("AEJS READY, hello world from AE twig");
+	
+	aeJS.settings['auth_window'] = auth_window;
+	aeJS.settings['services'] = social_logins;
+
+    console.log(aeJS.settings['services']);
+    aeJS.settings['extra_fields_screen'] = 'disabled'; //custom handling
+    aeJS.settings['extra_fields'] = {
+		gender: { 'required': true },
+		birthdate: { 'required': true },
+	}
+
+	aeJS.events.onFlow.addHandler(flowHandler);
+	aeJS.events.onLogin.addHandler(loginHandler);
+	aeJS.events.onUser.addHandler(userHandler);
+	aeJS.events.onLogout.addHandler(logoutHandler);
+	aeJS.events.onWindow.addHandler(windowHandler);
+
+}
+
+</script>
