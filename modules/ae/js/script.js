@@ -48,25 +48,3 @@ function logoutHandler(user) {
 	});
 }
 
-function AEJSReady(aeJS) {
-
-	globalAEJS = aeJS;
-
-	console.log("AEJS READY, hello world");
-	
-	aeJS.settings['auth_window'] = true;
-	aeJS.settings['services'] = 'spotify,facebook,twitter,email';
-
-    aeJS.settings['extra_fields_screen'] = 'disabled'; //custom handling
-    aeJS.settings['extra_fields'] = {
-		gender: { 'required': true },
-		birthdate: { 'required': true },
-	}
-
-	aeJS.events.onFlow.addHandler(flowHandler);
-	aeJS.events.onLogin.addHandler(loginHandler);
-	aeJS.events.onUser.addHandler(userHandler);
-	aeJS.events.onLogout.addHandler(logoutHandler);
-	aeJS.events.onWindow.addHandler(windowHandler);
-
-}

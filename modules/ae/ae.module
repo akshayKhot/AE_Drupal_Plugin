@@ -3,7 +3,10 @@
 function ae_theme($existing, $type, $theme, $path) {
   return [
     'signup' => [
-      'variables' => ['socials' => []],
+      'variables' => [
+          'socials' => [],
+          'want_email' => NULL
+          ],
     ],
   ];
 }
