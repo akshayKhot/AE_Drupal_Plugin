@@ -5,8 +5,11 @@ function ae_theme($existing, $type, $theme, $path) {
     'signup' => [
       'variables' => [
           'socials' => [],
+          'fields' => [],
+          'flow_css' => [],
           'want_email' => NULL,
-          'auth_window' => NULL
+          'auth_window' => NULL,
+          'sso' => NULL
           ],
     ],
   ];

@@ -12,6 +12,7 @@
             {% if want_email == 0 %}
 
                 <div style="background: #000; color:#fff;">Email Signup</div>
+
                 <div style="padding: 15px 30px;">
                     <form id="email-signup" data-ae-register-form="email" method="post">
                         <div class="form-group">
@@ -28,6 +29,95 @@
                 </div>
             {% endif %}
 
+            <div id="additional-data">
+            <div style="background: #000; color:#fff;">Additional Information Required</div>
+            <div style="padding: 15px 30px;">
+                <form id="additional-data-form" data-ae-register-form="email" method="post">
+
+                    {% for field in fields %}
+                        {% if field == 'email' %}
+                            <div>
+                                <label for="email">Email &nbsp;&nbsp;</label>
+                                <input id="email" name="email" type="email">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'dob' %}
+                            <div>
+                                <label for="birthdate">Birthdate &nbsp;&nbsp;</label>
+                                <input id="birthdate" name="birthdate" type="date">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'add1' %}
+                            <div>
+                                <label for="add1">Address 1 &nbsp;&nbsp;</label>
+                                <input id="add1" name="add1" type="text">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'add2' %}
+                            <div>
+                                <label for="add2">Address 2 &nbsp;&nbsp;</label>
+                                <input id="add2" name="add2" type="text">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'city' %}
+                            <div>
+                                <label for="city">City &nbsp;&nbsp;</label>
+                                <input id="city" name="city" type="text">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'mobile' %}
+                            <div>
+                                <label for="mobile">Mobile &nbsp;&nbsp;</label>
+                                <input id="mobile" name="mobile" type="number">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'firstname' %}
+                            <div>
+                                <label for="firstname">Firstname &nbsp;&nbsp;</label>
+                                <input id="firstname" name="firstname" type="text">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'lastname' %}
+                            <div>
+                                <label for="lastname">Lastname &nbsp;&nbsp;</label>
+                                <input id="lastname" name="lastname" type="text">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'zip' %}
+                            <div>
+                                <label for="zip">Zip &nbsp;&nbsp;</label>
+                                <input id="zip" name="zip" type="text">
+                            </div>
+                        {% endif %}
+
+                        {% if field == 'country' %}
+                            <div>
+                                <label for="country">Country &nbsp;&nbsp;</label>
+                                <input id="country" name="country" type="text">
+                            </div>
+                        {% endif %}
+
+
+                    {% endfor %}
+                    
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+
+
+
+
+
 
 <script type="text/javascript">
 
@@ -40,6 +130,8 @@ function AEJSReady(aeJS) {
     {% endfor %}
 
     var auth_window = {{auth_window}} == 0 ? true : false;
+    var sso = {{sso}} == 0 ? "application" : "local";
+    
 
 	globalAEJS = aeJS;
 
@@ -47,12 +139,22 @@ function AEJSReady(aeJS) {
 	
 	aeJS.settings['auth_window'] = auth_window;
 	aeJS.settings['services'] = social_logins;
-
-    console.log(aeJS.settings['services']);
+    aeJS.settings['sso'] = sso;
+    aeJS.settings['extra_fields'] = {
+        email: {
+            label: 'enter email',
+            required: true,
+            'required_message': "some message",
+            'error_message': "some error"
+        },
+        birthdate
+    }
+    aeJS.settings['flow_css'] = '{{ flow_css }}';
+    
     aeJS.settings['extra_fields_screen'] = 'disabled'; //custom handling
     aeJS.settings['extra_fields'] = {
-		gender: { 'required': true },
-		birthdate: { 'required': true },
+		email: { 'required': true },
+		firstname: { 'required': true },
 	}
 
 	aeJS.events.onFlow.addHandler(flowHandler);
