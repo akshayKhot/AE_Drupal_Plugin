@@ -1,0 +1,23 @@
+{
+    "remotePath": "/home/akshay_ae/drupal-plugin.appreciationengine.com/modules",
+    "host": "akshay.dev.appreciationengine.com",
+    "username": "akshay_ae",
+    "port": 21,
+    "secure": true,
+    "protocol": "sftp",
+    "uploadOnSave": false,
+    "passive": false,
+    "debug": false,
+    "privateKeyPath": "/Users/akshaykhot/.ssh/id_rsa",
+    "passphrase": null,
+    "ignore": [
+        "\\.vscode",
+        "\\.git",
+        "\\.DS_Store"
+    ],
+    "generatedFiles": {
+        "uploadOnSave": false,
+        "extensionsToInclude": [],
+        "path": ""
+    }
+}

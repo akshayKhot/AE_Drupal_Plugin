@@ -7,7 +7,8 @@ function flowHandler(event) {
 
 	if (event.step == 'required-fields') {
 		$('#signup').hide();
-		$('#additional-data').show();
+        $('#additional-data').show();
+        $("#loggedin").show();
 	}     
 }
 function windowHandler(event) {
