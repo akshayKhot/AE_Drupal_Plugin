@@ -33,14 +33,21 @@ class HelloBlock extends BlockBase {
 
         $fields = [
             'email' => "Email",
-            'dob' => "Date Of Birth",
-            'add1' => "Address Line 1",
-            'add2' => "Address Line 2",
+            'password' => "Password",
+            'birthdate' => "Date Of Birth",
+            'address' => "Address",
+            'addressline2' => "Address Line 2",
             'city' => "City",
-            'mobile' => "Mobile Number",
+            'state' => "State",
+            'homephone' => "Home Phone",
+            'mobilephone' => "Mobile Phone",
             'firstname' => "First Name",
-            'lastname' => "Last Name",
-            'zip' => "Zipcode",
+            'username' => "Username",
+            'website' => "Website",
+            'bio' => "Bio",
+            'gender' => "Gender",
+            'surname' => "Last Name",
+            'postcode' => "Zipcode",
             'country' => "Country"
         ];
 

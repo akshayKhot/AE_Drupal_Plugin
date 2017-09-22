@@ -3,7 +3,8 @@ var state = 'none';
 
 function flowHandler(event) {
     console.log("FLOW HANDLER");
-	console.log(event);
+    console.log(event);
+    console.log(globalAEJS);
 
 	if (event.step == 'required-fields') {
 		$('#signup').hide();
@@ -33,11 +34,11 @@ function userHandler(user,state) {
     
     $("#loggedin").show(); //allow logout
 
-    if (state == 'update') {
-    	$("#additional-data-form").off('submit'); //remove AE handlers
-    	$("#additional-data-form").attr('action', "sony_sample_handler.php"); //set local handler url
-		$("#additional-data-form").submit(); //data already saved to AE - submit form to a local handler
-	}   
+    // if (state == 'update') {
+    // 	$("#additional-data-form").off('submit'); //remove AE handlers
+    // 	$("#additional-data-form").attr('action', "sony_sample_handler.php"); //set local handler url
+	// 	$("#additional-data-form").submit(); //data already saved to AE - submit form to a local handler
+	// }   
 }
 function logoutHandler(user) {
 	console.log("LOGOUT HANDLER");

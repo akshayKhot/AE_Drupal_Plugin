@@ -43,24 +43,24 @@
                                 </div>
                             {% endif %}
 
-                            {% if field == 'dob' %}
+                            {% if field == 'birthdate' %}
                                 <div>
                                     <label for="birthdate">Birthdate &nbsp;&nbsp;</label>
                                     <input id="birthdate" name="birthdate" type="date">
                                 </div>
                             {% endif %}
 
-                            {% if field == 'add1' %}
+                            {% if field == 'address' %}
                                 <div>
-                                    <label for="add1">Address 1 &nbsp;&nbsp;</label>
-                                    <input id="add1" name="add1" type="text">
+                                    <label for="address">Address 1 &nbsp;&nbsp;</label>
+                                    <input id="address" name="address" type="text">
                                 </div>
                             {% endif %}
 
-                            {% if field == 'add2' %}
+                            {% if field == 'addressline2' %}
                                 <div>
-                                    <label for="add2">Address 2 &nbsp;&nbsp;</label>
-                                    <input id="add2" name="add2" type="text">
+                                    <label for="addressline2">Address 2 &nbsp;&nbsp;</label>
+                                    <input id="addressline2" name="addressline2" type="text">
                                 </div>
                             {% endif %}
 
@@ -71,10 +71,24 @@
                                 </div>
                             {% endif %}
 
-                            {% if field == 'mobile' %}
+                            {% if field == 'state' %}
                                 <div>
-                                    <label for="mobile">Mobile &nbsp;&nbsp;</label>
-                                    <input id="mobile" name="mobile" type="number">
+                                    <label for="state">State &nbsp;&nbsp;</label>
+                                    <input id="state" name="state" type="text">
+                                </div>
+                            {% endif %}
+
+                            {% if field == 'homephone' %}
+                                <div>
+                                    <label for="homephone">Home Phone &nbsp;&nbsp;</label>
+                                    <input id="homephone" name="homephone" type="number">
+                                </div>
+                            {% endif %}
+
+                            {% if field == 'mobilephone' %}
+                                <div>
+                                    <label for="mobilephone">Mobile &nbsp;&nbsp;</label>
+                                    <input id="mobilephone" name="mobilephone" type="number">
                                 </div>
                             {% endif %}
 
@@ -85,17 +99,38 @@
                                 </div>
                             {% endif %}
 
-                            {% if field == 'lastname' %}
+                            {% if field == 'surname' %}
                                 <div>
-                                    <label for="lastname">Lastname &nbsp;&nbsp;</label>
-                                    <input id="lastname" name="lastname" type="text">
+                                    <label for="surname">Lastname &nbsp;&nbsp;</label>
+                                    <input id="surname" name="surname" type="text">
                                 </div>
                             {% endif %}
 
-                            {% if field == 'zip' %}
+                            {% if field == 'website' %}
                                 <div>
-                                    <label for="zip">Zip &nbsp;&nbsp;</label>
-                                    <input id="zip" name="zip" type="text">
+                                    <label for="website">Website &nbsp;&nbsp;</label>
+                                    <input id="website" name="website" type="text">
+                                </div>
+                            {% endif %}
+
+                            {% if field == 'bio' %}
+                                <div>
+                                    <label for="bio">Bio &nbsp;&nbsp;</label>
+                                    <input id="bio" name="bio" type="text">
+                                </div>
+                            {% endif %}
+
+                            {% if field == 'gender' %}
+                                <div>
+                                    <label for="gender">Country &nbsp;&nbsp;</label>
+                                    <input id="gender" name="gender" type="text">
+                                </div>
+                            {% endif %}
+
+                            {% if field == 'postcode' %}
+                                <div>
+                                    <label for="postcode">Zip &nbsp;&nbsp;</label>
+                                    <input id="postcode" name="postcode" type="text">
                                 </div>
                             {% endif %}
 
@@ -155,7 +190,7 @@ function AEJSReady(aeJS) {
         extraFieldOptions['{{ field }}'] = { 'required': true };
     {% endfor %}
     console.log(extraFieldOptions);
-    aeJS.settings['extra_fields_screen'] = 'after'; 
+    //aeJS.settings['extra_fields_screen'] = 'after'; 
     aeJS.settings['extra_fields'] = extraFieldOptions;
 
 	aeJS.events.onFlow.addHandler(flowHandler);
