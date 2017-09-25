@@ -2,9 +2,8 @@ var globalAEJS;
 var state = 'none';
 
 function flowHandler(event) {
-    console.log("FLOW HANDLER");
-    console.log(event);
-    console.log(globalAEJS);
+    //console.log("FLOW HANDLER");
+    //console.log(event);
 
 	if (event.step == 'required-fields') {
 		$('#signup').hide();
@@ -13,13 +12,13 @@ function flowHandler(event) {
 	}     
 }
 function windowHandler(event) {
-	console.log("WINDOW HANDLER");
-    console.log(event);
+	//console.log("WINDOW HANDLER");
+    //console.log(event);
 }
 function loginHandler(user,type,sso) {
 	console.log("LOGIN HANDLER:"+type);
     console.log(user);
-    console.log(sso);
+    //console.log(sso);
     alert("SIGNED UP. THANKS.");
      $("#loggedin").show(); //allow logout
      
@@ -41,8 +40,8 @@ function userHandler(user,state) {
 	// }   
 }
 function logoutHandler(user) {
-	console.log("LOGOUT HANDLER");
-    console.log(user);
+	//console.log("LOGOUT HANDLER");
+    //console.log(user);
     alert("LOGGED OUT. THANKS.")
     $("#loggedin").hide();
     $('#signup').show();
