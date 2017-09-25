@@ -45,6 +45,8 @@ function logoutHandler(user) {
     console.log(user);
     alert("LOGGED OUT. THANKS.")
     $("#loggedin").hide();
+    $('#signup').show();
+    $('#additional-data').hide();
     $( "a.ae-btn" ).each(function( index ) {
   		$( this ).removeClass('active');
 	});
