@@ -16,3 +16,10 @@ ae.adminForm:
   options:
     _admin_route: TRUE
 
+ae.createuser:
+  path: 'ae/ajax/{id}'
+  defaults: 
+    _controller: '\Drupal\ae\Controller\LoginController::createuser'
+  methods: [GET]
+  requirements:
+    _permission: 'access content'

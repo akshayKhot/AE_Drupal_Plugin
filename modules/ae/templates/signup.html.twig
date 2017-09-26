@@ -43,6 +43,13 @@
                                 </div>
                             {% endif %}
 
+                            {% if field == 'password' %}
+                                <div>
+                                    <label for="password">Password &nbsp;&nbsp;</label>
+                                    <input id="password" name="password" type="password">
+                                </div>
+                            {% endif %}
+
                             {% if field == 'birthdate' %}
                                 <div>
                                     <label for="birthdate">Birthdate &nbsp;&nbsp;</label>
@@ -99,10 +106,10 @@
                                 </div>
                             {% endif %}
 
-                            {% if field == 'surname' %}
+                            {% if field == 'username' %}
                                 <div>
-                                    <label for="surname">Lastname &nbsp;&nbsp;</label>
-                                    <input id="surname" name="surname" type="text">
+                                    <label for="username">Username &nbsp;&nbsp;</label>
+                                    <input id="username" name="username" type="text">
                                 </div>
                             {% endif %}
 
@@ -124,6 +131,13 @@
                                 <div>
                                     <label for="gender">Gender &nbsp;&nbsp;</label>
                                     <input id="gender" name="gender" type="text">
+                                </div>
+                            {% endif %}
+
+                            {% if field == 'surname' %}
+                                <div>
+                                    <label for="surname">Lastname &nbsp;&nbsp;</label>
+                                    <input id="surname" name="surname" type="text">
                                 </div>
                             {% endif %}
 
