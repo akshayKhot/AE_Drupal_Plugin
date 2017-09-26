@@ -57,6 +57,73 @@ class HelloBlock extends BlockBase {
             '#title' => $this->t('Select the social logins that you want to add'),
         );
 
+        //// Extra Info ////
+
+        $form['extra_info'] = [
+            '#type' => 'fieldset',
+            '#title' => $this->t('Extra Information')
+        ];
+        $form['extra_info']['Global'] = [
+            '#type' => 'item',
+            '#title' => $this->t('Global')
+        ];
+        $form['extra_info']['global_top'] = [
+            '#type' => 'fieldset',
+            '#title' => $this->t('Top')
+        ];
+        $form['extra_info']['global_top']['text'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Text')
+        ];
+        $form['extra_info']['global_top']['title'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Title')
+        ];
+        $form['extra_info']['global_bottom'] = [
+            '#type' => 'fieldset',
+            '#title' => $this->t('Bottom')
+        ];
+        $form['extra_info']['global_bottom']['text'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Text')
+        ];
+        $form['extra_info']['global_bottom']['title'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Title')
+        ];
+
+        $form['extra_info']['Login'] = [
+            '#type' => 'item',
+            '#title' => $this->t('Login')
+        ];
+        $form['extra_info']['login_top'] = [
+            '#type' => 'fieldset',
+            '#title' => $this->t('Top')
+        ];
+        $form['extra_info']['login_top']['text'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Text')
+        ];
+        $form['extra_info']['login_top']['title'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Title')
+        ];
+        $form['extra_info']['login_bottom'] = [
+            '#type' => 'fieldset',
+            '#title' => $this->t('Bottom')
+        ];
+        $form['extra_info']['login_bottom']['text'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Text')
+        ];
+        $form['extra_info']['login_bottom']['title'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('Title')
+        ];
+
+
+        //// //// ////
+
         $form['flow_css'] = [
             '#type' => 'textfield',
             '#title' => $this->t('Enter the URL for the css')
