@@ -203,13 +203,11 @@ class HelloBlock extends BlockBase {
     public function build() {
         //return \Drupal::formBuilder()->getForm('Drupal\ae\Form\SignupForm');
 
-        $urls = explode("|", $this->state->get('socials'));
-        $fields = explode("|", $this->state->get('fields'));
 
         return [
             '#theme' => 'signup',
-            '#socials' => $urls,
-            '#fields' => $fields,
+            '#socials' => $this->state->get('socials'),
+            '#fields' => $this->state->get('fields'),
             '#want_email' => $this->state->get('email_signup'),
             '#auth_window' => $this->state->get('auth_window'),
             '#sso' => $this->state->get('sso'),
@@ -237,15 +235,15 @@ class HelloBlock extends BlockBase {
     public function getSelectedSocials(FormStateInterface $form_state) {
         $socials = $form_state->getValue('socials');
         $socials = array_diff($socials, [0]);
-        $value = implode("|", $socials);
-        return $value;
+        //$value = implode("|", $socials);
+        return $socials;
     }
 
     public function getSelectedFields(FormStateInterface $form_state) {
         $fields = $form_state->getValue('extra_fields');
         $fields = array_diff($fields, [0]);
-        $value = implode("|", $fields);
-        return $value;
+        //$value = implode("|", $fields);
+        return $fields;
     }
 }
 ?>
