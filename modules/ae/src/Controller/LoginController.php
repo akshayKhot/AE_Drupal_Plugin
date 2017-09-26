@@ -3,6 +3,8 @@
 namespace Drupal\ae\Controller;
 
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Component\Serialization\Json;
+use Drupal\user\Entity\User;
 
 class LoginController extends ControllerBase {
 
@@ -19,10 +21,22 @@ class LoginController extends ControllerBase {
         $request = $client->get($url);   
         $response = (string) $request->getBody();
 
-        echo $response;
+        $ae_user = Json::decode($response);
+        
+        // $user = User::create();
+        // $user->setPassword('password');
+        // $user->enforceIsNew();
+        // $user->setEmail('akshay.7277@gmail.com');
+        // $user->setUsername('akki03');
+        // $result = $user->save();
 
+        echo implode(",", $ae_user);
 
         exit(0);
+    }
+
+    function createNewUser() {
+        
     }
 }
 
