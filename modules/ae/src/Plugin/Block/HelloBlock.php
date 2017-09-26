@@ -169,12 +169,34 @@ class HelloBlock extends BlockBase {
         $sso = $form_state->getValue('sso');
         $flow_css = $form_state->getValue('flow_css');
 
+        $global_top_text = $form_state->getValue(['extra_info','global_top','text']);
+        $global_top_title = $form_state->getValue(['extra_info','global_top','title']);
+        $global_bottom_text = $form_state->getValue(['extra_info','global_bottom','text']);
+        $global_bottom_title = $form_state->getValue(['extra_info','global_bottom','title']);
+
+        $login_top_text = $form_state->getValue(['extra_info','login_top','text']);
+        $login_top_title = $form_state->getValue(['extra_info','login_top','title']);
+        $login_bottom_text = $form_state->getValue(['extra_info','login_bottom','text']);
+        $login_bottom_title = $form_state->getValue(['extra_info','login_bottom','title']);
+
+        $extra_info = [
+            'global_top_text' => $global_top_text,
+            'global_top_title' => $global_top_title,
+            'global_bottom_text' => $global_bottom_text,
+            'global_bottom_title' => $global_bottom_title
+        ];
+        
+        //ksm($extra_info);
+
         $this->state->set('socials', $socials);
         $this->state->set('fields', $fields);
         $this->state->set('email_signup', $want_email);
         $this->state->set('auth_window', $auth_window);
         $this->state->set('sso', $sso);
         $this->state->set('flow_css', $flow_css);
+        $this->state->set('extra_info', $extra_info);
+
+        //ksm($this->state->get('extra_info'));
         
     }
 
@@ -192,6 +214,7 @@ class HelloBlock extends BlockBase {
             '#auth_window' => $this->state->get('auth_window'),
             '#sso' => $this->state->get('sso'),
             '#flow_css' => $this->state->get('flow_css'),
+            '#extra_info' => $this->state->get('extra_info'),
             '#attached' => array(
                 'library' => array(
                   'ae/script',

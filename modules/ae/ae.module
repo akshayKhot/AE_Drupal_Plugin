@@ -9,7 +9,8 @@ function ae_theme($existing, $type, $theme, $path) {
           'flow_css' => [],
           'want_email' => NULL,
           'auth_window' => NULL,
-          'sso' => NULL
+          'sso' => NULL,
+          'extra_info' => [],
           ],
     ],
   ];

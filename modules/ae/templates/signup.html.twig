@@ -199,6 +199,19 @@ function AEJSReady(aeJS) {
     aeJS.settings['flow_css'] = '{{ flow_css }}';
     
 
+    var extra_info = {};
+    extra_info['global'] = { 
+        'top': {
+            'text': '{{ extra_info['global_top_text'] }}',
+            'title': '{{ extra_info['global_top_title'] }}',
+        },
+        'bottom': {
+            'text': '{{ extra_info['global_bottom_text'] }}',
+            'title': '{{ extra_info['global_bottom_title'] }}',
+        }
+    };
+    
+
     var extraFieldOptions = {};
     {% for field in fields %}
         extraFieldOptions['{{ field }}'] = { 'required': true };
@@ -206,6 +219,8 @@ function AEJSReady(aeJS) {
     console.log(extraFieldOptions);
     //aeJS.settings['extra_fields_screen'] = 'after'; 
     aeJS.settings['extra_fields'] = extraFieldOptions;
+
+    //aeJS.settings['extra_info'] = extra_info;
 
 	aeJS.events.onFlow.addHandler(flowHandler);
 	aeJS.events.onLogin.addHandler(loginHandler);
