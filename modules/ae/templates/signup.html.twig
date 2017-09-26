@@ -197,6 +197,9 @@ function AEJSReady(aeJS) {
 	aeJS.settings['services'] = social_logins;
     aeJS.settings['sso'] = sso;
     aeJS.settings['flow_css'] = '{{ flow_css }}';
+
+    var new_user = {{ new_user }};
+    console.log("Want New User: " + (new_user == 0 ? "Yes" : "No"));
     
 
     var extra_info = {};

@@ -10,6 +10,7 @@ function ae_theme($existing, $type, $theme, $path) {
           'want_email' => NULL,
           'auth_window' => NULL,
           'sso' => NULL,
+          'new_user' => NULL,
           'extra_info' => [],
           ],
     ],

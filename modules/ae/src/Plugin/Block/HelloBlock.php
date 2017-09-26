@@ -57,6 +57,13 @@ class HelloBlock extends BlockBase {
             '#title' => $this->t('Select the social logins that you want to add'),
         );
 
+        $form['new_user'] = array(
+            '#type' => 'radios',
+            '#title' => $this->t('Create a new Drupal user?'),
+            '#default_value' => 1,
+            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
+        );
+
         //// Extra Info ////
 
         $form['extra_info'] = [
@@ -168,6 +175,7 @@ class HelloBlock extends BlockBase {
         $want_email = $form_state->getValue('email_signup');
         $sso = $form_state->getValue('sso');
         $flow_css = $form_state->getValue('flow_css');
+        $new_user = $form_state->getValue('new_user');
 
         $global_top_text = $form_state->getValue(['extra_info','global_top','text']);
         $global_top_title = $form_state->getValue(['extra_info','global_top','title']);
@@ -195,6 +203,7 @@ class HelloBlock extends BlockBase {
         $this->state->set('sso', $sso);
         $this->state->set('flow_css', $flow_css);
         $this->state->set('extra_info', $extra_info);
+        $this->state->set('new_user', $new_user);
 
         //ksm($this->state->get('extra_info'));
         
@@ -211,6 +220,7 @@ class HelloBlock extends BlockBase {
             '#want_email' => $this->state->get('email_signup'),
             '#auth_window' => $this->state->get('auth_window'),
             '#sso' => $this->state->get('sso'),
+            '#new_user' => $this->state->get('new_user'),
             '#flow_css' => $this->state->get('flow_css'),
             '#extra_info' => $this->state->get('extra_info'),
             '#attached' => array(
