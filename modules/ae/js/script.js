@@ -28,8 +28,7 @@ function loginHandler(user,type,sso) {
              url: '/ae/ajax/' + user.data.AccessToken,
              method: 'GET',
              success: function(data) {
-                 console.log("Apple should be shown here.");
-                 console.log(data);
+                 console.log("User saved successfully. " + data);
              }
          }
      );
