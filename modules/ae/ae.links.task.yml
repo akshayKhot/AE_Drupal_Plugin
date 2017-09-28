@@ -1,0 +1,11 @@
+ae.adminForm:
+  route_name: ae.adminForm
+  title: 'Admin Form'
+  base_route: ae.adminForm
+  weight: 10
+
+ae.blockForm:
+  route_name: ae.adminForm
+  title: 'Block Form'
+  base_route: ae.adminForm
+  weight: 20
