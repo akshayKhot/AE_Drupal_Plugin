@@ -220,7 +220,7 @@ function AEJSReady(aeJS) {
         extraFieldOptions['{{ field }}'] = { 'required': true };
     {% endfor %}
     console.log(extraFieldOptions);
-    //aeJS.settings['extra_fields_screen'] = 'after'; 
+    aeJS.settings['extra_fields_screen'] = 'after';
     aeJS.settings['extra_fields'] = extraFieldOptions;
 
     //aeJS.settings['extra_info'] = extra_info;
