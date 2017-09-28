@@ -28,11 +28,10 @@ class ConfigurationForm extends ConfigFormBase {
             '#title' => $this->t('Base URL')
         ];
 
-        
         return parent::buildForm($form, $form_state);
     }
 
-    public function submitForm(array&$form, FormStateInterface $form_state) {
+    public function submitForm(array &$form, FormStateInterface $form_state) {
         parent::submitForm($form, $form_state);
 
         $api_key = $form_state->getValue('api_key');

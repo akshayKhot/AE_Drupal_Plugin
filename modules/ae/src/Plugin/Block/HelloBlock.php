@@ -57,12 +57,7 @@ class HelloBlock extends BlockBase {
             '#title' => $this->t('Select the social logins that you want to add'),
         );
 
-        $form['new_user'] = array(
-            '#type' => 'radios',
-            '#title' => $this->t('Create a new Drupal user?'),
-            '#default_value' => 1,
-            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
-        );
+
 
         //// Extra Info ////
 
@@ -128,40 +123,11 @@ class HelloBlock extends BlockBase {
             '#title' => $this->t('Title')
         ];
 
-
-        //// //// ////
-
-        $form['flow_css'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Enter the URL for the css')
-        ];
-
         $form['extra_fields'] = array(
             '#type' => 'checkboxes',
             '#options' => $fields,
             '#title' => $this->t('Required Fields'),
             '#description' => $this->t('Define fields you require to be collected.')
-        );
-
-        $form['auth_window'] = array(
-            '#type' => 'radios',
-            '#title' => $this->t('Open modal pop-up?'),
-            '#default_value' => 0,
-            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
-        );
-
-        $form['email_signup'] = array(
-            '#type' => 'radios',
-            '#title' => $this->t('Do you want email registration?'),
-            '#default_value' => 1,
-            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
-        );
-
-        $form['sso'] = array(
-            '#type' => 'radios',
-            '#title' => $this->t('Do you want to enable single sign on?'),
-            '#default_value' => 1,
-            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
         );
 
         return $form;
@@ -171,11 +137,6 @@ class HelloBlock extends BlockBase {
 
         $socials = $this->getSelectedSocials($form_state);
         $fields = $this->getSelectedFields($form_state);
-        $auth_window = $form_state->getValue('auth_window'); 
-        $want_email = $form_state->getValue('email_signup');
-        $sso = $form_state->getValue('sso');
-        $flow_css = $form_state->getValue('flow_css');
-        $new_user = $form_state->getValue('new_user');
 
         $global_top_text = $form_state->getValue(['extra_info','global_top','text']);
         $global_top_title = $form_state->getValue(['extra_info','global_top','title']);
@@ -198,12 +159,7 @@ class HelloBlock extends BlockBase {
 
         $this->state->set('socials', $socials);
         $this->state->set('fields', $fields);
-        $this->state->set('email_signup', $want_email);
-        $this->state->set('auth_window', $auth_window);
-        $this->state->set('sso', $sso);
-        $this->state->set('flow_css', $flow_css);
         $this->state->set('extra_info', $extra_info);
-        $this->state->set('new_user', $new_user);
 
         //ksm($this->state->get('extra_info'));
         

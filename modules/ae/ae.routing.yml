@@ -16,6 +16,16 @@ ae.adminForm:
   options:
     _admin_route: TRUE
 
+ae.settingsForm:
+  path: '/admin/config/ae/aesettings'
+  defaults:
+    _form: '\Drupal\ae\Form\AeSettingsForm'
+    _title: 'Settings Form'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
+
 ae.createuser:
   path: 'ae/ajax/{id}'
   defaults: 

@@ -4,8 +4,8 @@ ae.adminForm:
   base_route: ae.adminForm
   weight: 10
 
-ae.blockForm:
-  route_name: ae.adminForm
-  title: 'Block Form'
+ae.settingsForm:
+  route_name: ae.settingsForm
+  title: 'Ae Settings'
   base_route: ae.adminForm
   weight: 20
