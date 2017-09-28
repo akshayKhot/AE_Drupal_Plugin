@@ -5,7 +5,7 @@ function flowHandler(event) {
     console.log("FLOW HANDLER");
     console.log(event);
 
-	if (event.step == 'required-fields') {
+	if (event.step === 'required-fields') {
 		$('#signup').hide();
         $('#additional-data').show();
         $("#loggedin").show();
