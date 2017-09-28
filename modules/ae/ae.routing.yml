@@ -26,6 +26,16 @@ ae.settingsForm:
   options:
     _admin_route: TRUE
 
+ae.extraInfoForm:
+  path: '/admin/config/ae/extrainfo'
+  defaults:
+    _form: '\Drupal\ae\Form\ExtraInfoForm'
+    _title: 'Extra Info'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
+
 ae.createuser:
   path: 'ae/ajax/{id}'
   defaults: 

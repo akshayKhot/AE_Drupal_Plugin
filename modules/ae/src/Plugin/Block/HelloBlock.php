@@ -58,71 +58,6 @@ class HelloBlock extends BlockBase {
         );
 
 
-
-        //// Extra Info ////
-
-        $form['extra_info'] = [
-            '#type' => 'fieldset',
-            '#title' => $this->t('Extra Information')
-        ];
-        $form['extra_info']['Global'] = [
-            '#type' => 'item',
-            '#title' => $this->t('Global')
-        ];
-        $form['extra_info']['global_top'] = [
-            '#type' => 'fieldset',
-            '#title' => $this->t('Top')
-        ];
-        $form['extra_info']['global_top']['text'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Text')
-        ];
-        $form['extra_info']['global_top']['title'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Title')
-        ];
-        $form['extra_info']['global_bottom'] = [
-            '#type' => 'fieldset',
-            '#title' => $this->t('Bottom')
-        ];
-        $form['extra_info']['global_bottom']['text'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Text')
-        ];
-        $form['extra_info']['global_bottom']['title'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Title')
-        ];
-
-        $form['extra_info']['Login'] = [
-            '#type' => 'item',
-            '#title' => $this->t('Login')
-        ];
-        $form['extra_info']['login_top'] = [
-            '#type' => 'fieldset',
-            '#title' => $this->t('Top')
-        ];
-        $form['extra_info']['login_top']['text'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Text')
-        ];
-        $form['extra_info']['login_top']['title'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Title')
-        ];
-        $form['extra_info']['login_bottom'] = [
-            '#type' => 'fieldset',
-            '#title' => $this->t('Bottom')
-        ];
-        $form['extra_info']['login_bottom']['text'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Text')
-        ];
-        $form['extra_info']['login_bottom']['title'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('Title')
-        ];
-
         $form['extra_fields'] = array(
             '#type' => 'checkboxes',
             '#options' => $fields,
@@ -138,30 +73,8 @@ class HelloBlock extends BlockBase {
         $socials = $this->getSelectedSocials($form_state);
         $fields = $this->getSelectedFields($form_state);
 
-        $global_top_text = $form_state->getValue(['extra_info','global_top','text']);
-        $global_top_title = $form_state->getValue(['extra_info','global_top','title']);
-        $global_bottom_text = $form_state->getValue(['extra_info','global_bottom','text']);
-        $global_bottom_title = $form_state->getValue(['extra_info','global_bottom','title']);
-
-        $login_top_text = $form_state->getValue(['extra_info','login_top','text']);
-        $login_top_title = $form_state->getValue(['extra_info','login_top','title']);
-        $login_bottom_text = $form_state->getValue(['extra_info','login_bottom','text']);
-        $login_bottom_title = $form_state->getValue(['extra_info','login_bottom','title']);
-
-        $extra_info = [
-            'global_top_text' => $global_top_text,
-            'global_top_title' => $global_top_title,
-            'global_bottom_text' => $global_bottom_text,
-            'global_bottom_title' => $global_bottom_title
-        ];
-        
-        //ksm($extra_info);
-
         $this->state->set('socials', $socials);
         $this->state->set('fields', $fields);
-        $this->state->set('extra_info', $extra_info);
-
-        //ksm($this->state->get('extra_info'));
         
     }
 

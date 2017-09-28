@@ -9,3 +9,9 @@ ae.settingsForm:
   title: 'Ae Settings'
   base_route: ae.adminForm
   weight: 20
+
+ae.extraInfoForm:
+  route_name: ae.extraInfoForm
+  title: 'Extra Info'
+  base_route: ae.adminForm
+  weight: 20
