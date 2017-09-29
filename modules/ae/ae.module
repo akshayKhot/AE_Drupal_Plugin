@@ -11,6 +11,7 @@ function ae_theme($existing, $type, $theme, $path) {
           'auth_window' => NULL,
           'close_button' => NULL,
           'sso' => NULL,
+          'date_format' => NULL,
           'new_user' => NULL,
           'extra_info' => [],
       ],

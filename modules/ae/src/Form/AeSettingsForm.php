@@ -43,6 +43,13 @@ class AeSettingsForm extends ConfigFormBase {
             '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No'))
         );
 
+        $form['date_format'] = array(
+            '#type' => 'radios',
+            '#title' => $this->t('Date Format'),
+            '#default_value' => 'DD-MM-YYYY',
+            '#options' => array('MM-DD-YYYY' => $this->t('MM-DD-YYYY'), 'DD-MM-YYYY' => $this->t('DD-MM-YYYY'))
+        );
+
         $form['email_signup'] = array(
             '#type' => 'radios',
             '#title' => $this->t('Do you want email registration?'),
@@ -52,9 +59,9 @@ class AeSettingsForm extends ConfigFormBase {
 
         $form['sso'] = array(
             '#type' => 'radios',
-            '#title' => $this->t('Do you want to enable single sign on?'),
-            '#default_value' => 1,
-            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
+            '#title' => $this->t('Single Sign On?'),
+            '#default_value' => 'application',
+            '#options' => array('application' => $this->t('application'), 'local' => $this->t('local')),
         );
 
         $form['new_user'] = array(
@@ -85,6 +92,7 @@ class AeSettingsForm extends ConfigFormBase {
         $flow_css = $form_state->getValue('flow_css');
         $new_user = $form_state->getValue('new_user');
         $close_button = $form_state->getValue('close_button');
+        $date_format = $form_state->getValue('date_format');
 
         $state = \Drupal::state();
         $state->set('email_signup', $want_email);
@@ -94,6 +102,7 @@ class AeSettingsForm extends ConfigFormBase {
         $state->set('new_user', $new_user);
         $state->set('fields', $fields);
         $state->set('close_button', $close_button);
+        $state->set('date_format', $date_format);
 
         drupal_set_message($flow_css);
     }
