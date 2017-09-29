@@ -50,9 +50,10 @@ class ConfigurationForm extends ConfigFormBase {
         $url = $base_url . '/v1.1/app/info?apiKey=' . $api_key . '&turnoffdebug=1';
         
         $client = \Drupal::httpClient();
-        $request = $client->get($url);   
+        $request = $client->get($url);
+        //ksm($request->getBody());
         $response = (string) $request->getBody();
-
+        drupal_set_message($response);
         return $response;
     }
 }

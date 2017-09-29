@@ -36,6 +36,13 @@ class AeSettingsForm extends ConfigFormBase {
             '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
         );
 
+        $form['close_button'] = array(
+            '#type' => 'radios',
+            '#title' => $this->t('Close Button?'),
+            '#default_value' => 0,
+            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No'))
+        );
+
         $form['email_signup'] = array(
             '#type' => 'radios',
             '#title' => $this->t('Do you want email registration?'),
@@ -77,6 +84,7 @@ class AeSettingsForm extends ConfigFormBase {
         $sso = $form_state->getValue('sso');
         $flow_css = $form_state->getValue('flow_css');
         $new_user = $form_state->getValue('new_user');
+        $close_button = $form_state->getValue('close_button');
 
         $state = \Drupal::state();
         $state->set('email_signup', $want_email);
@@ -85,6 +93,7 @@ class AeSettingsForm extends ConfigFormBase {
         $state->set('flow_css', $flow_css);
         $state->set('new_user', $new_user);
         $state->set('fields', $fields);
+        $state->set('close_button', $close_button);
 
         drupal_set_message($flow_css);
     }

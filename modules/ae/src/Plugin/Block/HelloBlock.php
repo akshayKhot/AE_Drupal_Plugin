@@ -61,6 +61,7 @@ class HelloBlock extends BlockBase {
             '#sso' => $this->state->get('sso'),
             '#new_user' => $this->state->get('new_user'),
             '#flow_css' => $this->state->get('flow_css'),
+            '#close_button' => $this->state->get('close_button'),
             '#extra_info' => $this->state->get('extra_info'),
             '#attached' => [
                 'library' => [

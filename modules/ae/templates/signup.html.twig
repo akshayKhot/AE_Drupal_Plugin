@@ -12,21 +12,21 @@
 
             {% if want_email == 0 %}
 
-            <div class="panel-heading" style="background: #000; color:#fff;">Email Signup</div>
-            <div class="panel-body" style="padding: 15px 30px;">
-                <form id="email-signup" data-ae-register-form="email" method="post">
-                    <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                    </div>
-                    <button type="submit" class="btn btn-primary">Sign Up!</button>
-                </form>
-            </div>
+                <div class="panel-heading" style="background: #000; color:#fff;">Email Signup</div>
+                <div class="panel-body" style="padding: 15px 30px;">
+                    <form id="email-signup" data-ae-register-form="email" method="post">
+                        <div class="form-group">
+                            <label for="email">Email address</label>
+                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up!</button>
+                    </form>
+                </div>
 
             {% endif %}
 
@@ -164,15 +164,8 @@
         </div>
 
         <div id="loggedin" style="display: none;">
-<a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
-</div>
-
-
-
-
-
-
-
+            <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
+        </div>
 
 
 <script type="text/javascript">
@@ -185,18 +178,15 @@ function AEJSReady(aeJS) {
         social_logins += '{{ social|lower }}{% if not loop.last %},{% endif %}';
     {% endfor %}
 
-    var auth_window = {{auth_window}} == 0 ? true : false;
-    var sso = {{sso}} == 0 ? "application" : "local";
-    
-
 	globalAEJS = aeJS;
 
-	console.log("AEJS READY, hello world from AE twig");
-	
-	aeJS.settings['auth_window'] = auth_window;
+	aeJS.settings['auth_window'] = {{auth_window}} === 0;
 	aeJS.settings['services'] = social_logins;
-    aeJS.settings['sso'] = sso;
+    aeJS.settings['sso'] = {{sso}} === 0 ? "application" : "local";
     aeJS.settings['flow_css'] = '{{ flow_css }}';
+    aeJS.settings['close_button'] = {{ close_button }} === 0;
+
+    console.log(aeJS.settings);
 
     var new_user = {{ new_user }};
     console.log("Want New User: " + (new_user == 0 ? "Yes" : "No"));
@@ -219,7 +209,6 @@ function AEJSReady(aeJS) {
     {% for field in fields %}
         extraFieldOptions['{{ field }}'] = { 'required': true };
     {% endfor %}
-    console.log(extraFieldOptions);
     aeJS.settings['extra_fields_screen'] = 'after';
     aeJS.settings['extra_fields'] = extraFieldOptions;
 
