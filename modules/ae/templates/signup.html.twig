@@ -57,11 +57,6 @@ function AEJSReady(aeJS) {
     aeJS.settings['date_format'] = '{{ date_format }}';
     aeJS.settings['display_error_message'] = {{ display_error_message }} === 1;
 
-    console.log(aeJS.settings);
-
-    var new_user = {{ new_user }};
-    
-
     var extra_info = {};
     extra_info['global'] = { 
         'top': {
@@ -74,12 +69,21 @@ function AEJSReady(aeJS) {
         }
     };
 
-    var myFields = {{ fields|json_encode|raw }};
+    var fields = {{ fields|json_encode|raw }};
+    var enabledFields = fields.filter(function(field) {
+        return field.enabled === 1;
+    });
+    var extraFields = {};
+    enabledFields.forEach(function(field) {
+        extraFields[field.field] = {
+            required: field.required === 1
+        }
+    });
+    console.log(extraFields);
+    aeJS.settings['extra_fields_screen'] = 'disabled';
+    aeJS.settings['extra_fields'] = extraFields;
 
-    //aeJS.settings['extra_fields_screen'] = 'after';
-    //aeJS.settings['extra_fields'] = extraFieldOptions;
-
-    //aeJS.settings['extra_info'] = extra_info;
+    console.log(aeJS.settings);
 
 	aeJS.events.onFlow.addHandler(flowHandler);
 	aeJS.events.onLogin.addHandler(loginHandler);
