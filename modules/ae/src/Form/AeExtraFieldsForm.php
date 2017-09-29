@@ -8,6 +8,7 @@
 
 namespace Drupal\ae\Form;
 
+use Drupal\Core\Config\ConfigFactoryInterface;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
 
@@ -23,29 +24,9 @@ class AeExtraFieldsForm extends ConfigFormBase {
         return 'ae_extra_fields_form';
     }
 
-    public function buildForm(array $form, FormStateInterface $form_state) {
-
-        $form['extra_fields'] = array(
-            '#type' => 'checkboxes',
-            '#options' => $this->getFields(),
-            '#title' => $this->t('Required Fields'),
-            '#description' => $this->t('Define fields you require to be collected.')
-        );
-
-        return parent::buildForm($form, $form_state);
-    }
-
-    public function submitForm(array &$form, FormStateInterface $form_state) {
-        parent::submitForm($form, $form_state);
-
-        $fields = $this->getSelectedFields($form_state);
-
-        $state = \Drupal::state();
-        $state->set('fields', $fields);
-    }
-
-    private function getFields() {
-        return [
+    function __construct()
+    {
+        $this->fields = [
             'email' => "Email",
             'password' => "Password",
             'birthdate' => "Date Of Birth",
@@ -66,10 +47,52 @@ class AeExtraFieldsForm extends ConfigFormBase {
         ];
     }
 
-    private function getSelectedFields(FormStateInterface $form_state) {
-        $fields = $form_state->getValue('extra_fields');
-        $fields = array_diff($fields, [0]);
-        return $fields;
+    public function buildForm(array $form, FormStateInterface $form_state) {
+
+        foreach ($this->fields as $field_key=>$field_name) {
+
+            $form['extra_field_' . $field_key] = [
+                '#type' => 'fieldset',
+                '#title' => $this->t($field_name)
+            ];
+
+            $form['extra_field_' . $field_key]['enable_' . $field_key] = [
+                '#type' => 'checkbox',
+                '#title' => $this->t('Enable')
+            ];
+
+            $form['extra_field_' . $field_key]['require_' . $field_key] = [
+                '#type' => 'checkbox',
+                '#title' => $this->t('Required')
+            ];
+
+        }
+
+        return parent::buildForm($form, $form_state);
+    }
+
+    public function submitForm(array &$form, FormStateInterface $form_state) {
+        parent::submitForm($form, $form_state);
+
+        $fields = $this->getFieldsData($form_state);
+        ksm($fields);
+        $state = \Drupal::state();
+        $state->set('fields', $fields);
+    }
+
+
+    private function getFieldsData(FormStateInterface $form_state) {
+
+        $fieldsData = [];
+        foreach ($this->fields as $field_key=>$field_name) {
+            $data = [
+                'field' => $field_key,
+                'enabled' => $form_state->getValue('enable_' . $field_key),
+                'required' => $form_state->getValue('require_' . $field_key)
+            ];
+            $fieldsData[] = $data;
+        }
+        return $fieldsData;
     }
 
 

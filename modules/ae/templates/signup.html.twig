@@ -31,137 +31,6 @@
             {% endif %}
 
         </div>
-        <div id="additional-data" style="display: none;">
-            <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
-            <div class="panel-body" style="padding: 15px 30px;">
-                <form id="additional-data-form" data-ae-register-form="email" method="post">
-                    {% for field in fields %}
-                            {% if field == 'email' %}
-                                <div>
-                                    <label for="email">Email &nbsp;&nbsp;</label>
-                                    <input id="email" name="email" type="email">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'password' %}
-                                <div>
-                                    <label for="password">Password &nbsp;&nbsp;</label>
-                                    <input id="password" name="password" type="password">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'birthdate' %}
-                                <div>
-                                    <label for="birthdate">Birthdate &nbsp;&nbsp;</label>
-                                    <input id="birthdate" name="birthdate" type="date">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'address' %}
-                                <div>
-                                    <label for="address">Address 1 &nbsp;&nbsp;</label>
-                                    <input id="address" name="address" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'addressline2' %}
-                                <div>
-                                    <label for="addressline2">Address 2 &nbsp;&nbsp;</label>
-                                    <input id="addressline2" name="addressline2" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'city' %}
-                                <div>
-                                    <label for="city">City &nbsp;&nbsp;</label>
-                                    <input id="city" name="city" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'state' %}
-                                <div>
-                                    <label for="state">State &nbsp;&nbsp;</label>
-                                    <input id="state" name="state" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'homephone' %}
-                                <div>
-                                    <label for="homephone">Home Phone &nbsp;&nbsp;</label>
-                                    <input id="homephone" name="homephone" type="number">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'mobilephone' %}
-                                <div>
-                                    <label for="mobilephone">Mobile &nbsp;&nbsp;</label>
-                                    <input id="mobilephone" name="mobilephone" type="number">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'firstname' %}
-                                <div>
-                                    <label for="firstname">Firstname &nbsp;&nbsp;</label>
-                                    <input id="firstname" name="firstname" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'username' %}
-                                <div>
-                                    <label for="username">Username &nbsp;&nbsp;</label>
-                                    <input id="username" name="username" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'website' %}
-                                <div>
-                                    <label for="website">Website &nbsp;&nbsp;</label>
-                                    <input id="website" name="website" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'bio' %}
-                                <div>
-                                    <label for="bio">Bio &nbsp;&nbsp;</label>
-                                    <input id="bio" name="bio" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'gender' %}
-                                <div>
-                                    <label for="gender">Gender &nbsp;&nbsp;</label>
-                                    <input id="gender" name="gender" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'surname' %}
-                                <div>
-                                    <label for="surname">Lastname &nbsp;&nbsp;</label>
-                                    <input id="surname" name="surname" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'postcode' %}
-                                <div>
-                                    <label for="postcode">Zip &nbsp;&nbsp;</label>
-                                    <input id="postcode" name="postcode" type="text">
-                                </div>
-                            {% endif %}
-
-                            {% if field == 'country' %}
-                                <div>
-                                    <label for="country">Country &nbsp;&nbsp;</label>
-                                    <input id="country" name="country" type="text">
-                                </div>
-                            {% endif %}
-
-
-                        {% endfor %}
-                        
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                </form>
-            </div>
-        </div>
 
         <div id="loggedin" style="display: none;">
             <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
@@ -204,14 +73,11 @@ function AEJSReady(aeJS) {
             'title': '{{ extra_info['global_bottom_title'] }}',
         }
     };
-    
 
-    var extraFieldOptions = {};
-    {% for field in fields %}
-        extraFieldOptions['{{ field }}'] = { 'required': true };
-    {% endfor %}
-    aeJS.settings['extra_fields_screen'] = 'after';
-    aeJS.settings['extra_fields'] = extraFieldOptions;
+    var myFields = {{ fields|json_encode|raw }};
+
+    //aeJS.settings['extra_fields_screen'] = 'after';
+    //aeJS.settings['extra_fields'] = extraFieldOptions;
 
     //aeJS.settings['extra_info'] = extra_info;
 

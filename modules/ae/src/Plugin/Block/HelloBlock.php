@@ -87,7 +87,6 @@ class HelloBlock extends BlockBase {
     public function getSelectedSocials(FormStateInterface $form_state) {
         $socials = $form_state->getValue('socials');
         $socials = array_diff($socials, [0]);
-        //$value = implode("|", $socials);
         return $socials;
     }
 
