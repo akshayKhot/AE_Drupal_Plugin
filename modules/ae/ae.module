@@ -12,6 +12,7 @@ function ae_theme($existing, $type, $theme, $path) {
           'close_button' => NULL,
           'sso' => NULL,
           'date_format' => NULL,
+          'display_error_message' => NULL,
           'new_user' => NULL,
           'extra_info' => [],
       ],

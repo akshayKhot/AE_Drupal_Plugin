@@ -57,6 +57,13 @@ class AeSettingsForm extends ConfigFormBase {
             '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
         );
 
+        $form['display_error_message'] = array(
+            '#type' => 'radios',
+            '#title' => $this->t('Display Error Message?'),
+            '#default_value' => 0,
+            '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
+        );
+
         $form['sso'] = array(
             '#type' => 'radios',
             '#title' => $this->t('Single Sign On?'),
@@ -93,6 +100,9 @@ class AeSettingsForm extends ConfigFormBase {
         $new_user = $form_state->getValue('new_user');
         $close_button = $form_state->getValue('close_button');
         $date_format = $form_state->getValue('date_format');
+        $display_error_message = $form_state->getValue('display_error_message');
+
+        drupal_set_message($want_email);
 
         $state = \Drupal::state();
         $state->set('email_signup', $want_email);
@@ -103,6 +113,7 @@ class AeSettingsForm extends ConfigFormBase {
         $state->set('fields', $fields);
         $state->set('close_button', $close_button);
         $state->set('date_format', $date_format);
+        $state->set('display_error_message', $display_error_message);
 
         drupal_set_message($flow_css);
     }

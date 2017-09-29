@@ -26,11 +26,11 @@ class LoginController extends ControllerBase {
         $user = User::create();
         $user->setPassword('password');
         $user->enforceIsNew();
-        $user->setEmail('akshay@appengine12.com');
-        $user->setUsername('anotherUser123');
+        $user->setEmail('akshay' . rand(0, 99) . '@appengine12.com');
+        $user->setUsername('user' . rand(0, 99));
         $result = $user->save();
 
-        echo $user->id;
+        echo $user->uuid();
 
         exit(0);
     }

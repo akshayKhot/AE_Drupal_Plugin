@@ -64,6 +64,7 @@ class HelloBlock extends BlockBase {
             '#close_button' => $this->state->get('close_button'),
             '#date_format' => $this->state->get('date_format'),
             '#extra_info' => $this->state->get('extra_info'),
+            '#display_error_message' => $this->state->get('display_error_message'),
             '#attached' => [
                 'library' => [
                   'ae/script',
