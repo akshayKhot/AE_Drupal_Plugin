@@ -4,14 +4,25 @@ ae.adminForm:
   base_route: ae.adminForm
   weight: 10
 
-ae.settingsForm:
-  route_name: ae.settingsForm
+ae.settings:
   title: 'Ae Settings'
+  route_name: ae.settingsForm
   base_route: ae.adminForm
   weight: 20
 
+ae.settingsForm:
+  title: 'Ae Settings Form'
+  route_name: ae.settingsForm
+  parent_id: ae.settings
+
+ae.extraFieldsForm:
+  title: 'Ae Extra Fields'
+  route_name: ae.extraFieldsForm
+  parent_id: ae.settings
+  weight: 1
+
 ae.extraInfoForm:
-  route_name: ae.extraInfoForm
   title: 'Extra Info'
-  base_route: ae.adminForm
-  weight: 20
+  route_name: ae.extraInfoForm
+  parent_id: ae.settings
+  weight: 2

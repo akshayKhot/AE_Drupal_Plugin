@@ -26,6 +26,16 @@ ae.settingsForm:
   options:
     _admin_route: TRUE
 
+ae.extraFieldsForm:
+  path: '/admin/config/ae/aesettings/extra_fields'
+  defaults:
+    _form: '\Drupal\ae\Form\AeExtraFieldsForm'
+    _title: 'Extra Fields Form'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
+
 ae.extraInfoForm:
   path: '/admin/config/ae/extrainfo'
   defaults:

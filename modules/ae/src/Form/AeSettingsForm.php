@@ -78,21 +78,12 @@ class AeSettingsForm extends ConfigFormBase {
             '#options' => array(0 => $this->t('Yes'), 1 => $this->t('No')),
         );
 
-        $form['extra_fields'] = array(
-            '#type' => 'checkboxes',
-            '#options' => $this->getFields(),
-            '#title' => $this->t('Required Fields'),
-            '#description' => $this->t('Define fields you require to be collected.')
-        );
-
-
         return parent::buildForm($form, $form_state);
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
         parent::submitForm($form, $form_state);
 
-        $fields = $this->getSelectedFields($form_state);
         $auth_window = $form_state->getValue('auth_window');
         $want_email = $form_state->getValue('email_signup');
         $sso = $form_state->getValue('sso');
@@ -110,40 +101,11 @@ class AeSettingsForm extends ConfigFormBase {
         $state->set('sso', $sso);
         $state->set('flow_css', $flow_css);
         $state->set('new_user', $new_user);
-        $state->set('fields', $fields);
         $state->set('close_button', $close_button);
         $state->set('date_format', $date_format);
         $state->set('display_error_message', $display_error_message);
 
         drupal_set_message($flow_css);
-    }
-
-    private function getFields() {
-        return [
-            'email' => "Email",
-            'password' => "Password",
-            'birthdate' => "Date Of Birth",
-            'address' => "Address",
-            'addressline2' => "Address Line 2",
-            'city' => "City",
-            'state' => "State",
-            'homephone' => "Home Phone",
-            'mobilephone' => "Mobile Phone",
-            'firstname' => "First Name",
-            'username' => "Username",
-            'website' => "Website",
-            'bio' => "Bio",
-            'gender' => "Gender",
-            'surname' => "Last Name",
-            'postcode' => "Zipcode",
-            'country' => "Country"
-        ];
-    }
-
-    private function getSelectedFields(FormStateInterface $form_state) {
-        $fields = $form_state->getValue('extra_fields');
-        $fields = array_diff($fields, [0]);
-        return $fields;
     }
 
 
