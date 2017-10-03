@@ -1,0 +1,59 @@
+<?php
+
+function ae_schema() {
+    $schema['ae_user'] = array(
+        'description' => 'Table to store the user returned by AE',
+        'fields' => array(
+            'aeid' => array(
+                'description' => 'The primary identifier for a user.',
+                'type' => 'serial',
+                'unsigned' => TRUE,
+                'not null' => TRUE,
+            ),
+            'firstname' => array(
+                'description' => 'First Name of User',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'surname' => array(
+                'description' => 'Surname of User',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'email' => array(
+              'description' => 'User Email',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+            ),
+            'city' => array(
+              'description' => 'User City',
+              'type' => 'varchar',
+              'length' => 255,
+              'not null' => TRUE,
+              'default' => '',
+            ),
+            'username' => array(
+                'description' => 'Username',
+                'type' => 'varchar',
+                'length' => 255,
+                'not null' => TRUE,
+                'default' => '',
+            ),
+            'ae_data' => array(
+                'description' => 'AE User data blob',
+                'type' => 'blob',
+            )
+        ),
+        'indexes' => array(
+            'aeid' => array('aeid')
+        ),
+        'primary key' => array('aeid'),
+    );
+    return $schema;
+}
