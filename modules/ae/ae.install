@@ -5,9 +5,13 @@ function ae_schema() {
         'description' => 'Table to store the user returned by AE',
         'fields' => array(
             'aeid' => array(
-                'description' => 'The primary identifier for a user.',
-                'type' => 'serial',
-                'unsigned' => TRUE,
+                'description' => 'The primary identifier for a AE user.',
+                'type' => 'int',
+                'not null' => TRUE,
+            ),
+            'uid' => array(
+                'description' => 'The primary identifier for a drupal user.',
+                'type' => 'int',
                 'not null' => TRUE,
             ),
             'firstname' => array(
@@ -54,6 +58,16 @@ function ae_schema() {
             'aeid' => array('aeid')
         ),
         'primary key' => array('aeid'),
+        'foreign keys' => array(
+            'uid' => array(
+                'table' => 'users',
+                'columns' => array('uid' => 'uid'),
+            )
+        )
     );
     return $schema;
+}
+
+function ae_user_login($account) {
+    drupal_set_message("User logged in successfully" . $account);
 }

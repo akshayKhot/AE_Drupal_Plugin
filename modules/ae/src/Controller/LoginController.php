@@ -9,45 +9,47 @@ use Drupal\user\Entity\User;
 class LoginController extends ControllerBase {
 
     public function createuser($id) {
-      // fetch the AE user
-      // Store that user in the database
-      // Create a nwe Drupal user
-      // Map 1:1 AE user to drupal user
 
-          $state = \Drupal::state();
+        $ae_user = $this->fetchAeUser($id);
 
-          $api_key = $state->get('api_key');
-          //$url = "https://akshay.dev.appreciationengine.com/v1.1/member/" . $id . "?apiKey=" . $api_key;
+        $drupal_user = User::create();
+        $drupal_user->setPassword('password');
+        $drupal_user->enforceIsNew();
+        $drupal_user->setEmail($ae_user->data->Email);
+        $drupal_user->setUsername($ae_user->data->Username);
 
-          $url = "https://akshay.dev.appreciationengine.com/v1.1/member/4290847?apiKey=9ee609a0370231ac93149413e00a2ca0";
-          $client = \Drupal::httpClient();
-          $request = $client->get($url);
-          $ae_user = $request->getBody();
-          $user_json = json_decode($ae_user);
+        // log in user
+        $drupal_user->activate();// NOTE: login will fail silently if not activated!
+        $drupal_user->save();
+        user_login_finalize($drupal_user);
 
-          $user = User::create();
-          $user->setPassword('password');
-          $user->enforceIsNew();
-          $user->setEmail($user_json->data->Email);
-          $user->setUsername($user_json->data->Username);
-          $result = $user->save();
+        $uid = $drupal_user->id();
 
-          db_insert('ae_users')->fields([
-            'aeid' => $user_json->data->ID,
-            'firstname' => $user_json->data->FirstName,
-            'surname' => $user_json->data->Surname,
-            'username' => $user_json->data->Username
-          ])->execute();
+        db_insert('ae_users')->fields([
+            'aeid' => $ae_user->data->ID,
+            'uid' => $uid,
+            'firstname' => $ae_user->data->FirstName,
+            'surname' => $ae_user->data->Surname,
+            'username' => $ae_user->data->Username
+        ])->execute();
 
-          echo $user_json->data->FirstName;
+        echo $uid;
 
-          exit(0);
+        exit(0);
     }
 
-    function createNewUser() {
-        // Get a new user from the api
-        // create a new user
-        // add in the database
+    private function fetchAeUser($id) {
+        $state = \Drupal::state();
+
+        $api_key = $state->get('api_key');
+        //$url = "https://akshay.dev.appreciationengine.com/v1.1/member/" . $id . "?apiKey=" . $api_key;
+
+        $url = "https://akshay.dev.appreciationengine.com/v1.1/member/4290847?apiKey=9ee609a0370231ac93149413e00a2ca0";
+        $client = \Drupal::httpClient();
+        $request = $client->get($url);
+        $ae_user = $request->getBody();
+        $user_json = json_decode($ae_user);
+        return $user_json;
     }
 }
 
