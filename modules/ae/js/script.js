@@ -49,5 +49,11 @@ function logoutHandler(user) {
     $( "a.ae-btn" ).each(function( index ) {
       $( this ).removeClass('active');
 	  });
+
+    window.location =  "http://drupal-plugin.appreciationengine.com/user/logout";
 }
 
+$('a:contains("Log out")').attr({
+  "href": "#",
+  "data-ae-logout-link": true
+});

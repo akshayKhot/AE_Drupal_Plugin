@@ -67,7 +67,3 @@ function ae_schema() {
     );
     return $schema;
 }
-
-function ae_user_login($account) {
-    drupal_set_message("User logged in successfully" . $account);
-}
