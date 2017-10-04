@@ -27,7 +27,7 @@ function loginHandler(user,type,sso) {
         url: '/ae/ajax/' + user.data.ID,
         method: 'GET',
         success: function(data) {
-          console.log("User saved successfully. User Id:  " + data);
+          console.log(data);
         }
     });
 }

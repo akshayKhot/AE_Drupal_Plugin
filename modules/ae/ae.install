@@ -1,7 +1,7 @@
 <?php
 
 function ae_schema() {
-    $schema['ae_user'] = array(
+    $schema['ae_users'] = array(
         'description' => 'Table to store the user returned by AE',
         'fields' => array(
             'aeid' => array(

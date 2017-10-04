@@ -17,35 +17,37 @@ class LoginController extends ControllerBase {
           $state = \Drupal::state();
 
           $api_key = $state->get('api_key');
-          $url = "https://akshay.dev.appreciationengine.com/v1.1/member/" . $id . "?apiKey=" . $api_key;
+          //$url = "https://akshay.dev.appreciationengine.com/v1.1/member/" . $id . "?apiKey=" . $api_key;
 
+          $url = "https://akshay.dev.appreciationengine.com/v1.1/member/4290847?apiKey=9ee609a0370231ac93149413e00a2ca0";
           $client = \Drupal::httpClient();
           $request = $client->get($url);
-          $response = (string) $request->getBody();
-
-          $ae_user = Json::decode($response);
+          $ae_user = $request->getBody();
+          $user_json = json_decode($ae_user);
 
           $user = User::create();
           $user->setPassword('password');
           $user->enforceIsNew();
-          $user->setEmail($ae_user->Email);
-          $user->setUsername($ae_user->Username);
+          $user->setEmail($user_json->data->Email);
+          $user->setUsername($user_json->data->Username);
           $result = $user->save();
 
-          db_insert('ae_user')->fields([
-            'aeid' => 1,
-            'firstname' => "Akshay",
-            'surname' => "Khot",
-            'username' => "akki03"
+          db_insert('ae_users')->fields([
+            'aeid' => $user_json->data->ID,
+            'firstname' => $user_json->data->FirstName,
+            'surname' => $user_json->data->Surname,
+            'username' => $user_json->data->Username
           ])->execute();
 
-          echo $user->uuid();
+          echo $user_json->data->FirstName;
 
           exit(0);
     }
 
     function createNewUser() {
-        
+        // Get a new user from the api
+        // create a new user
+        // add in the database
     }
 }
 
