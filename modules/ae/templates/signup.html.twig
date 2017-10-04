@@ -32,8 +32,20 @@
 
         </div>
 
+
+        <div id="additional-data" style="display: none;">
+            <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
+            <div class="panel-body" style="padding: 15px 30px;">
+                <ul>
+                    {% for field in fields %}
+                        <li>{{ field.field }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
         <div id="loggedin" style="display: none;">
-            <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
+            User has logged in.
         </div>
 
 

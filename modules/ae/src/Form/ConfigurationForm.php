@@ -37,12 +37,11 @@ class ConfigurationForm extends ConfigFormBase {
         $api_key = $form_state->getValue('api_key');
         $base_url = $form_state->getValue('base_url');
 
-        $config_str = $this->getConfig($base_url, $api_key);
+        $config = $this->getConfig($base_url, $api_key);
 
         $state = \Drupal::state();
         $state->set('api_key', $api_key);
-        $state->set('config', $config_str);
-        //drupal_set_message($config_str);
+        $state->set('config', $config);
     }
 
     private function getConfig($base_url, $api_key) {
@@ -51,10 +50,10 @@ class ConfigurationForm extends ConfigFormBase {
         
         $client = \Drupal::httpClient();
         $request = $client->get($url);
-        //ksm($request->getBody());
-        $response = (string) $request->getBody();
-        drupal_set_message($response);
-        return $response;
+        $response = $request->getBody();
+
+        $config = json_decode($response);
+        return $config;
     }
 }
 

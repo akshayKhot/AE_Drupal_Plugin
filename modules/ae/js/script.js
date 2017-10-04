@@ -35,7 +35,7 @@ function userHandler(user,state) {
 	  console.log("USER HANDLER");
     console.log(user);
     console.log(state);
-    
+    $('#signup').hide();
     $("#loggedin").show(); //allow logout
 
 }

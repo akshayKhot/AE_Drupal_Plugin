@@ -74,13 +74,12 @@ class HelloBlock extends BlockBase {
     }
 
     public function getSocialsFromConfig() {
-        $config = json_decode($this->state->get('config'));
+        $config = $this->state->get('config');
         $urls = $config->Urls;
         $socials = [];
         foreach($urls as $url) {
             $socials[] = $url->Name;
         }
-        $socials[] = "linkedin";
         return $socials;
     }
 
