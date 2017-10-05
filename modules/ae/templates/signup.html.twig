@@ -36,11 +36,17 @@
         <div id="additional-data" style="display: none;">
             <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
             <div class="panel-body" style="padding: 15px 30px;">
-                <ul>
+                <form id="additional-data-form" data-ae-register-form="email" method="post">
                     {% for field in fields %}
-                        <li>{{ field.field }}</li>
+                            {% if field.enabled == 1 %}
+                                <div class="form-group">
+                                    <label for="{{ field.field }}">{{  field.field }} &nbsp;&nbsp;</label>
+                                    <input id="{{ field.field }}" name="{{ field.field }}" type="{{ field.type }}">
+                                </div>
+                            {% endif %}
                     {% endfor %}
-                </ul>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
             </div>
         </div>
 

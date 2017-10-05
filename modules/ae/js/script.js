@@ -38,6 +38,13 @@ function userHandler(user,state) {
     $('#signup').hide();
     $("#loggedin").show(); //allow logout
 
+
+    if (state === 'update') {
+        jQuery("#additional-data-form").hide();
+
+        // update the local user in drupal db
+    }
+
 }
 function logoutHandler(user) {
 	  console.log("LOGOUT HANDLER");
