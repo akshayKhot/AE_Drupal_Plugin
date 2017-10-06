@@ -19,3 +19,8 @@ function ae_theme($existing, $type, $theme, $path) {
     ],
   ];
 }
+
+
+function ae_user_login($account) {
+    drupal_set_message("New user created and logged in");
+}

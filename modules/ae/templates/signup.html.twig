@@ -32,8 +32,26 @@
 
         </div>
 
+
+        <div id="additional-data" style="display: none;">
+            <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
+            <div class="panel-body" style="padding: 15px 30px;">
+                <form id="additional-data-form" data-ae-register-form="email" method="post">
+                    {% for field in fields %}
+                            {% if field.enabled == 1 %}
+                                <div class="form-group">
+                                    <label for="{{ field.field }}">{{  field.field }} &nbsp;&nbsp;</label>
+                                    <input id="{{ field.field }}" name="{{ field.field }}" type="{{ field.type }}">
+                                </div>
+                            {% endif %}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
         <div id="loggedin" style="display: none;">
-            <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
+            User has logged in.
         </div>
 
 
