@@ -2,5 +2,5 @@
 ae.admin_settings:
   route_name: ae.adminForm
   title: 'AE Configuration'
-  description: 'Set up AE on your website'
+  description: 'Configure AE for your website'
   parent: system.admin_config_system

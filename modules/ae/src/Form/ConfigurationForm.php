@@ -17,6 +17,12 @@ class ConfigurationForm extends ConfigFormBase {
         return 'ae_config_form';
     }
 
+    function __construct()
+    {
+        $this->client = \Drupal::httpClient();
+        $this->state = \Drupal::state();
+    }
+
     public function buildForm(array $form, FormStateInterface $form_state) {
         $form['api_key'] = [
             '#type' => 'textfield',
@@ -38,18 +44,15 @@ class ConfigurationForm extends ConfigFormBase {
         $base_url = $form_state->getValue('base_url');
 
         $config = $this->getConfig($base_url, $api_key);
-
-        $state = \Drupal::state();
-        $state->set('api_key', $api_key);
-        $state->set('config', $config);
+        $this->state->set('api_key', $api_key);
+        $this->state->set('config', $config);
     }
 
     private function getConfig($base_url, $api_key) {
 
         $url = $base_url . '/v1.1/app/info?apiKey=' . $api_key . '&turnoffdebug=1';
-        
-        $client = \Drupal::httpClient();
-        $request = $client->get($url);
+
+        $request = $this->client->get($url);
         $response = $request->getBody();
 
         $config = json_decode($response);
