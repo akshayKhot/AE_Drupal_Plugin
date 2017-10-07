@@ -8,31 +8,77 @@ ae.adminForm:
   options:
     _admin_route: TRUE
 
+# General
 ae.settingsForm:
-  path: '/admin/config/ae/aesettings'
+  path: '/admin/config/ae/general/settings'
   defaults:
-    _form: '\Drupal\ae\Form\AeSettingsForm'
-    _title: 'Settings Form'
+    _form: '\Drupal\ae\Form\General\SettingsForm'
   requirements:
     _permission: 'access admin pages'
   options:
     _admin_route: TRUE
 
-ae.extraFieldsForm:
-  path: '/admin/config/ae/aesettings/extra_fields'
+ae.socialsForm:
+  path: '/admin/config/ae/general/social'
   defaults:
-    _form: '\Drupal\ae\Form\AeExtraFieldsForm'
-    _title: 'Extra Fields Form'
+    _form: '\Drupal\ae\Form\General\SocialsForm'
   requirements:
     _permission: 'access admin pages'
   options:
     _admin_route: TRUE
 
-ae.extraInfoForm:
-  path: '/admin/config/ae/extrainfo'
+ae.userFieldsForm:
+  path: '/admin/config/ae/general/userfields'
   defaults:
-    _form: '\Drupal\ae\Form\ExtraInfoForm'
-    _title: 'Extra Info'
+    _form: '\Drupal\ae\Form\General\UserFieldsForm'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
+
+ae.emailForm:
+  path: '/admin/config/ae/general/email'
+  defaults:
+    _form: '\Drupal\ae\Form\General\EmailForm'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
+
+# Widget
+ae.basicForm:
+  path: '/admin/config/ae/widget/basic'
+  defaults:
+    _form: '\Drupal\ae\Form\Widget\BasicForm'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
+
+ae.textForm:
+  path: '/admin/config/ae/widget/text'
+  defaults:
+    _form: '\Drupal\ae\Form\Widget\TextForm'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
+
+# Performance
+ae.performanceForm:
+  path: '/admin/config/ae/performance'
+  defaults:
+    _form: '\Drupal\ae\Form\Performance\PerformanceForm'
+  requirements:
+    _permission: 'access admin pages'
+  options:
+    _admin_route: TRUE
+
+# Install
+ae.installForm:
+  path: '/admin/config/ae/install'
+  defaults:
+    _form: '\Drupal\ae\Form\Install\InstallForm'
   requirements:
     _permission: 'access admin pages'
   options:

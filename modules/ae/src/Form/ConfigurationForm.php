@@ -24,14 +24,15 @@ class ConfigurationForm extends ConfigFormBase {
     }
 
     public function buildForm(array $form, FormStateInterface $form_state) {
-        $form['api_key'] = [
-            '#type' => 'textfield',
-            '#title' => $this->t('API Key')
-        ];
 
         $form['base_url'] = [
             '#type' => 'textfield',
             '#title' => $this->t('Base URL')
+        ];
+
+        $form['api_key'] = [
+            '#type' => 'textfield',
+            '#title' => $this->t('API Key')
         ];
 
         return parent::buildForm($form, $form_state);
