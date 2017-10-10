@@ -25,11 +25,8 @@ class BasicForm extends ConfigFormBase {
 
     public function buildForm(array $form, FormStateInterface $form_state) {
         $options = array(
-            'auth_window' => t('Show Authentication as Popup'),
-            'error_message' => t('Display Default Error Message'),
-            'auto_detect' => t('Device Auto-Detect'),
-            'multi_site_login' => t('Enable Multi-Site Login'),
-            'social_login' => t('Social Login Only'),
+            'use_modal_overlay' => t('Use Modal Overlay'),
+            'show_ep_button' => t('Show Email/Password as Button')
         );
 
         # the drupal checkboxes form field definition
@@ -38,6 +35,26 @@ class BasicForm extends ConfigFormBase {
             '#type' => 'checkboxes',
             '#options' => $options,
         );
+
+        // Font Size
+        $form['style_url'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Stylesheet URL'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Family
+        $form['form_validation_language'] = array(
+            '#type' => 'select',
+            '#title' => t('Form Validation Language'),
+            '#options' => [
+                '1' => $this->t('English'),
+                '2' => $this->t('French'),
+                '3' => $this->t('Spanish'),
+            ]
+        );
+
 
         return parent::buildForm($form, $form_state);
     }

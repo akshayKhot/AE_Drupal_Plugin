@@ -74,16 +74,6 @@ ae.performanceForm:
   options:
     _admin_route: TRUE
 
-# Install
-ae.installForm:
-  path: '/admin/config/ae/install'
-  defaults:
-    _form: '\Drupal\ae\Form\Install\InstallForm'
-  requirements:
-    _permission: 'access admin pages'
-  options:
-    _admin_route: TRUE
-
 ae.createuser:
   path: 'ae/ajax/{id}'
   defaults: 

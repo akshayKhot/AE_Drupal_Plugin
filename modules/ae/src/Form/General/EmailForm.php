@@ -24,129 +24,224 @@ class EmailForm extends ConfigFormBase {
         return 'ae_email_form';
     }
 
-    function __construct()
-    {
-        $this->fields = [
-            'email' => [
-                "name" => "Email",
-                "type" => "text"
-            ],
-            'password' => [
-                "name" => "Password",
-                "type" => "password"
-            ],
-            'birthdate' => [
-                "name" => "Date Of Birth",
-                "type" => "date"
-            ],
-            'address' => [
-                "name" => "Address",
-                "type" => "text"
-            ],
-            'addressline2' => [
-                "name" => "Address Line 2",
-                "type" => "text"
-            ],
-            'city' => [
-                "name" => "City",
-                "type" => "text"
-            ],
-            'state' => [
-                "name" => "State",
-                "type" => "text"
-            ],
-            'homephone' => [
-                "name" => "Home Phone",
-                "type" => "text"
-            ],
-            'mobilephone' => [
-                "name" => "Mobile Phone",
-                "type" => "text"
-            ],
-            'firstname' => [
-                "name" => "First Name",
-                "type" => "text"
-            ],
-            'username' => [
-                "name" => "Username",
-                "type" => "text"
-            ],
-            'website' => [
-                "name" => "Website",
-                "type" => "text"
-            ],
-            'bio' => [
-                "name" => "Bio",
-                "type" => "text"
-            ],
-            'gender' => [
-                "name" => "Gender",
-                "type" => "text"
-            ],
-            'surname' => [
-                "name" => "Last Name",
-                "type" => "text"
-            ],
-            'postcode' => [
-                "name" => "Zipcode",
-                "type" => "text"
-            ],
-            'country' => [
-                "name" => "Country",
-                "type" => "text"
-            ]
-        ];
-    }
-
     public function buildForm(array $form, FormStateInterface $form_state) {
 
-        foreach ($this->fields as $field_key=>$field_details) {
+        // Options
+        $options = array(
+          'verify_email' => t('Send Email Verification During Registration'),
+          'req_email_verify' => t('Site Requires Verified Email Before Login')
+        );
 
-            $form['extra_field_' . $field_key] = [
-                '#type' => 'fieldset',
-                '#title' => $this->t($field_details["name"])
-            ];
+        # the drupal checkboxes form field definition
+        $form['options'] = array(
+          '#title' => t('Options'),
+          '#type' => 'checkboxes',
+          '#options' => $options,
+        );
 
-            $form['extra_field_' . $field_key]['enable_' . $field_key] = [
-                '#type' => 'checkbox',
-                '#title' => $this->t('Enable')
-            ];
+//////////////////////// Format ////////////////////////////
+        ///
+        $form['format'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Format')
+        );
 
-            $form['extra_field_' . $field_key]['require_' . $field_key] = [
-                '#type' => 'checkbox',
-                '#title' => $this->t('Required')
-            ];
+        // Background Color
+        $form['format']['background_color'] = array(
+            '#id' => 'bg_color',
+            '#type' => 'textfield',
+            '#title' => t('Background Color'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
 
-        }
+        // Font Size
+        $form['format']['font_size'] = array(
+            '#id' => 'font_size',
+            '#type' => 'textfield',
+            '#title' => t('Font Size'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Family
+        $form['format']['font_family'] = array(
+            '#id' => 'font_family',
+            '#type' => 'textfield',
+            '#title' => t('Font Family'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Color
+        $form['format']['font_color'] = array(
+            '#id' => 'font_color',
+            '#type' => 'textfield',
+            '#title' => t('Font Color'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        //////////////////////// Header ////////////////////////////
+        $form['header'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Format')
+        );
+
+        // Background Color
+        $form['header']['show_header'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Show Header'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Size
+        $form['header']['header_bg_color'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Header Background Color'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Family
+        $form['header']['header_font_color'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Header Font Color'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Color
+        $form['header']['header_img_url'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Header Image URL'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        //////////////////////// Footer ////////////////////////////
+        $form['footer'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Format')
+        );
+
+        // Background Color
+        $form['footer']['show_footer'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Show Footer'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Size
+        $form['footer']['footer_bg_color'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Footer Background Color'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Family
+        $form['footer']['footer_font_color'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Footer Font Color'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Color
+        $form['footer']['footer_logo_dest_link'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Footer Logo Destination Link'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Color
+        $form['footer']['footer_logo_img_url'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Footer Logo Image URL'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Color
+        $form['footer']['copyright_text'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Copyright Text'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        //////////////////////// Verify Email Settings ////////////////////////////
+        $form['verify_email'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Format')
+        );
+
+        // Background Color
+        $form['verify_email']['email_subject'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Verify Email Subject'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Size
+        $form['verify_email']['email_text'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Verify Email Text'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Family
+        $form['verify_email']['email_link_text'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Verify Email Link Text'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        //////////////////////// Reset Password Settings ////////////////////////////
+        $form['reset_password'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Format')
+        );
+
+        // Background Color
+        $form['reset_password']['subject'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Reset Password Subject'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Size
+        $form['reset_password']['text'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Reset Password Text'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        // Font Family
+        $form['reset_password']['link_text'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Reset Email Link Text'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
 
         return parent::buildForm($form, $form_state);
+
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
-        parent::submitForm($form, $form_state);
 
-        $fields = $this->getFieldsData($form_state);
-        ksm($fields);
-        $state = \Drupal::state();
-        $state->set('fields', $fields);
     }
-
-
-    private function getFieldsData(FormStateInterface $form_state) {
-
-        $fieldsData = [];
-        foreach ($this->fields as $field_key=>$field_details) {
-            $data = [
-                'field' => $field_key,
-                'type' => $field_details["type"],
-                'enabled' => $form_state->getValue('enable_' . $field_key),
-                'required' => $form_state->getValue('require_' . $field_key)
-            ];
-            $fieldsData[] = $data;
-        }
-        return $fieldsData;
-    }
-
 
 }
 

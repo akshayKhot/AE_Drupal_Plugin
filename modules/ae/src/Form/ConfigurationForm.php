@@ -27,7 +27,7 @@ class ConfigurationForm extends ConfigFormBase {
 
         $form['base_url'] = [
             '#type' => 'textfield',
-            '#title' => $this->t('Base URL')
+            '#title' => $this->t('Instance')
         ];
 
         $form['api_key'] = [

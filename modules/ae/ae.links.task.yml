@@ -62,18 +62,9 @@ ae.textForm:
 #### Performance
 
 ae.performanceSettings:
-  title: 'Performance'
+  title: 'Perform'
   route_name: ae.performanceForm
   base_route: ae.adminForm
   weight: 4
-
-##########################################################
-#### Install
-
-ae.installSettings:
-  title: 'Install'
-  route_name: ae.installForm
-  base_route: ae.adminForm
-  weight: 5
 
 ##########################################################
