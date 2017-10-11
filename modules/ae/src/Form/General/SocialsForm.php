@@ -23,20 +23,17 @@ class SocialsForm extends ConfigFormBase {
         return 'ae_general_settings_form';
     }
 
-    public function buildForm(array $form, FormStateInterface $form_state) {
-        $networks = array(
-            'facebook' => t('Facebook'),
-            'twitter' => t('Twitter'),
-            'google' => t('Google'),
-            'tumbler' => t('Tumblr'),
-            'instagram' => t('Instagram'),
-            'youtube' => t('YouTube'),
-            'spotify' => t('Spotify'),
+    function __construct()
+    {
+        $this->state = \Drupal::state();
+    }
 
-        );
+    public function buildForm(array $form, FormStateInterface $form_state) {
+
+        $networks = $this->getSocials();
 
         # the drupal checkboxes form field definition
-        $form['options'] = array(
+        $form['socials'] = array(
             '#title' => t('Social Networks'),
             '#type' => 'checkboxes',
             '#description' => t('Select the Social Networks for AE.'),
@@ -48,6 +45,21 @@ class SocialsForm extends ConfigFormBase {
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
         parent::submitForm($form, $form_state);
+
+        $form_state->cleanValues();
+
+        $this->state->set('socials', $form_state->getValues());
+
+    }
+
+    private function getSocials() {
+        $urls = $this->state->get('config')['Urls'];
+        $networks = [];
+        foreach($urls as $url) {
+            $networks[$url['Name']] = t($url['Name']);
+        }
+
+        return $networks;
     }
 
 

@@ -23,27 +23,60 @@ class TextForm extends ConfigFormBase {
         return 'ae_general_settings_form';
     }
 
+    function __construct()
+    {
+        $this->state = \Drupal::state();
+    }
+
     public function buildForm(array $form, FormStateInterface $form_state) {
-        $options = array(
-            'auth_window' => t('Show Authentication as Popup'),
-            'error_message' => t('Display Default Error Message'),
-            'auto_detect' => t('Device Auto-Detect'),
-            'multi_site_login' => t('Enable Multi-Site Login'),
-            'social_login' => t('Social Login Only'),
+        $form['header'] = array(
+            '#type' => 'textarea',
+            '#title' => $this->t('Header(text or html)')
         );
 
-        # the drupal checkboxes form field definition
-        $form['options'] = array(
-            '#title' => t('Options'),
-            '#type' => 'checkboxes',
-            '#options' => $options,
+        $form['footer'] = array(
+            '#type' => 'textarea',
+            '#title' => $this->t('Footer(text or html)'),
+        );
+
+        $form['labels'] = array(
+            '#type' => 'fieldset',
+            '#title' => t('Labels and Messages')
+        );
+
+
+        $form['labels']['error_screen'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Error Screen title'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        $form['labels']['logic_screen'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Logic Screen Title'),
+            '#size' => 60,
+            '#maxlength' => 60,
+        );
+
+        $form['labels']['email_login'] = array(
+            '#type' => 'textfield',
+            '#title' => t('Email Login Button Text'),
+            '#size' => 60,
+            '#maxlength' => 60,
         );
 
         return parent::buildForm($form, $form_state);
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
+
         parent::submitForm($form, $form_state);
+
+        $form_state->cleanValues();
+
+        $this->state->set('text_options', $form_state->getValues());
+
     }
 
 

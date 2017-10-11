@@ -23,6 +23,11 @@ class BasicForm extends ConfigFormBase {
         return 'ae_general_settings_form';
     }
 
+    function __construct()
+    {
+        $this->state = \Drupal::state();
+    }
+
     public function buildForm(array $form, FormStateInterface $form_state) {
         $options = array(
             'use_modal_overlay' => t('Use Modal Overlay'),
@@ -60,7 +65,13 @@ class BasicForm extends ConfigFormBase {
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
+
         parent::submitForm($form, $form_state);
+
+        $form_state->cleanValues();
+
+        $this->state->set('basic_options', $form_state->getValues());
+
     }
 
 

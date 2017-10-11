@@ -47,6 +47,7 @@ class ConfigurationForm extends ConfigFormBase {
         $config = $this->getConfig($base_url, $api_key);
         $this->state->set('api_key', $api_key);
         $this->state->set('config', $config);
+        ksm($config['Urls']);
     }
 
     private function getConfig($base_url, $api_key) {
@@ -55,8 +56,7 @@ class ConfigurationForm extends ConfigFormBase {
 
         $request = $this->client->get($url);
         $response = $request->getBody();
-
-        $config = json_decode($response);
+        $config = json_decode($response, true);
         return $config;
     }
 }

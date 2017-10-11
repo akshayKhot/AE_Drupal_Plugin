@@ -62,7 +62,7 @@ ae.textForm:
 #### Performance
 
 ae.performanceSettings:
-  title: 'Perform'
+  title: 'Performance'
   route_name: ae.performanceForm
   base_route: ae.adminForm
   weight: 4

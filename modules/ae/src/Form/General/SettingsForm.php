@@ -23,6 +23,11 @@ class SettingsForm extends ConfigFormBase {
         return 'ae_general_settings_form';
     }
 
+    function __construct()
+    {
+        $this->state = \Drupal::state();
+    }
+
     public function buildForm(array $form, FormStateInterface $form_state) {
         $options = array(
             'auth_window' => t('Show Authentication as Popup'),
@@ -43,7 +48,13 @@ class SettingsForm extends ConfigFormBase {
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
+
         parent::submitForm($form, $form_state);
+
+        $form_state->cleanValues();
+
+        $this->state->set('general_settings', $form_state->getValues());
+
     }
 
 

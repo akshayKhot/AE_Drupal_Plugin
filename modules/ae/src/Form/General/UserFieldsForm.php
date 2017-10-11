@@ -21,11 +21,12 @@ class UserFieldsForm extends ConfigFormBase {
     }
 
     public function getFormId() {
-        return 'ae_user_fields_form';
+        return 'ae_extra_fields_form';
     }
 
     function __construct()
     {
+        $this->state = \Drupal::state();
         $this->fields = [
             'email' => [
                 "name" => "Email",
@@ -123,12 +124,18 @@ class UserFieldsForm extends ConfigFormBase {
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
+//        parent::submitForm($form, $form_state);
+//
+//        $fields = $this->getFieldsData($form_state);
+//        ksm($fields);
+//        $state = \Drupal::state();
+//        $state->set('fields', $fields);
+
         parent::submitForm($form, $form_state);
 
-        $fields = $this->getFieldsData($form_state);
-        ksm($fields);
-        $state = \Drupal::state();
-        $state->set('fields', $fields);
+        $form_state->cleanValues();
+
+        $this->state->set('user_fields', $form_state->getValues());
     }
 
 

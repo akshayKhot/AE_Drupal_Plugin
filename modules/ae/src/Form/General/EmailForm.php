@@ -24,6 +24,11 @@ class EmailForm extends ConfigFormBase {
         return 'ae_email_form';
     }
 
+    function __construct()
+    {
+        $this->state = \Drupal::state();
+    }
+
     public function buildForm(array $form, FormStateInterface $form_state) {
 
         // Options
@@ -46,7 +51,6 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Format')
         );
 
-        // Background Color
         $form['format']['background_color'] = array(
             '#id' => 'bg_color',
             '#type' => 'textfield',
@@ -55,7 +59,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Size
         $form['format']['font_size'] = array(
             '#id' => 'font_size',
             '#type' => 'textfield',
@@ -64,7 +67,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Family
         $form['format']['font_family'] = array(
             '#id' => 'font_family',
             '#type' => 'textfield',
@@ -73,7 +75,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Color
         $form['format']['font_color'] = array(
             '#id' => 'font_color',
             '#type' => 'textfield',
@@ -85,10 +86,9 @@ class EmailForm extends ConfigFormBase {
         //////////////////////// Header ////////////////////////////
         $form['header'] = array(
             '#type' => 'fieldset',
-            '#title' => t('Format')
+            '#title' => t('Header')
         );
 
-        // Background Color
         $form['header']['show_header'] = array(
             '#type' => 'textfield',
             '#title' => t('Show Header'),
@@ -96,7 +96,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Size
         $form['header']['header_bg_color'] = array(
             '#type' => 'textfield',
             '#title' => t('Header Background Color'),
@@ -104,7 +103,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Family
         $form['header']['header_font_color'] = array(
             '#type' => 'textfield',
             '#title' => t('Header Font Color'),
@@ -112,7 +110,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Color
         $form['header']['header_img_url'] = array(
             '#type' => 'textfield',
             '#title' => t('Header Image URL'),
@@ -123,10 +120,9 @@ class EmailForm extends ConfigFormBase {
         //////////////////////// Footer ////////////////////////////
         $form['footer'] = array(
             '#type' => 'fieldset',
-            '#title' => t('Format')
+            '#title' => t('Footer')
         );
 
-        // Background Color
         $form['footer']['show_footer'] = array(
             '#type' => 'textfield',
             '#title' => t('Show Footer'),
@@ -134,7 +130,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Size
         $form['footer']['footer_bg_color'] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Background Color'),
@@ -142,7 +137,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Family
         $form['footer']['footer_font_color'] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Font Color'),
@@ -150,7 +144,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Color
         $form['footer']['footer_logo_dest_link'] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Logo Destination Link'),
@@ -158,7 +151,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Color
         $form['footer']['footer_logo_img_url'] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Logo Image URL'),
@@ -166,7 +158,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Color
         $form['footer']['copyright_text'] = array(
             '#type' => 'textfield',
             '#title' => t('Copyright Text'),
@@ -177,10 +168,9 @@ class EmailForm extends ConfigFormBase {
         //////////////////////// Verify Email Settings ////////////////////////////
         $form['verify_email'] = array(
             '#type' => 'fieldset',
-            '#title' => t('Format')
+            '#title' => t('Verify Email Settings')
         );
 
-        // Background Color
         $form['verify_email']['email_subject'] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Subject'),
@@ -188,7 +178,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Size
         $form['verify_email']['email_text'] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Text'),
@@ -196,7 +185,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Family
         $form['verify_email']['email_link_text'] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Link Text'),
@@ -207,10 +195,9 @@ class EmailForm extends ConfigFormBase {
         //////////////////////// Reset Password Settings ////////////////////////////
         $form['reset_password'] = array(
             '#type' => 'fieldset',
-            '#title' => t('Format')
+            '#title' => t('Reset Password Settings')
         );
 
-        // Background Color
         $form['reset_password']['subject'] = array(
             '#type' => 'textfield',
             '#title' => t('Reset Password Subject'),
@@ -218,7 +205,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Size
         $form['reset_password']['text'] = array(
             '#type' => 'textfield',
             '#title' => t('Reset Password Text'),
@@ -226,7 +212,6 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Family
         $form['reset_password']['link_text'] = array(
             '#type' => 'textfield',
             '#title' => t('Reset Email Link Text'),
@@ -241,6 +226,11 @@ class EmailForm extends ConfigFormBase {
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
 
+        parent::submitForm($form, $form_state);
+
+        $form_state->cleanValues();
+
+        $this->state->set('email_options', $form_state->getValues());
     }
 
 }

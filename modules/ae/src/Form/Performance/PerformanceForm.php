@@ -23,6 +23,11 @@ class PerformanceForm extends ConfigFormBase {
         return 'ae_general_settings_form';
     }
 
+    function __construct()
+    {
+        $this->state = \Drupal::state();
+    }
+
     public function buildForm(array $form, FormStateInterface $form_state) {
         $options = array(
           'not_create_user' => t('Do not create local user'),
@@ -30,7 +35,7 @@ class PerformanceForm extends ConfigFormBase {
         );
 
         # the drupal checkboxes form field definition
-        $form['options'] = array(
+        $form['performance_options'] = array(
           '#title' => t('Options'),
           '#type' => 'checkboxes',
           '#options' => $options,
@@ -40,7 +45,13 @@ class PerformanceForm extends ConfigFormBase {
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
+
         parent::submitForm($form, $form_state);
+
+        $form_state->cleanValues();
+
+        $this->state->set('performance_options', $form_state->getValues());
+
     }
 
 

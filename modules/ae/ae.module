@@ -1,5 +1,21 @@
 <?php
 
+
+//function ae_theme($existing, $type, $theme, $path) {
+//    return [
+//    'signup' => [
+//      'variables' => [
+//          'general_settings' => [],
+//          'social_networks' => [],
+//          'user_fields' => [],
+//          'email_options' => [],
+//          'basic_options' => [],
+//          'text_options' => [],
+//          'performance_options' => []
+//      ],
+//    ],
+//  ];
+//}
 function ae_theme($existing, $type, $theme, $path) {
   return [
     'signup' => [

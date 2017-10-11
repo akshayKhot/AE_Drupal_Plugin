@@ -10,49 +10,48 @@
                 {% endfor %}
             </div>
 
-            {% if want_email == 0 %}
 
-                <div class="panel-heading" style="background: #000; color:#fff;">Email Signup</div>
-                <div class="panel-body" style="padding: 15px 30px;">
-                    <form id="email-signup" data-ae-register-form="email" method="post">
-                        <div class="form-group">
-                            <label for="email">Email address</label>
-                            <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                            <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                        </div>
-                        <div class="form-group">
-                            <label for="password">Password</label>
-                            <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign Up!</button>
-                    </form>
-                </div>
-
-            {% endif %}
-
-        </div>
-
-
-        <div id="additional-data" style="display: none;">
-            <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
+            <div class="panel-heading" style="background: #000; color:#fff;">Email Signup</div>
             <div class="panel-body" style="padding: 15px 30px;">
-                <form id="additional-data-form" data-ae-register-form="email" method="post">
-                    {% for field in fields %}
-                            {% if field.enabled == 1 %}
-                                <div class="form-group">
-                                    <label for="{{ field.field }}">{{  field.field }} &nbsp;&nbsp;</label>
-                                    <input id="{{ field.field }}" name="{{ field.field }}" type="{{ field.type }}">
-                                </div>
-                            {% endif %}
-                    {% endfor %}
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <form id="email-signup" data-ae-register-form="email" method="post">
+                    <div class="form-group">
+                        <label for="email">Email address</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Sign Up!</button>
                 </form>
             </div>
+
+
+
         </div>
 
-        <div id="loggedin" style="display: none;">
-            User has logged in.
-        </div>
+
+        {#<div id="additional-data" style="display: none;">#}
+            {#<div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>#}
+            {#<div class="panel-body" style="padding: 15px 30px;">#}
+                {#<form id="additional-data-form" data-ae-register-form="email" method="post">#}
+                    {#{% for field in fields %}#}
+                            {#{% if field.enabled == 1 %}#}
+                                {#<div class="form-group">#}
+                                    {#<label for="{{ field.field }}">{{  field.field }} &nbsp;&nbsp;</label>#}
+                                    {#<input id="{{ field.field }}" name="{{ field.field }}" type="{{ field.type }}">#}
+                                {#</div>#}
+                            {#{% endif %}#}
+                    {#{% endfor %}#}
+                    {#<button type="submit" class="btn btn-primary">Submit</button>#}
+                {#</form>#}
+            {#</div>#}
+        {#</div>#}
+
+        {#<div id="loggedin" style="display: none;">#}
+            {#User has logged in.#}
+        {#</div>#}
 
 
 <script type="text/javascript">
@@ -60,48 +59,48 @@
 
 function AEJSReady(aeJS) {
 
-    var social_logins = "";
-    {% for social in socials %}
-        social_logins += '{{ social|lower }}{% if not loop.last %},{% endif %}';
-    {% endfor %}
+    {#var social_logins = "";#}
+    {#{% for social in socials %}#}
+        {#social_logins += '{{ social|lower }}{% if not loop.last %},{% endif %}';#}
+    {#{% endfor %}#}
 
-	globalAEJS = aeJS;
+	{#globalAEJS = aeJS;#}
 
-	aeJS.settings['auth_window'] = {{auth_window}} === 0;
-	aeJS.settings['services'] = social_logins;
-    aeJS.settings['sso'] = '{{sso}}';
-    aeJS.settings['flow_css'] = '{{ flow_css }}';
-    aeJS.settings['close_button'] = {{ close_button }} === 0;
-    aeJS.settings['date_format'] = '{{ date_format }}';
-    aeJS.settings['display_error_message'] = {{ display_error_message }} === 1;
+	{#aeJS.settings['auth_window'] = {{auth_window}} === 0;#}
+	{#aeJS.settings['services'] = social_logins;#}
+    {#aeJS.settings['sso'] = '{{sso}}';#}
+    {#aeJS.settings['flow_css'] = '{{ flow_css }}';#}
+    {#aeJS.settings['close_button'] = {{ close_button }} === 0;#}
+    {#aeJS.settings['date_format'] = '{{ date_format }}';#}
+    {#aeJS.settings['display_error_message'] = {{ display_error_message }} === 1;#}
 
-    var extra_info = {};
-    extra_info['global'] = { 
-        'top': {
-            'text': '{{ extra_info['global_top_text'] }}',
-            'title': '{{ extra_info['global_top_title'] }}',
-        },
-        'bottom': {
-            'text': '{{ extra_info['global_bottom_text'] }}',
-            'title': '{{ extra_info['global_bottom_title'] }}',
-        }
-    };
+    {#var extra_info = {};#}
+    {#extra_info['global'] = { #}
+        {#'top': {#}
+            {#'text': '{{ extra_info['global_top_text'] }}',#}
+            {#'title': '{{ extra_info['global_top_title'] }}',#}
+        {#},#}
+        {#'bottom': {#}
+            {#'text': '{{ extra_info['global_bottom_text'] }}',#}
+            {#'title': '{{ extra_info['global_bottom_title'] }}',#}
+        {#}#}
+    {#};#}
 
-    var fields = {{ fields|json_encode|raw }};
-    var enabledFields = fields.filter(function(field) {
-        return field.enabled === 1;
-    });
-    var extraFields = {};
-    enabledFields.forEach(function(field) {
-        extraFields[field.field] = {
-            required: field.required === 1
-        }
-    });
-    console.log(extraFields);
-    aeJS.settings['extra_fields_screen'] = 'disabled';
-    aeJS.settings['extra_fields'] = extraFields;
+    {#var fields = {{ fields|json_encode|raw }};#}
+    {#var enabledFields = fields.filter(function(field) {#}
+        {#return field.enabled === 1;#}
+    {#});#}
+    {#var extraFields = {};#}
+    {#enabledFields.forEach(function(field) {#}
+        {#extraFields[field.field] = {#}
+            {#required: field.required === 1#}
+        {#}#}
+    {#});#}
+    {#console.log(extraFields);#}
+    {#aeJS.settings['extra_fields_screen'] = 'disabled';#}
+    {#aeJS.settings['extra_fields'] = extraFields;#}
 
-    console.log(aeJS.settings);
+    {#console.log(aeJS.settings);#}
 
 	aeJS.events.onFlow.addHandler(flowHandler);
 	aeJS.events.onLogin.addHandler(loginHandler);
