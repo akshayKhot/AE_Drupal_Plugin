@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="PublishConfigData" autoUpload="Always" serverName="AE">
+  <component name="PublishConfigData" autoUpload="Always" serverName="ae_drupal_module">
     <serverData>
-      <paths name="AE">
+      <paths name="ae_drupal_module">
         <serverdata>
           <mappings>
             <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
           </mappings>
-          <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/core" />
-          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>
