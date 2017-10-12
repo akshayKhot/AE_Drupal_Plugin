@@ -124,18 +124,14 @@ class UserFieldsForm extends ConfigFormBase {
     }
 
     public function submitForm(array &$form, FormStateInterface $form_state) {
-//        parent::submitForm($form, $form_state);
-//
-//        $fields = $this->getFieldsData($form_state);
-//        ksm($fields);
-//        $state = \Drupal::state();
-//        $state->set('fields', $fields);
 
         parent::submitForm($form, $form_state);
 
-        $form_state->cleanValues();
-
-        $this->state->set('user_fields', $form_state->getValues());
+        $fields = $this->getFieldsData($form_state);
+        ksm($fields);
+        $state = \Drupal::state();
+        $state->set('fields', $fields);
+        ksm($fields);
     }
 
 

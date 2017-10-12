@@ -47,7 +47,7 @@ ae.widgetSettings:
   weight: 3
 
 ae.basicForm:
-  title: 'Basic'
+  title: 'Settings'
   route_name: ae.basicForm
   parent_id: ae.widgetSettings
   weight: 1

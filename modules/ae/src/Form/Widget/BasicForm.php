@@ -30,7 +30,6 @@ class BasicForm extends ConfigFormBase {
 
     public function buildForm(array $form, FormStateInterface $form_state) {
         $options = array(
-            'use_modal_overlay' => t('Use Modal Overlay'),
             'show_ep_button' => t('Show Email/Password as Button')
         );
 

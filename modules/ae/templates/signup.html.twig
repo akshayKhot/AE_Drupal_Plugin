@@ -32,42 +32,86 @@
         </div>
 
 
-        {#<div id="additional-data" style="display: none;">#}
-            {#<div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>#}
-            {#<div class="panel-body" style="padding: 15px 30px;">#}
-                {#<form id="additional-data-form" data-ae-register-form="email" method="post">#}
-                    {#{% for field in fields %}#}
-                            {#{% if field.enabled == 1 %}#}
-                                {#<div class="form-group">#}
-                                    {#<label for="{{ field.field }}">{{  field.field }} &nbsp;&nbsp;</label>#}
-                                    {#<input id="{{ field.field }}" name="{{ field.field }}" type="{{ field.type }}">#}
-                                {#</div>#}
-                            {#{% endif %}#}
-                    {#{% endfor %}#}
-                    {#<button type="submit" class="btn btn-primary">Submit</button>#}
-                {#</form>#}
-            {#</div>#}
-        {#</div>#}
+        <div id="additional-data" style="display: none;">
+            <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
+            <div class="panel-body" style="padding: 15px 30px;">
+                <form id="additional-data-form" data-ae-register-form="email" method="post">
+                    {% for field in fields %}
+                            {% if field.enabled == 1 %}
+                                <div class="form-group">
+                                    <label for="{{ field.field }}">{{  field.field }} &nbsp;&nbsp;</label>
+                                    <input id="{{ field.field }}" name="{{ field.field }}" type="{{ field.type }}">
+                                </div>
+                            {% endif %}
+                    {% endfor %}
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
 
-        {#<div id="loggedin" style="display: none;">#}
-            {#User has logged in.#}
-        {#</div>#}
+        <div id="loggedin" style="display: none;">
+            User has logged in.
+        </div>
 
 
 <script type="text/javascript">
 
+  	function getSocials() {
+  	  var social_logins = "";
+  	    {% for social in socials %}
+  	  social_logins += '{{ social|lower }}{% if not loop.last %},{% endif %}';
+  	    {% endfor %}
+  	  return social_logins;
+  	}
+
+
+	function getOptions() {
+	  var general_settings =  {{ general_settings|json_encode|raw }};
+	  var basic_options =  {{ basic_options|json_encode|raw }};
+	  var email_options =  {{ email_options|json_encode|raw }};
+	  var text_options =  {{ text_options|json_encode|raw }};
+	  var performance_options =  {{ performance_options|json_encode|raw }};
+
+	  console.log(basic_options);
+	  var options = {
+		'auth_window': typeof general_settings.options.auth_window === "string",
+		'social_logins': getSocials(),
+		'display_error_message': typeof general_settings.options.error_message === "string",
+		'device_detect': typeof general_settings.options.auto_detect === "string",
+		'sso': general_settings.options.multi_site_login === 0,
+		'no_email': typeof general_settings.options.social_login === "string",
+		'email_format': email_options,
+		'hide_email_form': basic_options.options.show_ep_button === 0,
+		'style_url': basic_options.style_url,
+		'language': 'en_US ' // Todo: Make it dynamic later
+	  };
+
+	  return options;
+	}
+
+
 
 function AEJSReady(aeJS) {
 
-    {#var social_logins = "";#}
-    {#{% for social in socials %}#}
-        {#social_logins += '{{ social|lower }}{% if not loop.last %},{% endif %}';#}
-    {#{% endfor %}#}
 
-	{#globalAEJS = aeJS;#}
 
-	{#aeJS.settings['auth_window'] = {{auth_window}} === 0;#}
-	{#aeJS.settings['services'] = social_logins;#}
+  	var options = getOptions();
+
+	globalAEJS = aeJS;
+
+	aeJS.settings['auth_window'] = options.auth_window;
+	aeJS.settings['services'] = options.social_logins;
+	aeJS.settings['display_error_message'] = options.display_error_message;
+	aeJS.settings['mobile_detect'] = options.device_detect;
+	aeJS.settings['sso'] = options.sso;
+    aeJS.settings['no_email'] = options.no_email;
+	aeJS.settings['email_format'] = options.email_format;
+	aeJS.settings['hide_email_form'] = options.hide_email_form;
+	aeJS.settings['flow_css'] = options.style_url;
+    aeJS.settings['language'] = options.language;
+
+  debugger;
+
     {#aeJS.settings['sso'] = '{{sso}}';#}
     {#aeJS.settings['flow_css'] = '{{ flow_css }}';#}
     {#aeJS.settings['close_button'] = {{ close_button }} === 0;#}

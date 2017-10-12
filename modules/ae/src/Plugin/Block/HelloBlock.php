@@ -23,18 +23,17 @@ class HelloBlock extends BlockBase {
 
     public function build() {
 
-        $general_settings = $this->state->get('general_settings');
 
-        $user_fields = $this->state->get('user_fields');
-        $email_options = $this->state->get('email_options');
-        $basic_options = $this->state->get('basic_options');
-        $text_options = $this->state->get('text_options');
-        $performance_options = $this->state->get('performance_options');
 
         return [
             '#theme' => 'signup',
             '#socials' => $this->getSelectedSocials(),
-//            '#fields' => $this->state->get('fields'),
+            '#fields' => $this->state->get('fields'),
+            '#general_settings' => $this->state->get('general_settings'),
+            '#basic_options' => $this->state->get('basic_options'),
+            '#email_options' => $this->state->get('email_options'),
+            '#text_options' => $this->state->get('text_options'),
+            '#performance_options' => $this->state->get('performance_options'),
 //            '#want_email' => $this->state->get('email_signup'),
 //            '#auth_window' => $this->state->get('auth_window'),
 //            '#sso' => $this->state->get('sso'),

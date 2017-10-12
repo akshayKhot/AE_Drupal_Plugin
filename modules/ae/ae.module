@@ -22,6 +22,11 @@ function ae_theme($existing, $type, $theme, $path) {
       'variables' => [
           'socials' => [],
           'fields' => [],
+          'general_settings' => [],
+          'basic_options' => [],
+          'email_options' => [],
+          'text_options' => [],
+          'performance_options' => [],
           'flow_css' => [],
           'want_email' => NULL,
           'auth_window' => NULL,

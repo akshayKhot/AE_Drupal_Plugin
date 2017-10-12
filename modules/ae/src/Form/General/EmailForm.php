@@ -96,7 +96,7 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        $form['header']['header_bg_color'] = array(
+        $form['header']['header_background_color'] = array(
             '#type' => 'textfield',
             '#title' => t('Header Background Color'),
             '#size' => 60,
@@ -110,7 +110,7 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        $form['header']['header_img_url'] = array(
+        $form['header']['image_url '] = array(
             '#type' => 'textfield',
             '#title' => t('Header Image URL'),
             '#size' => 60,
@@ -130,7 +130,7 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        $form['footer']['footer_bg_color'] = array(
+        $form['footer']['footer_background_color'] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Background Color'),
             '#size' => 60,
@@ -144,21 +144,21 @@ class EmailForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        $form['footer']['footer_logo_dest_link'] = array(
+        $form['footer']['logo_link '] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Logo Destination Link'),
             '#size' => 60,
             '#maxlength' => 60,
         );
 
-        $form['footer']['footer_logo_img_url'] = array(
+        $form['footer']['logo_img_url '] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Logo Image URL'),
             '#size' => 60,
             '#maxlength' => 60,
         );
 
-        $form['footer']['copyright_text'] = array(
+        $form['footer']['copyright'] = array(
             '#type' => 'textfield',
             '#title' => t('Copyright Text'),
             '#size' => 60,
@@ -171,21 +171,21 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Verify Email Settings')
         );
 
-        $form['verify_email']['email_subject'] = array(
+        $form['verify_email']['verify_email_subject '] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Subject'),
             '#size' => 60,
             '#maxlength' => 60,
         );
 
-        $form['verify_email']['email_text'] = array(
+        $form['verify_email']['verify_email_message '] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Text'),
             '#size' => 60,
             '#maxlength' => 60,
         );
 
-        $form['verify_email']['email_link_text'] = array(
+        $form['verify_email']['verify_email_link '] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Link Text'),
             '#size' => 60,
@@ -198,21 +198,21 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Reset Password Settings')
         );
 
-        $form['reset_password']['subject'] = array(
+        $form['reset_password']['reset_pw_email_subject'] = array(
             '#type' => 'textfield',
             '#title' => t('Reset Password Subject'),
             '#size' => 60,
             '#maxlength' => 60,
         );
 
-        $form['reset_password']['text'] = array(
+        $form['reset_password']['reset_pw_email_message'] = array(
             '#type' => 'textfield',
             '#title' => t('Reset Password Text'),
             '#size' => 60,
             '#maxlength' => 60,
         );
 
-        $form['reset_password']['link_text'] = array(
+        $form['reset_password']['reset_pw_email_link'] = array(
             '#type' => 'textfield',
             '#title' => t('Reset Email Link Text'),
             '#size' => 60,
