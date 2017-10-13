@@ -32,10 +32,6 @@ class UserFieldsForm extends ConfigFormBase {
                 "name" => "Email",
                 "type" => "text"
             ],
-            'password' => [
-                "name" => "Password",
-                "type" => "password"
-            ],
             'birthdate' => [
                 "name" => "Date Of Birth",
                 "type" => "date"
@@ -118,6 +114,13 @@ class UserFieldsForm extends ConfigFormBase {
                 '#title' => $this->t('Required')
             ];
 
+            $form['extra_field_' . $field_key]['alt_text_' . $field_key] = [
+                '#type' => 'textfield',
+                '#title' => t('Alternative Text'),
+                '#size' => 60,
+                '#maxlength' => 60,
+            ];
+
         }
 
         return parent::buildForm($form, $form_state);
@@ -128,7 +131,6 @@ class UserFieldsForm extends ConfigFormBase {
         parent::submitForm($form, $form_state);
 
         $fields = $this->getFieldsData($form_state);
-        ksm($fields);
         $state = \Drupal::state();
         $state->set('fields', $fields);
         ksm($fields);
@@ -143,7 +145,8 @@ class UserFieldsForm extends ConfigFormBase {
                 'field' => $field_key,
                 'type' => $field_details["type"],
                 'enabled' => $form_state->getValue('enable_' . $field_key),
-                'required' => $form_state->getValue('require_' . $field_key)
+                'required' => $form_state->getValue('require_' . $field_key),
+                'alt_text' => $form_state->getValue('alt_text_' . $field_key)
             ];
             $fieldsData[] = $data;
         }

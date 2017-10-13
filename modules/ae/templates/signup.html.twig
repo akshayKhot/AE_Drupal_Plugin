@@ -64,14 +64,46 @@
   	    return social_logins;
   	}
 
+  	function getGlobalHeaderFooter(text) {
+  	    return {
+  	        global: {
+                'top': {
+                    'text' : text.header,
+                    'title' : 'Global Header'
+                },
+                'bottom': {
+                    'text' : text.footer,
+                    'title' : 'Global Footer'
+                }
+            }
+        }
+    }
+
+    function getExtraFields(fields) {
+
+  	    required_fields = fields.filter(function(field) {
+  	        return field.required === 1;
+        });
+
+  	    var extraFields = {};
+  	    required_fields.forEach(function(field) {
+  	        extraFields[field.field] = {
+  	            label: field.alt_text,
+                required: true
+            }
+        });
+
+  	    return extraFields;
+    }
+
 	function getOptions() {
 	    var general_settings =  {{ general_settings|json_encode|raw }};
 	    var basic_options =  {{ basic_options|json_encode|raw }};
 	    var email_options =  {{ email_options|json_encode|raw }};
 	    var text_options =  {{ text_options|json_encode|raw }};
 	    var performance_options =  {{ performance_options|json_encode|raw }};
+	    var fields = {{ fields|json_encode|raw }};
 
-	    console.log(text_options);
 	    var options = {
 	  	    'auth_window': typeof general_settings.options.auth_window === "string",
 	  	    'social_logins': getSocials(),
@@ -79,13 +111,17 @@
 	  	    'device_detect': typeof general_settings.options.auto_detect === "string",
 	  	    'sso': general_settings.options.multi_site_login === 0,
 	  	    'no_email': typeof general_settings.options.social_login === "string",
+            'verify_email': typeof email_options.verify_email === "string",
+            'verify_email_for_login': typeof email_options.req_email_verify === "string",
 	  	    'email_format': email_options,
 	  	    'hide_email_form': basic_options.options.show_ep_button === 0,
 	  	    'style_url': basic_options.style_url,
 	  	    'language': 'en_US ', // Todo: Make it dynamic later,
             'flow_text': text_options,
             'create_local_user': performance_options.not_create_user === 0,
-            'sign_in_local_user': performance_options.not_sign_in === 0
+            'sign_in_local_user': performance_options.not_sign_in === 0,
+            'extra_info': getGlobalHeaderFooter(text_options),
+            'extra_fields': getExtraFields(fields)
 	    };
 
 	  return options;
@@ -99,48 +135,20 @@ function AEJSReady(aeJS) {
 	aeJS.settings['auth_window'] = options.auth_window;
 	aeJS.settings['services'] = options.social_logins;
 	aeJS.settings['display_error_message'] = options.display_error_message;
-	aeJS.settings['mobile_detect'] = options.device_detect;
-	aeJS.settings['sso'] = options.sso;
-    aeJS.settings['no_email'] = options.no_email;
 	aeJS.settings['email_format'] = options.email_format;
-	aeJS.settings['hide_email_form'] = options.hide_email_form;
-	aeJS.settings['flow_css'] = options.style_url;
-    aeJS.settings['language'] = options.language;
+    aeJS.settings['extra_fields'] = options.extra_fields;
+    aeJS.settings['extra_info'] = options.extra_info;
+    aeJS.settings['flow_css'] = options.style_url;
     aeJS.settings['flow_text'] = options.flow_text;
+    aeJS.settings['hide_email_form'] = options.hide_email_form;
+    aeJS.settings['language'] = options.language;
+    aeJS.settings['no_email'] = options.no_email;
+    aeJS.settings['mobile_detect'] = options.device_detect;
+	aeJS.settings['sso'] = options.sso;
+    aeJS.settings['verify_email'] = options.verify_email;
+    aeJS.settings['verify_email_for_login'] = options.verify_email_for_login;
 
-    {#aeJS.settings['sso'] = '{{sso}}';#}
-    {#aeJS.settings['flow_css'] = '{{ flow_css }}';#}
-    {#aeJS.settings['close_button'] = {{ close_button }} === 0;#}
-    {#aeJS.settings['date_format'] = '{{ date_format }}';#}
-    {#aeJS.settings['display_error_message'] = {{ display_error_message }} === 1;#}
-
-    {#var extra_info = {};#}
-    {#extra_info['global'] = { #}
-        {#'top': {#}
-            {#'text': '{{ extra_info['global_top_text'] }}',#}
-            {#'title': '{{ extra_info['global_top_title'] }}',#}
-        {#},#}
-        {#'bottom': {#}
-            {#'text': '{{ extra_info['global_bottom_text'] }}',#}
-            {#'title': '{{ extra_info['global_bottom_title'] }}',#}
-        {#}#}
-    {#};#}
-
-    {#var fields = {{ fields|json_encode|raw }};#}
-    {#var enabledFields = fields.filter(function(field) {#}
-        {#return field.enabled === 1;#}
-    {#});#}
-    {#var extraFields = {};#}
-    {#enabledFields.forEach(function(field) {#}
-        {#extraFields[field.field] = {#}
-            {#required: field.required === 1#}
-        {#}#}
-    {#});#}
-    {#console.log(extraFields);#}
-    {#aeJS.settings['extra_fields_screen'] = 'disabled';#}
-    {#aeJS.settings['extra_fields'] = extraFields;#}
-
-    {#console.log(aeJS.settings);#}
+    console.log(aeJS.settings);
 
 	aeJS.events.onFlow.addHandler(flowHandler);
 	aeJS.events.onLogin.addHandler(loginHandler);
