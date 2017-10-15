@@ -18,7 +18,7 @@ class LoginController extends ControllerBase {
         if($drupal_user_exists) {
             $drupal_user = $this->fetch_drupal_user($uid);
             user_login_finalize($drupal_user);
-            echo "success";
+            echo 1;
         } else {
 //            $ae_user = fetch_ae_user();
 //            $drupal_user = create_new_drupal_user($ae_user);

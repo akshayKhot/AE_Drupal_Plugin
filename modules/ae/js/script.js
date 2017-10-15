@@ -27,7 +27,10 @@ function loginHandler(user,type,sso) {
         url: '/ae/ajax/' + user.data.ID,
         method: 'GET',
         success: function(data) {
-          console.log(data);
+            if(data === "1")
+                window.location.reload(true);
+            else
+                console.log("server returned: " + data);
         }
     });
 }
