@@ -26,13 +26,10 @@
                     <button type="submit" class="btn btn-primary">Sign Up!</button>
                 </form>
             </div>
-
-
-
         </div>
 
 
-        <div id="additional-data" style="display: none;">
+        <div id="additional-data" style="display: none;" data-ae-logout-link="true">
             <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
             <div class="panel-body" style="padding: 15px 30px;">
                 <form id="additional-data-form" data-ae-register-form="email" method="post">
@@ -50,7 +47,7 @@
         </div>
 
         <div id="loggedin" style="display: none;">
-            User has logged in.
+            <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
         </div>
 
 
@@ -127,35 +124,35 @@
 	  return options;
 	}
 
-function AEJSReady(aeJS) {
-  	var options = getOptions();
+    function AEJSReady(aeJS) {
+        var options = getOptions();
 
-	globalAEJS = aeJS;
+        globalAEJS = aeJS;
 
-	aeJS.settings['auth_window'] = options.auth_window;
-	aeJS.settings['services'] = options.social_logins;
-	aeJS.settings['display_error_message'] = options.display_error_message;
-	aeJS.settings['email_format'] = options.email_format;
-    aeJS.settings['extra_fields'] = options.extra_fields;
-    aeJS.settings['extra_info'] = options.extra_info;
-    aeJS.settings['flow_css'] = options.style_url;
-    aeJS.settings['flow_text'] = options.flow_text;
-    aeJS.settings['hide_email_form'] = options.hide_email_form;
-    aeJS.settings['language'] = options.language;
-    aeJS.settings['no_email'] = options.no_email;
-    aeJS.settings['mobile_detect'] = options.device_detect;
-	aeJS.settings['sso'] = options.sso;
-    aeJS.settings['verify_email'] = options.verify_email;
-    aeJS.settings['verify_email_for_login'] = options.verify_email_for_login;
+        aeJS.settings['auth_window'] = options.auth_window;
+        aeJS.settings['services'] = options.social_logins;
+        aeJS.settings['display_error_message'] = options.display_error_message;
+        aeJS.settings['email_format'] = options.email_format;
+        aeJS.settings['extra_fields'] = options.extra_fields;
+        aeJS.settings['extra_info'] = options.extra_info;
+        aeJS.settings['flow_css'] = options.style_url;
+        aeJS.settings['flow_text'] = options.flow_text;
+        aeJS.settings['hide_email_form'] = options.hide_email_form;
+        aeJS.settings['language'] = options.language;
+        aeJS.settings['no_email'] = options.no_email;
+        aeJS.settings['mobile_detect'] = options.device_detect;
+        aeJS.settings['sso'] = options.sso;
+        aeJS.settings['verify_email'] = options.verify_email;
+        aeJS.settings['verify_email_for_login'] = options.verify_email_for_login;
 
-    console.log(aeJS.settings);
+        console.log(aeJS.settings);
 
-	aeJS.events.onFlow.addHandler(flowHandler);
-	aeJS.events.onLogin.addHandler(loginHandler);
-	aeJS.events.onUser.addHandler(userHandler);
-	aeJS.events.onLogout.addHandler(logoutHandler);
-	aeJS.events.onWindow.addHandler(windowHandler);
+        aeJS.events.onFlow.addHandler(flowHandler);
+        aeJS.events.onLogin.addHandler(loginHandler);
+        aeJS.events.onUser.addHandler(userHandler);
+        aeJS.events.onLogout.addHandler(logoutHandler);
+        aeJS.events.onWindow.addHandler(windowHandler);
 
-}
+    }
 
 </script>

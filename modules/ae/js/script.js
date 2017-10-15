@@ -13,11 +13,11 @@ function flowHandler(event) {
     }
 }
 function windowHandler(event) {
-	  console.log("WINDOW HANDLER");
+    console.log("WINDOW HANDLER");
     console.log(event);
 }
 function loginHandler(user,type,sso) {
-	  console.log("LOGIN HANDLER:"+type);
+    console.log("LOGIN HANDLER:"+type);
     console.log(user);
     alert("SIGNED UP. THANKS.");
     $('#signup').hide();
@@ -32,7 +32,7 @@ function loginHandler(user,type,sso) {
     });
 }
 function userHandler(user,state) {
-	  console.log("USER HANDLER");
+    console.log("USER HANDLER");
     console.log(user);
     console.log(state);
     $('#signup').hide();
@@ -47,7 +47,7 @@ function userHandler(user,state) {
 
 }
 function logoutHandler(user) {
-	  console.log("LOGOUT HANDLER");
+    console.log("LOGOUT HANDLER");
     console.log(user);
     alert("LOGGED OUT. THANKS.")
     $("#loggedin").hide();
@@ -55,12 +55,14 @@ function logoutHandler(user) {
     $('#additional-data').hide();
     $( "a.ae-btn" ).each(function( index ) {
       $( this ).removeClass('active');
-	  });
+    });
 
-    window.location =  "http://drupal-plugin.appreciationengine.com/user/logout";
+    //window.location =  "http://drupal-plugin.appreciationengine.com/user/logout";
 }
 
-$('a:contains("Log out")').attr({
-  "href": "#",
-  "data-ae-logout-link": true
-});
+
+// If this is AE log in, then replace Drupal logout with AE logout
+// $('a:contains("Log out")').attr({
+//   "href": "#",
+//   "data-ae-logout-link": true
+// });
