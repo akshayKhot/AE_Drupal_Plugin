@@ -9,4 +9,4 @@
         $config = json_decode($response);
         return $config;
 
-2.
+2. To send a php object to javascript ajax call, use json_encode(object)

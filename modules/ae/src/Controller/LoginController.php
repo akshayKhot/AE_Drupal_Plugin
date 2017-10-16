@@ -17,30 +17,46 @@ class LoginController extends ControllerBase {
         $drupal_user = NULL;
         if($drupal_user_exists) {
             $drupal_user = $this->fetch_drupal_user($uid);
-            user_login_finalize($drupal_user);
-            echo 1;
         } else {
-//            $ae_user = fetch_ae_user();
-//            $drupal_user = create_new_drupal_user($ae_user);
-//            create_local_ae_user($drupal_user);
-            echo 200;
+            $ae_user = $this->fetch_ae_user($aeid);
+            $drupal_user = $this->create_new_drupal_user($ae_user);
+            $this->create_local_ae_user($drupal_user, $ae_user);
         }
 
-        //login_drupal_user($drupal_user);
+        $this->login_drupal_user($drupal_user);
+        echo 1;
 
         exit(0);
+    }
+
+    private function create_new_drupal_user($ae_user) {
+        $drupal_user = User::create();
+        $drupal_user->setPassword('password');
+        $drupal_user->enforceIsNew();
+        $drupal_user->setEmail($ae_user->data->Email);
+        $drupal_user->setUsername($ae_user->data->Username);
+        $drupal_user->activate();// NOTE: login will fail silently if not activated!
+        $drupal_user->save();
+
+        return $drupal_user;
     }
 
     private function fetch_drupal_user($uid) {
         return \Drupal\user\Entity\User::load($uid);
     }
 
-    private function fetch_ae_user($id) {
+    private function fetch_ae_user($aeid) {
+        $state = \Drupal::state();
+        $client = \Drupal::httpClient();
 
-    }
+        $api_key = $state->get('api_key');
+        $url = "https://akshay.dev.appreciationengine.com/v1.1/member/" . $aeid . "?apiKey=" . $api_key;
 
-    private function login_ae_user() {
-
+        //$url = "https://akshay.dev.appreciationengine.com/v1.1/member/4290847?apiKey=9ee609a0370231ac93149413e00a2ca0";
+        $request = $client->get($url);
+        $ae_user = $request->getBody();
+        $user_json = json_decode($ae_user);
+        return $user_json;
     }
 
     private function fetch_uid_from_aeid($aeid) {
@@ -48,49 +64,23 @@ class LoginController extends ControllerBase {
         return $uid;
     }
 
-    //public function createuser($id) {
+    private function create_local_ae_user($drupal_user, $ae_user) {
+        $uid = $drupal_user->id();
 
-//        $ae_user = $this->fetchAeUser($id);
-//
-//        $drupal_user = User::create();
-//        $drupal_user->setPassword('password');
-//        $drupal_user->enforceIsNew();
-//        $drupal_user->setEmail($ae_user->data->Email);
-//        $drupal_user->setUsername($ae_user->data->Username);
-//
-//        // log in user
-//        $drupal_user->activate();// NOTE: login will fail silently if not activated!
-//        $drupal_user->save();
-//        user_login_finalize($drupal_user);
-//
-//        $uid = $drupal_user->id();
-//
-//        db_insert('ae_users')->fields([
-//            'aeid' => $ae_user->data->ID,
-//            'uid' => $uid,
-//            'firstname' => $ae_user->data->FirstName,
-//            'surname' => $ae_user->data->Surname,
-//            'username' => $ae_user->data->Username
-//        ])->execute();
-//
-//        echo $uid;
-//
-//        exit(0);
-    //}
-
-    private function fetchAeUser($id) {
-        $state = \Drupal::state();
-
-        $api_key = $state->get('api_key');
-        $url = "https://akshay.dev.appreciationengine.com/v1.1/member/" . $id . "?apiKey=" . $api_key;
-
-        //$url = "https://akshay.dev.appreciationengine.com/v1.1/member/4290847?apiKey=9ee609a0370231ac93149413e00a2ca0";
-        $client = \Drupal::httpClient();
-        $request = $client->get($url);
-        $ae_user = $request->getBody();
-        $user_json = json_decode($ae_user);
-        return $user_json;
+        db_insert('ae_users')->fields([
+            'aeid' => $ae_user->data->ID,
+            'uid' => $uid,
+            'firstname' => $ae_user->data->FirstName,
+            'surname' => $ae_user->data->Surname,
+            'username' => $ae_user->data->Username
+        ])->execute();
     }
+
+    private function login_drupal_user($drupal_user) {
+
+        user_login_finalize($drupal_user);
+    }
+
 }
 
 

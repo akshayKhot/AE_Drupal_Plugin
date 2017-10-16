@@ -29,8 +29,11 @@ function loginHandler(user,type,sso) {
         success: function(data) {
             if(data === "1")
                 window.location.reload(true);
-            else
-                console.log("server returned: " + data);
+            else {
+                console.log("Here is the response");
+                console.log(data);
+                console.log(JSON.parse(data));
+            }
         }
     });
 }
