@@ -12,10 +12,8 @@ class LoginController extends ControllerBase {
 
         $uid = $this->fetch_uid_from_aeid($aeid);
 
-        $drupal_user_exists = is_numeric($uid);
-
         $drupal_user = NULL;
-        if($drupal_user_exists) {
+        if($this->drupal_user_exists($uid)) {
             $drupal_user = $this->fetch_drupal_user($uid);
         } else {
             $ae_user = $this->fetch_ae_user($aeid);
@@ -29,16 +27,9 @@ class LoginController extends ControllerBase {
         exit(0);
     }
 
-    private function create_new_drupal_user($ae_user) {
-        $drupal_user = User::create();
-        $drupal_user->setPassword('password');
-        $drupal_user->enforceIsNew();
-        $drupal_user->setEmail($ae_user->data->Email);
-        $drupal_user->setUsername($ae_user->data->Username);
-        $drupal_user->activate();// NOTE: login will fail silently if not activated!
-        $drupal_user->save();
-
-        return $drupal_user;
+    private function fetch_uid_from_aeid($aeid) {
+        $uid = db_query("SELECT uid FROM {ae_users} WHERE aeid = :aeid", [':aeid' => $aeid])->fetchField();
+        return $uid;
     }
 
     private function fetch_drupal_user($uid) {
@@ -59,9 +50,16 @@ class LoginController extends ControllerBase {
         return $user_json;
     }
 
-    private function fetch_uid_from_aeid($aeid) {
-        $uid = db_query("SELECT uid FROM {ae_users} WHERE aeid = :aeid", [':aeid' => $aeid])->fetchField();
-        return $uid;
+    private function create_new_drupal_user($ae_user) {
+        $drupal_user = User::create();
+        $drupal_user->setPassword('password');
+        $drupal_user->enforceIsNew();
+        $drupal_user->setEmail($ae_user->data->Email);
+        $drupal_user->setUsername($ae_user->data->Username);
+        $drupal_user->activate();// NOTE: login will fail silently if not activated!
+        $drupal_user->save();
+
+        return $drupal_user;
     }
 
     private function create_local_ae_user($drupal_user, $ae_user) {
@@ -77,8 +75,11 @@ class LoginController extends ControllerBase {
     }
 
     private function login_drupal_user($drupal_user) {
-
         user_login_finalize($drupal_user);
+    }
+
+    private function drupal_user_exists($uid) {
+        return is_numeric($uid);
     }
 
 }

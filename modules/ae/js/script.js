@@ -42,13 +42,18 @@ function userHandler(user,state) {
     console.log(user);
     console.log(state);
     $('#signup').hide();
-    $("#loggedin").show(); //allow logout
+    $('#loggedin').show();
 
-
+    var $logout = $('a:contains("Log out")');
+    $logout
+        .removeAttr( "data-drupal-link-system-path" )
+        .attr({
+            "data-ae-logout-link": true,
+            "href": "#"
+        });
+    globalAEJS.trigger.attach($logout);
     if (state === 'update') {
         jQuery("#additional-data-form").hide();
-
-        // update the local user in drupal db
     }
 
 }
@@ -63,12 +68,6 @@ function logoutHandler(user) {
       $( this ).removeClass('active');
     });
 
-    //window.location =  "http://drupal-plugin.appreciationengine.com/user/logout";
+    window.location =  "http://drupal-plugin.appreciationengine.com/user/logout";
 }
 
-
-// If this is AE log in, then replace Drupal logout with AE logout
-// $('a:contains("Log out")').attr({
-//   "href": "#",
-//   "data-ae-logout-link": true
-// });
