@@ -9,7 +9,6 @@ function flowHandler(event) {
     if (event.step === 'required-fields') {
         $('#signup').hide();
         $('#additional-data').show();
-        $("#loggedin").show();
     }
 }
 function windowHandler(event) {
@@ -21,7 +20,6 @@ function loginHandler(user,type,sso) {
     console.log(user);
     alert("SIGNED UP. THANKS.");
     $('#signup').hide();
-    $("#loggedin").show(); //allow logout
 
     $.ajax({
         url: '/ae/ajax/' + user.data.ID,
@@ -42,9 +40,8 @@ function userHandler(user,state) {
     console.log(user);
     console.log(state);
     $('#signup').hide();
-    $('#loggedin').show();
 
-    var $logout = $('a:contains("Log out")');
+    var $logout = $( "a[data-drupal-link-system-path='user/logout']" );
     $logout
         .removeAttr( "data-drupal-link-system-path" )
         .attr({
@@ -60,8 +57,7 @@ function userHandler(user,state) {
 function logoutHandler(user) {
     console.log("LOGOUT HANDLER");
     console.log(user);
-    alert("LOGGED OUT. THANKS.")
-    $("#loggedin").hide();
+    alert("LOGGED OUT. THANKS.");
     $('#signup').show();
     $('#additional-data').hide();
     $( "a.ae-btn" ).each(function( index ) {
