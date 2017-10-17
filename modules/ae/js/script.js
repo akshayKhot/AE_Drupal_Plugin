@@ -22,7 +22,7 @@ function loginHandler(user,type,sso) {
     console.log(user);
     alert("SIGNED UP. THANKS.");
     $('#signup').hide();
-    debugger;
+
     $.ajax({
         url: '/ae/ajax/' + user.data.ID + '/' + createLocalUser + '/' + signInLocalUser,
         method: 'GET',

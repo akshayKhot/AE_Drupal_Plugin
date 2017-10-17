@@ -40,7 +40,7 @@ class BasicForm extends ConfigFormBase {
             '#options' => $options,
         );
 
-        // Font Size
+        // Style URL
         $form['style_url'] = array(
             '#type' => 'textfield',
             '#title' => t('Stylesheet URL'),
@@ -48,15 +48,53 @@ class BasicForm extends ConfigFormBase {
             '#maxlength' => 60,
         );
 
-        // Font Family
+        $language_codes = array(
+            'English' => 'en_US',
+            'Albanian  ' => 'sq_AL',
+            'Arabic ' => 'ar_MA',
+            'Basque ' => 'eu_ES',
+            'Belgium (French) ' => 'be_FR',
+            'Belgium (Netherland) ' => 'be_NL',
+            'Bulgarian ' => 'bg_BG',
+            'Catalan ' => 'ca_ES',
+            'Chilean Spanish ' => 'es_CL',
+            'Chinese ' => 'zh_CN',
+            'Czech ' => 'cs_CZ',
+            'Danish ' => 'da_DK',
+            'Dutch (Netherland) ' => 'nl_NL',
+            'Finnish ' => 'fi_FI',
+            'French ' => 'fr_FR',
+            'German ' => 'de_DE',
+            'Greek ' => 'gr_EL',
+            'Hebrew ' => 'he_IL',
+            'Hindi ' => 'hi_IN',
+            'Hungarian ' => 'hu_HU',
+            'Indonesian ' => 'id_ID',
+            'Italian ' => 'it_IT',
+            'Japanese ' => 'ja_JP',
+            'Norwegian ' => 'no_NO',
+            'Persian (Farsi) ' => 'fa_IR',
+            'Polish ' => 'pl_PL',
+            'Portuguese (Brazil) ' => 'pt_BR',
+            'Portuguese (Portugal) ' => 'pt_PT',
+            'Romanian ' => 'ro_RO',
+            'Russian ' => 'ru_RU',
+            'Serbian ' => 'sr_RS',
+            'Slovak ' => 'sk_SK',
+            'Spanish ' => 'es_ES',
+            'Swedish ' => 'sv_SE',
+            'Taiwanese ' => 'zh_TW',
+            'Thai ' => 'th_TH',
+            'Turkish ' => 'tr_TR',
+            'Ukrainian ' => 'ua_UA',
+            'Vietnamese ' => 'vi_VN'
+        );
+
+        // Language
         $form['form_validation_language'] = array(
             '#type' => 'select',
             '#title' => t('Form Validation Language'),
-            '#options' => [
-                '1' => $this->t('English'),
-                '2' => $this->t('French'),
-                '3' => $this->t('Spanish'),
-            ]
+            '#options' => array_flip($language_codes)
         );
 
 
