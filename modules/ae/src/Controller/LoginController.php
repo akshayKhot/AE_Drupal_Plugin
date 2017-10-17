@@ -8,23 +8,28 @@ use Drupal\user\Entity\User;
 
 class LoginController extends ControllerBase {
 
-    public function createuser($aeid) {
-
-        $uid = $this->fetch_uid_from_aeid($aeid);
+    public function createuser($aeid, $createlocal, $signinlocal) {
 
         $drupal_user = NULL;
-        if($this->drupal_user_exists($uid)) {
-            $drupal_user = $this->fetch_drupal_user($uid);
-        } else {
+        if($signinlocal=="true" && $this->drupal_user_exists($aeid)) {
+            $drupal_user = $this->fetch_drupal_user($aeid);
+        } else if($createlocal=="true") {
             $ae_user = $this->fetch_ae_user($aeid);
             $drupal_user = $this->create_new_drupal_user($ae_user);
             $this->create_local_ae_user($drupal_user, $ae_user);
         }
 
-        $this->login_drupal_user($drupal_user);
+        if($signinlocal=="true") {
+            $this->login_drupal_user($drupal_user);
+        }
         echo 1;
 
         exit(0);
+    }
+
+    private function drupal_user_exists($aeid) {
+        $uid = $this->fetch_uid_from_aeid($aeid);
+        return is_numeric($uid);
     }
 
     private function fetch_uid_from_aeid($aeid) {
@@ -32,7 +37,8 @@ class LoginController extends ControllerBase {
         return $uid;
     }
 
-    private function fetch_drupal_user($uid) {
+    private function fetch_drupal_user($aeid) {
+        $uid = $this->fetch_uid_from_aeid($aeid);
         return \Drupal\user\Entity\User::load($uid);
     }
 
@@ -78,9 +84,7 @@ class LoginController extends ControllerBase {
         user_login_finalize($drupal_user);
     }
 
-    private function drupal_user_exists($uid) {
-        return is_numeric($uid);
-    }
+
 
 }
 

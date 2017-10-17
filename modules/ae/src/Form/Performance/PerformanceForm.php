@@ -35,7 +35,7 @@ class PerformanceForm extends ConfigFormBase {
         );
 
         # the drupal checkboxes form field definition
-        $form['performance_options'] = array(
+        $form['options'] = array(
           '#title' => t('Options'),
           '#type' => 'checkboxes',
           '#options' => $options,
@@ -52,6 +52,7 @@ class PerformanceForm extends ConfigFormBase {
 
         $this->state->set('performance_options', $form_state->getValues());
 
+        ksm($this->state->get('performance_options'));
     }
 
 

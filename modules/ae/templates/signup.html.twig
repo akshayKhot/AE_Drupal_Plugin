@@ -89,6 +89,11 @@
   	    return extraFields;
     }
 
+    function isset(variable) {
+  	    debugger;
+  	    return typeof variable === "string";
+    }
+
 	function getOptions() {
 	    var general_settings =  {{ general_settings|json_encode|raw }};
 	    var basic_options =  {{ basic_options|json_encode|raw }};
@@ -96,6 +101,8 @@
 	    var text_options =  {{ text_options|json_encode|raw }};
 	    var performance_options =  {{ performance_options|json_encode|raw }};
 	    var fields = {{ fields|json_encode|raw }};
+	    createLocalUser = !isset(performance_options.options.not_create_user);
+	    signInLocalUser = !isset(performance_options.options.not_sign_in);
 
 	    var options = {
 	  	    'auth_window': typeof general_settings.options.auth_window === "string",

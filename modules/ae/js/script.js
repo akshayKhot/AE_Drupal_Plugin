@@ -1,4 +1,6 @@
 var globalAEJS;
+var createLocalUser;
+var signInLocalUser;
 var state = 'none';
 
 
@@ -20,18 +22,13 @@ function loginHandler(user,type,sso) {
     console.log(user);
     alert("SIGNED UP. THANKS.");
     $('#signup').hide();
-
+    debugger;
     $.ajax({
-        url: '/ae/ajax/' + user.data.ID,
+        url: '/ae/ajax/' + user.data.ID + '/' + createLocalUser + '/' + signInLocalUser,
         method: 'GET',
         success: function(data) {
             if(data === "1")
                 window.location.reload(true);
-            else {
-                console.log("Here is the response");
-                console.log(data);
-                console.log(JSON.parse(data));
-            }
         }
     });
 }
