@@ -37,6 +37,7 @@ function userHandler(user,state) {
     console.log(user);
     console.log(state);
     $('#signup').hide();
+    $('#loggedin').show();
 
     var $logout = $( "a[data-drupal-link-system-path='user/logout']" );
     $logout
@@ -51,6 +52,7 @@ function userHandler(user,state) {
     }
 
 }
+
 function logoutHandler(user) {
     console.log("LOGOUT HANDLER");
     console.log(user);

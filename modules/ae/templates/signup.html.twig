@@ -10,7 +10,6 @@
                 {% endfor %}
             </div>
 
-
             <div class="panel-heading" style="background: #000; color:#fff;">Email Signup</div>
             <div class="panel-body" style="padding: 15px 30px;">
                 <form id="email-signup" data-ae-register-form="email" method="post">
@@ -28,7 +27,6 @@
             </div>
         </div>
 
-
         <div id="additional-data" style="display: none;" data-ae-logout-link="true">
             <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
             <div class="panel-body" style="padding: 15px 30px;">
@@ -44,6 +42,10 @@
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
             </div>
+        </div>
+
+        <div id="loggedin" style="display: none;">
+            <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
         </div>
 
 
@@ -123,8 +125,32 @@
             'extra_fields': getExtraFields(fields)
 	    };
 
+        var options = {
+            'auth_window': isset(general_settings.options.auth_window),
+            'social_logins': getSocials(),
+            'display_error_message': isset(general_settings.options.error_message),
+            'device_detect': isset(general_settings.options.auto_detect),
+            'sso': !isset(general_settings.options.multi_site_login),
+            'no_email': isset(general_settings.options.social_login),
+            'verify_email': isset(email_options.verify_email),
+            'verify_email_for_login': isset(email_options.req_email_verify),
+            'email_format': email_options,
+            'hide_email_form': !isset(basic_options.options.show_ep_button),
+            'style_url': basic_options.style_url,
+            'language': basic_options.form_validation_language, // Todo: Make it dynamic later,
+            'flow_text': text_options,
+            'create_local_user': !isset(performance_options.not_create_user),
+            'sign_in_local_user': !isset(performance_options.not_sign_in),
+            'extra_info': getGlobalHeaderFooter(text_options),
+            'extra_fields': getExtraFields(fields)
+        };
+
 	  return options;
 	}
+
+	function isset(param) {
+  	    return typeof param === "string";
+    }
 
     function AEJSReady(aeJS) {
         var options = getOptions();

@@ -42,6 +42,7 @@ class SettingsForm extends ConfigFormBase {
             '#title' => t('Options'),
             '#type' => 'checkboxes',
             '#options' => $options,
+            '#default_value' => array("auth_window", "error_message", "auto_detect", "multi_site_login")
         );
 
         return parent::buildForm($form, $form_state);

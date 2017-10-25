@@ -1,21 +1,5 @@
 <?php
 
-
-//function ae_theme($existing, $type, $theme, $path) {
-//    return [
-//    'signup' => [
-//      'variables' => [
-//          'general_settings' => [],
-//          'social_networks' => [],
-//          'user_fields' => [],
-//          'email_options' => [],
-//          'basic_options' => [],
-//          'text_options' => [],
-//          'performance_options' => []
-//      ],
-//    ],
-//  ];
-//}
 function ae_theme($existing, $type, $theme, $path) {
   return [
     'signup' => [
@@ -26,21 +10,11 @@ function ae_theme($existing, $type, $theme, $path) {
           'basic_options' => [],
           'email_options' => [],
           'text_options' => [],
-          'performance_options' => [],
-          'flow_css' => [],
-          'want_email' => NULL,
-          'auth_window' => NULL,
-          'close_button' => NULL,
-          'sso' => NULL,
-          'date_format' => NULL,
-          'display_error_message' => NULL,
-          'new_user' => NULL,
-          'extra_info' => [],
+          'performance_options' => []
       ],
     ],
   ];
 }
-
 
 function ae_user_login($account) {
     drupal_set_message("New user created and logged in");
