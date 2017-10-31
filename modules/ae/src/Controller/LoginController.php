@@ -72,7 +72,6 @@ class LoginController extends ControllerBase {
         db_insert('ae_users')->fields([
             'aeid' => $ae_user->data->ID,
             'uid' => $uid,
-            'firstname' => $ae_user->data->FirstName,
             'username' => $ae_user->data->Username
         ])->execute();
     }

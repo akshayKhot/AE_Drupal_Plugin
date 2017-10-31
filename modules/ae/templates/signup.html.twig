@@ -105,26 +105,6 @@
 	    createLocalUser = !isset(performance_options.options.not_create_user);
 	    signInLocalUser = !isset(performance_options.options.not_sign_in);
 
-//	    var options = {
-//	  	    'auth_window': typeof general_settings.options.auth_window === "string",
-//	  	    'social_logins': getSocials(),
-//	  	    'display_error_message': typeof general_settings.options.error_message === "string",
-//	  	    'device_detect': typeof general_settings.options.auto_detect === "string",
-//	  	    'sso': general_settings.options.multi_site_login === 0,
-//	  	    'no_email': typeof general_settings.options.social_login === "string",
-//            'verify_email': typeof email_options.verify_email === "string",
-//            'verify_email_for_login': typeof email_options.req_email_verify === "string",
-//	  	    'email_format': email_options,
-//	  	    'hide_email_form': basic_options.options.show_ep_button === 0,
-//	  	    'style_url': basic_options.style_url,
-//	  	    'language': basic_options.form_validation_language, // Todo: Make it dynamic later,
-//            'flow_text': text_options,
-//            'create_local_user': performance_options.not_create_user === 0,
-//            'sign_in_local_user': performance_options.not_sign_in === 0,
-//            'extra_info': getGlobalHeaderFooter(text_options),
-//            'extra_fields': getExtraFields(fields)
-//	    };
-
         var options = {
             'auth_window': isset(general_settings.options.auth_window),
             'social_logins': getSocials(),
