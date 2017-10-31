@@ -10,7 +10,6 @@ class LoginController extends ControllerBase {
 
     public function createuser($aeid, $createlocal, $signinlocal) {
 
-        $drupal_user = NULL;
         if($signinlocal=="true" && $this->drupal_user_exists($aeid)) {
             $drupal_user = $this->fetch_drupal_user($aeid);
         } else if($createlocal=="true") {

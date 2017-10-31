@@ -12,6 +12,10 @@ function flowHandler(event) {
         $('#signup').hide();
         $('#additional-data').show();
     }
+
+    if (event.step === 'error') {
+        alert(event.error);
+    }
 }
 function windowHandler(event) {
     console.log("WINDOW HANDLER");
