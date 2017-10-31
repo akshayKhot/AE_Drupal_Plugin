@@ -31,9 +31,7 @@ function loginHandler(user,type,sso) {
         url: '/ae/ajax/' + user.data.ID + '/' + createLocalUser + '/' + signInLocalUser,
         method: 'GET',
         success: function(data) {
-            console.log(data);
-            if(data === "1")
-                window.location.reload(true);
+            window.location.reload(true);
         }
     });
 }

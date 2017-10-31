@@ -12,16 +12,16 @@ class LoginController extends ControllerBase {
 
         if($signinlocal=="true" && $this->drupal_user_exists($aeid)) {
             $drupal_user = $this->fetch_drupal_user($aeid);
+            user_login_finalize($drupal_user);
         } else if($createlocal=="true") {
             $ae_user = $this->fetch_ae_user($aeid);
             $drupal_user = $this->create_new_drupal_user($ae_user);
             $this->create_local_ae_user($drupal_user, $ae_user);
+            user_login_finalize($drupal_user);
         }
 
-        $this->login_drupal_user($drupal_user);
-
-        echo 1;
-
+        $user = \Drupal::currentUser();
+        echo $user->id();
         exit(0);
     }
 
@@ -72,13 +72,10 @@ class LoginController extends ControllerBase {
         db_insert('ae_users')->fields([
             'aeid' => $ae_user->data->ID,
             'uid' => $uid,
-            'username' => $ae_user->data->Username
+            'ae_data' => serialize($ae_user->data)
         ])->execute();
     }
 
-    private function login_drupal_user($drupal_user) {
-        user_login_finalize($drupal_user);
-    }
 }
 
 
