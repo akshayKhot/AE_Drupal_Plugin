@@ -10,3 +10,4 @@
         return $config;
 
 2. To send a php object to javascript ajax call, use json_encode(object)
+    In the javascript, use JSON.Parse();
