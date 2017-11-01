@@ -20,8 +20,6 @@ class LoginController extends ControllerBase {
             user_login_finalize($drupal_user);
         }
 
-        $user = \Drupal::currentUser();
-        echo $user->id();
         exit(0);
     }
 
