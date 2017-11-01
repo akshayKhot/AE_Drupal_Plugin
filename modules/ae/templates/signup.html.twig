@@ -105,6 +105,8 @@
 	    createLocalUser = !isset(performance_options.options.not_create_user);
 	    signInLocalUser = !isset(performance_options.options.not_sign_in);
 
+	    console.log(email_options);
+
         var options = {
             'auth_window': isset(general_settings.options.auth_window),
             'social_logins': getSocials(),
@@ -112,8 +114,8 @@
             'device_detect': isset(general_settings.options.auto_detect),
             'sso': !isset(general_settings.options.multi_site_login),
             'no_email': isset(general_settings.options.social_login),
-            'verify_email': isset(email_options.verify_email),
-            'verify_email_for_login': isset(email_options.req_email_verify),
+            'verify_email': isset(email_options.options.verify_email),
+            'verify_email_for_login': isset(email_options.options.req_email_verify),
             'email_format': email_options,
             'hide_email_form': !isset(basic_options.options.show_ep_button),
             'style_url': basic_options.style_url,

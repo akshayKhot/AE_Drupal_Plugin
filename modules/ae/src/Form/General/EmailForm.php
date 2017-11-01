@@ -231,6 +231,9 @@ class EmailForm extends ConfigFormBase {
         $form_state->cleanValues();
 
         $this->state->set('email_options', $form_state->getValues());
+
+        ksm($this->state->get('email_options'));
+
     }
 
 }
