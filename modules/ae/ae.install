@@ -14,10 +14,43 @@ function ae_schema() {
                 'type' => 'int',
                 'not null' => TRUE,
             ),
-            'ae_data' => array(
-                'description' => 'AE User data blob',
-                'type' => 'blob',
+            'FirstName' => array(
+                'description' => 'The primary identifier for a drupal user.',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'SurName' => array(
+                'description' => 'The primary identifier for a drupal user.',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'Email' => array(
+                'description' => 'The primary identifier for a drupal user.',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'Username' => array(
+                'description' => 'The primary identifier for a drupal user.',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'MobilePhone' => array(
+                'description' => 'The primary identifier for a drupal user.',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'VerifiedEmail' => array(
+                'description' => 'The primary identifier for a drupal user.',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'Services' => array(
+                'description' => 'The primary identifier for a drupal user.',
+                'type' => 'varchar',
+                'length' => 32,
             )
+
+
         ),
         'indexes' => array(
             'aeid' => array('aeid')
@@ -30,5 +63,32 @@ function ae_schema() {
             )
         )
     );
+
+    $schema['ae_services'] = array(
+        'description' => 'Table to store the services returned by AE',
+        'fields' => array(
+            'serviceID' => array(
+                'description' => 'The primary identifier for a AE Service.',
+                'type' => 'int',
+                'not null' => TRUE,
+            ),
+            'aeid' => array(
+                'description' => 'The primary identifier for a local user corresponding to a service.',
+                'type' => 'int',
+                'not null' => TRUE,
+            )
+        ),
+        'indexes' => array(
+            'serviceID' => array('serviceID')
+        ),
+        'primary key' => array('serviceID'),
+        'foreign keys' => array(
+            'aeid' => array(
+                'table' => 'ae_users',
+                'columns' => array('aeid' => 'aeid'),
+            )
+        )
+    );
+
     return $schema;
 }
