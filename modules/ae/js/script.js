@@ -23,9 +23,6 @@ function windowHandler(event) {
 }
 function loginHandler(user,type,sso) {
     console.log("LOGIN HANDLER:"+type);
-    console.log(user);
-    alert("SIGNED UP. THANKS.");
-    $('#signup').hide();
 
     $.ajax({
         url: '/ae/ajax/' + user.data.ID + '/' + createLocalUser + '/' + signInLocalUser,
@@ -57,15 +54,6 @@ function userHandler(user,state) {
 }
 
 function logoutHandler(user) {
-    console.log("LOGOUT HANDLER");
-    console.log(user);
-    alert("LOGGED OUT. THANKS.");
-    $('#signup').show();
-    $('#additional-data').hide();
-    $( "a.ae-btn" ).each(function( index ) {
-      $( this ).removeClass('active');
-    });
-
     window.location =  "http://drupal-plugin.appreciationengine.com/user/logout";
 }
 

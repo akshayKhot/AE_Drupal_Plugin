@@ -39,7 +39,7 @@ class LoginController extends ControllerBase {
         $client = \Drupal::httpClient();
 
         $api_key = $state->get('api_key');
-        $url = "https://akshay.dev.appreciationengine.com/v1.1/member/" . $aeid . "?apiKey=" . $api_key;
+        $url = "https://staging.theappreciationengine.com/v1.1/member/" . $aeid . "?apiKey=" . $api_key;
 
         //$url = "https://akshay.dev.appreciationengine.com/v1.1/member/4290847?apiKey=9ee609a0370231ac93149413e00a2ca0";
         $request = $client->get($url);
@@ -62,7 +62,9 @@ class LoginController extends ControllerBase {
 
         foreach ($ae_user->services as $service) {
             $aeid = db_query("SELECT aeid FROM {ae_services} WHERE serviceID = :sid", [':sid' => $service->ID])->fetchField();
-            return is_numeric($aeid);
+            if(is_numeric($aeid)) {
+                return true;
+            }
         }
         return false;
 
