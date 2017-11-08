@@ -14,10 +14,14 @@ class LoginController extends ControllerBase {
 
         if($this->drupal_user_exists($aeid)) {
             $drupal_user = $this->fetch_drupal_user($aeid);
+            $drupal_user->activate();// NOTE: login will fail silently if not activated!
+            $drupal_user->save();
             user_login_finalize($drupal_user);
         }
         else if($this->returning_user_with_different_aeid($ae_user)) {
             $drupal_user = $this->fetch_returning_user($ae_user);
+            $drupal_user->activate();// NOTE: login will fail silently if not activated!
+            $drupal_user->save();
             user_login_finalize($drupal_user);
         }
         else {
