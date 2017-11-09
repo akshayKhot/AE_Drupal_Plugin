@@ -3,6 +3,8 @@
 <script type="text/javascript" charset="utf-8" src="https://staging.theappreciationengine.com/framework/js/507"></script>
 
 
+{% if logged_in == false %}
+
         <div id="signup">
             <div class="panel-heading" style="background: #000; color:#fff;">Social Signup</div>
             <div class="panel-body" style="padding: 15px 30px;">
@@ -45,9 +47,13 @@
             </div>
         </div>
 
-        <div id="loggedin" style="display: none;">
-            <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
-        </div>
+        {#<div id="loggedin" style="display: none;">#}
+            {#<a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>#}
+        {#</div>#}
+
+
+{% endif %}
+
 
 
 <script type="text/javascript">
@@ -105,8 +111,6 @@
 	    var fields = {{ fields|json_encode|raw }};
 	    createLocalUser = !isset(performance_options.options.not_create_user);
 	    signInLocalUser = !isset(performance_options.options.not_sign_in);
-
-	    console.log(email_options);
 
         var options = {
             'auth_window': isset(general_settings.options.auth_window),

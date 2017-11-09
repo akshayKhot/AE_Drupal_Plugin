@@ -3,7 +3,6 @@ var createLocalUser;
 var signInLocalUser;
 var state = 'none';
 
-
 function flowHandler(event) {
     console.log("FLOW HANDLER");
     console.log(event);
@@ -23,14 +22,16 @@ function windowHandler(event) {
 }
 function loginHandler(user,type,sso) {
     console.log("LOGIN HANDLER:"+type);
-
     $.ajax({
         url: '/ae/ajax/' + user.data.ID + '/' + createLocalUser + '/' + signInLocalUser,
         method: 'GET',
         success: function(data) {
-            window.location.reload(true);
+//            window.location.reload(true);
+            window.location.href = "http://drupal-plugin.appreciationengine.com/";
+
         }
     });
+
 }
 function userHandler(user,state) {
     console.log("USER HANDLER");

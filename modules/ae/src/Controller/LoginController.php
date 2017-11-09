@@ -27,10 +27,9 @@ class LoginController extends ControllerBase {
         else {
             $drupal_user = $this->create_new_drupal_user($ae_user);
             $this->create_local_ae_user($drupal_user, $ae_user);
-            $this->add_services_for_user($drupal_user, $ae_user);
             user_login_finalize($drupal_user);
         }
-
+        $this->add_services_for_user($drupal_user, $ae_user);
         exit(0);
     }
 
@@ -111,12 +110,21 @@ class LoginController extends ControllerBase {
 
         // for each service for the ae user
         foreach ($ae_user->services as $service) {
-            db_insert('ae_services')->fields([
-                'serviceID' => isset($service->ID) ? $service->ID : "",
-                'aeid' => isset($ae_user->data->ID) ? $ae_user->data->ID: ""
-            ])->execute();
+
+            if(!$this->service_exists($service)) {
+                db_insert('ae_services')->fields([
+                    'serviceID' => isset($service->ID) ? $service->ID : "",
+                    'aeid' => isset($ae_user->data->ID) ? $ae_user->data->ID : ""
+                    //$drupal_user->id()
+                ])->execute();
+            }
         }
 
+    }
+
+    private function service_exists($service) {
+        $service_id = db_query("SELECT serviceID FROM ae_services WHERE serviceID = :serviceID LIMIT 1;", [':serviceID' => $service->ID])->fetchField();
+        return is_numeric($service_id);
     }
 
     private function fetch_uid_from_aeid($aeid) {
