@@ -26,6 +26,7 @@
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Sign Up!</button>
+                    <button type="button" id="forgotPasswordButton">Forgot Password?</button>
                 </form>
             </div>
         </div>
@@ -43,6 +44,19 @@
                             {% endif %}
                     {% endfor %}
                     <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="passwordResetForm" style="display: none;" data-ae-logout-link="true">
+            <div class="panel-heading" style="background: #000; color:#fff;">Reset Password</div>
+            <div class="panel-body" style="padding: 15px 30px;">
+                <form method="post">
+                    <label for="email">Email</label>
+                    <input type="email" id="email">
+                    <label for="newpassword">New Password</label>
+                    <input type="password" id="newpassword">
+                    <button type="button" class="btn btn-primary" onclick="resetPassword()">Update</button>
                 </form>
             </div>
         </div>
@@ -167,7 +181,16 @@
         aeJS.events.onUser.addHandler(userHandler);
         aeJS.events.onLogout.addHandler(logoutHandler);
         aeJS.events.onWindow.addHandler(windowHandler);
-
+        aeJS.events.onPasswordReset.addHandler(passwordHandler);
     }
+
+    $("#forgotPasswordButton").click(function() {
+        return_url = "http://drupal-plugin.appreciationengine.com/";
+        globalAEJS.trigger.verify_reset_password();
+    });
+
+
+
+
 
 </script>
