@@ -173,6 +173,7 @@
         aeJS.settings['sso'] = options.sso;
         aeJS.settings['verify_email'] = options.verify_email;
         aeJS.settings['verify_email_for_login'] = options.verify_email_for_login;
+        aeJS.settings['display_error_message'] = false;
 
         console.log(aeJS.settings);
 
@@ -185,8 +186,8 @@
     }
 
     $("#forgotPasswordButton").click(function() {
-        return_url = "http://drupal-plugin.appreciationengine.com/";
-        globalAEJS.trigger.verify_reset_password();
+        var returnURL = "http://drupal-plugin.appreciationengine.com/";
+        globalAEJS.trigger.verify_reset_password(returnURL);
     });
 
 
