@@ -32,12 +32,21 @@ class SocialsForm extends ConfigFormBase {
 
         $networks = $this->getSocials();
 
+        $opts = $this->state->get('socials')["socials"];
+        if(isset($opts)) {
+            $default_values = array_keys(array_filter($opts));
+        }
+        else {
+            $default_values = [];
+        }
+
         # the drupal checkboxes form field definition
         $form['socials'] = array(
             '#title' => t('Social Networks'),
             '#type' => 'checkboxes',
             '#description' => t('Select the Social Networks for AE.'),
             '#options' => $networks,
+            '#default_value' => $default_values
         );
 
         return parent::buildForm($form, $form_state);
@@ -49,7 +58,7 @@ class SocialsForm extends ConfigFormBase {
         $form_state->cleanValues();
 
         $this->state->set('socials', $form_state->getValues());
-
+        ksm($this->state->get('socials')["socials"]);
     }
 
     private function getSocials() {

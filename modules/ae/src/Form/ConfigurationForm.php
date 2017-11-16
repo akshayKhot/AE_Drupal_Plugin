@@ -27,12 +27,14 @@ class ConfigurationForm extends ConfigFormBase {
 
         $form['base_url'] = [
             '#type' => 'textfield',
-            '#title' => $this->t('Instance')
+            '#title' => $this->t('Instance'),
+            '#default_value' => $this->state->get('base_url')
         ];
 
         $form['api_key'] = [
             '#type' => 'textfield',
-            '#title' => $this->t('API Key')
+            '#title' => $this->t('API Key'),
+            '#default_value' => $this->state->get('api_key')
         ];
 
         return parent::buildForm($form, $form_state);
@@ -47,6 +49,7 @@ class ConfigurationForm extends ConfigFormBase {
         $config = $this->getConfig($base_url, $api_key);
         $this->state->set('api_key', $api_key);
         $this->state->set('config', $config);
+        $this->state->set('base_url', $base_url);
         ksm($config['Urls']);
     }
 

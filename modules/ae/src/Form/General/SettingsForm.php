@@ -37,12 +37,19 @@ class SettingsForm extends ConfigFormBase {
             'social_login' => t('Social Login Only'),
         );
 
+        $opts = $this->state->get('general_settings')["options"];
+        if(isset($opts)) {
+            $default_values = array_keys(array_filter($opts));
+        }
+        else {
+            $default_values = ["auth_window", "error_message", "auto_detect", "multi_site_login"];
+        }
         # the drupal checkboxes form field definition
         $form['options'] = array(
             '#title' => t('Options'),
             '#type' => 'checkboxes',
             '#options' => $options,
-            '#default_value' => array("auth_window", "error_message", "auto_detect", "multi_site_login")
+            '#default_value' => $default_values
         );
 
         return parent::buildForm($form, $form_state);
@@ -56,6 +63,7 @@ class SettingsForm extends ConfigFormBase {
 
         $this->state->set('general_settings', $form_state->getValues());
 
+        ksm($this->state->get('general_settings')["options"]);
     }
 
 
