@@ -5,7 +5,7 @@
       <paths name="ae_drupal_module">
         <serverdata>
           <mappings>
-            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+            <mapping deploy="/drupal-plugin.appreciationengine.com" local="$PROJECT_DIR$" web="/" />
           </mappings>
         </serverdata>
       </paths>

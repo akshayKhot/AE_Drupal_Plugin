@@ -2,31 +2,30 @@
 <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
 <script type="text/javascript" charset="utf-8" src="https://staging.theappreciationengine.com/framework/js/507"></script>
 
-
+{#
 {% if logged_in == false %}
-
+#}
         <div id="signup">
-            <div class="panel-heading" style="background: #000; color:#fff;">Social Signup</div>
+            <div class="panel-heading" style="background: #000; color:#fff; padding: 5px;">Social Signup</div>
             <div class="panel-body" style="padding: 15px 30px;">
                 {% for social in socials %}
                     <a href="#" data-ae-register-link="{{ social|lower }}" class="ae-btn btn btn-default">{{social}}</a>
                 {% endfor %}
             </div>
 
-            <div class="panel-heading" style="background: #000; color:#fff;">Email Signup</div>
+            <div class="panel-heading" style="background: #000; color:#fff; padding: 5px;">Email</div>
             <div class="panel-body" style="padding: 15px 30px;">
                 <form id="email-signup" data-ae-register-form="email" data-ae-type="register" method="post">
                     <div class="form-group">
-                        <label for="email">Email address</label>
-                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+                        <label for="email">Email Address</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email"> <br>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
                     <button type="submit" class="btn btn-primary">Sign Up!</button>
-                    <button type="button" id="forgotPasswordButton">Forgot Password?</button>
+                    <button type="button" class="btn btn-primary" id="forgotPasswordButton">Forgot Password?</button>
                 </form>
             </div>
         </div>
@@ -65,9 +64,9 @@
             {#<a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>#}
         {#</div>#}
 
-
+{#
 {% endif %}
-
+#}
 
 
 <script type="text/javascript">

@@ -8,7 +8,7 @@ var service_id;
 var reset_email;
 
 function flowHandler(event) {
-    console.log("FLOW HANDLER");
+    console.log("FLOW HANDLER ");
     console.log(event);
 
     if (event.step === 'required-fields') {
