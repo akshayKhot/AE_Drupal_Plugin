@@ -134,11 +134,11 @@
             'no_email': isset(general_settings.options.social_login),
             'verify_email': isset(email_options.options.verify_email),
             'verify_email_for_login': isset(email_options.options.req_email_verify),
-            'email_format': email_options,
+            'email_format': parseObject(email_options),
             'hide_email_form': !isset(basic_options.options.show_ep_button),
             'style_url': basic_options.style_url,
             'language': basic_options.form_validation_language, // Todo: Make it dynamic later,
-            'flow_text': text_options,
+            'flow_text': parseObject(text_options),
             'create_local_user': !isset(performance_options.not_create_user),
             'sign_in_local_user': !isset(performance_options.not_sign_in),
             'extra_info': getGlobalHeaderFooter(text_options),
@@ -147,6 +147,15 @@
 
 	  return options;
 	}
+
+	// parses a given object and sets values to null if they are empty string ""
+	function parseObject(options) {
+  	    for(var option in options) {
+  	        if(options[option] === "")
+  	            delete options[option];
+        }
+        return options;
+    }
 
 	function isset(param) {
   	    return typeof param === "string";
@@ -172,7 +181,7 @@
         aeJS.settings['sso'] = options.sso;
         aeJS.settings['verify_email'] = options.verify_email;
         aeJS.settings['verify_email_for_login'] = options.verify_email_for_login;
-        aeJS.settings['display_error_message'] = false;
+        //aeJS.settings['display_error_message'] = false;
 
         console.log(aeJS.settings);
 
