@@ -37,11 +37,21 @@ class EmailForm extends ConfigFormBase {
           'req_email_verify' => t('Site Requires Verified Email Before Login')
         );
 
+        $selection = $this->state->get('email_options');
+        $opts = $selection["options"];
+        if(isset($opts)) {
+            $default_values = array_keys(array_filter($opts));
+        }
+        else {
+            $default_values = [];
+        }
+
         # the drupal checkboxes form field definition
         $form['options'] = array(
-          '#title' => t('Options'),
-          '#type' => 'checkboxes',
-          '#options' => $options,
+            '#title' => t('Options'),
+            '#type' => 'checkboxes',
+            '#options' => $options,
+            '#default_value' => $default_values
         );
 
 //////////////////////// Format ////////////////////////////
@@ -57,6 +67,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Background Color'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["background_color"]
         );
 
         $form['format']['font_size'] = array(
@@ -65,6 +76,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Font Size'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["font_size"]
         );
 
         $form['format']['font_family'] = array(
@@ -73,6 +85,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Font Family'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["font_family"]
         );
 
         $form['format']['font_color'] = array(
@@ -81,6 +94,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Font Color'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["font_color"]
         );
 
         //////////////////////// Header ////////////////////////////
@@ -94,6 +108,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Show Header'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["show_header"]
         );
 
         $form['header']['header_background_color'] = array(
@@ -101,6 +116,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Header Background Color'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["header_background_color"]
         );
 
         $form['header']['header_font_color'] = array(
@@ -108,13 +124,15 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Header Font Color'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["header_font_color"]
         );
 
-        $form['header']['image_url '] = array(
+        $form['header']['image_url'] = array(
             '#type' => 'textfield',
             '#title' => t('Header Image URL'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["image_url"]
         );
 
         //////////////////////// Footer ////////////////////////////
@@ -128,6 +146,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Show Footer'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["show_footer"]
         );
 
         $form['footer']['footer_background_color'] = array(
@@ -135,6 +154,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Footer Background Color'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["footer_background_color"]
         );
 
         $form['footer']['footer_font_color'] = array(
@@ -142,20 +162,23 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Footer Font Color'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["footer_font_color"]
         );
 
-        $form['footer']['logo_link '] = array(
+        $form['footer']['logo_link'] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Logo Destination Link'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["logo_link"]
         );
 
-        $form['footer']['logo_img_url '] = array(
+        $form['footer']['logo_img_url'] = array(
             '#type' => 'textfield',
             '#title' => t('Footer Logo Image URL'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["logo_img_url"]
         );
 
         $form['footer']['copyright'] = array(
@@ -163,6 +186,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Copyright Text'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["copyright"]
         );
 
         //////////////////////// Verify Email Settings ////////////////////////////
@@ -171,25 +195,28 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Verify Email Settings')
         );
 
-        $form['verify_email']['verify_email_subject '] = array(
+        $form['verify_email']['verify_email_subject'] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Subject'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["verify_email_subject"]
         );
 
-        $form['verify_email']['verify_email_message '] = array(
+        $form['verify_email']['verify_email_message'] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Text'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["verify_email_message"]
         );
 
-        $form['verify_email']['verify_email_link '] = array(
+        $form['verify_email']['verify_email_link'] = array(
             '#type' => 'textfield',
             '#title' => t('Verify Email Link Text'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["verify_email_link"]
         );
 
         //////////////////////// Reset Password Settings ////////////////////////////
@@ -203,6 +230,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Reset Password Subject'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["reset_pw_email_subject"]
         );
 
         $form['reset_password']['reset_pw_email_message'] = array(
@@ -210,6 +238,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Reset Password Text'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["reset_pw_email_message"]
         );
 
         $form['reset_password']['reset_pw_email_link'] = array(
@@ -217,6 +246,7 @@ class EmailForm extends ConfigFormBase {
             '#title' => t('Reset Email Link Text'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $selection["reset_pw_email_link"]
         );
 
 

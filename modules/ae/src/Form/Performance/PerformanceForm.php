@@ -34,11 +34,20 @@ class PerformanceForm extends ConfigFormBase {
           'not_sign_in' => t('Do not sign in local user')
         );
 
+        $opts = $this->state->get('performance_options')["options"];
+        if(isset($opts)) {
+            $default_values = array_keys(array_filter($opts));
+        }
+        else {
+            $default_values = [];
+        }
+
         # the drupal checkboxes form field definition
         $form['options'] = array(
-          '#title' => t('Options'),
-          '#type' => 'checkboxes',
-          '#options' => $options,
+            '#title' => t('Options'),
+            '#type' => 'checkboxes',
+            '#options' => $options,
+            '#default_value' => $default_values
         );
 
         return parent::buildForm($form, $form_state);
