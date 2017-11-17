@@ -33,11 +33,20 @@ class BasicForm extends ConfigFormBase {
             'show_ep_button' => t('Show Email/Password as Button')
         );
 
+        $opts = $this->state->get('basic_options');
+        if(isset($opts["options"])) {
+            $default_values = array_keys(array_filter($opts)["options"]);
+        }
+        else {
+            $default_values = [];
+        }
+
         # the drupal checkboxes form field definition
         $form['options'] = array(
             '#title' => t('Options'),
             '#type' => 'checkboxes',
             '#options' => $options,
+            '#default_value' => $default_values
         );
 
         // Style URL
@@ -46,6 +55,7 @@ class BasicForm extends ConfigFormBase {
             '#title' => t('Stylesheet URL'),
             '#size' => 60,
             '#maxlength' => 60,
+            '#default_value' => $opts['style_url']
         );
 
         $language_codes = array(
@@ -94,7 +104,8 @@ class BasicForm extends ConfigFormBase {
         $form['form_validation_language'] = array(
             '#type' => 'select',
             '#title' => t('Form Validation Language'),
-            '#options' => array_flip($language_codes)
+            '#options' => array_flip($language_codes),
+            '#default_value' => $opts['form_validation_language']
         );
 
 
@@ -108,6 +119,8 @@ class BasicForm extends ConfigFormBase {
         $form_state->cleanValues();
 
         $this->state->set('basic_options', $form_state->getValues());
+
+        ksm($this->state->get('basic_options'));
 
     }
 
