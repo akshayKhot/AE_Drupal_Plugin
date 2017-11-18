@@ -19,6 +19,12 @@ function flowHandler(event) {
     if (event.step === 'error') {
         alert(event.error);
     }
+
+    if(event.step === 'verify-email') {
+        globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {'subject':'Email Subject',
+            'body':'Body text in email',
+            'label': 'Return link label'});
+    }
 }
 
 function windowHandler(event) {
