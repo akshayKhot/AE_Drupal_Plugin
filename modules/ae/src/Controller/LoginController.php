@@ -8,28 +8,33 @@ use Drupal\user\Entity\User;
 
 class LoginController extends ControllerBase {
 
-    public function createuser($aeid) {
+    public function createuser($aeid, $createlocal, $signinlocal) {
 
-        $ae_user = $this->fetch_ae_user($aeid);
+        $createLocalUser = $createlocal == "true";
+        $signinLocalUser = $signinlocal == "true";
 
-        if($this->drupal_user_exists($aeid)) {
-            $drupal_user = $this->fetch_drupal_user($aeid);
-            $drupal_user->activate();// NOTE: login will fail silently if not activated!
-            $drupal_user->save();
-            user_login_finalize($drupal_user);
-        }
-        else if($this->returning_user_with_different_aeid($ae_user)) {
-            $drupal_user = $this->fetch_returning_user($ae_user);
-            $drupal_user->activate();// NOTE: login will fail silently if not activated!
-            $drupal_user->save();
-            user_login_finalize($drupal_user);
-        }
-        else {
-            $drupal_user = $this->create_new_drupal_user($ae_user);
-            $this->create_local_ae_user($drupal_user, $ae_user);
-            user_login_finalize($drupal_user);
-        }
-        $this->add_services_for_user($drupal_user, $ae_user);
+
+//        $ae_user = $this->fetch_ae_user($aeid);
+//
+//        if($this->drupal_user_exists($aeid)) {
+//            $drupal_user = $this->fetch_drupal_user($aeid);
+//            $drupal_user->activate();// NOTE: login will fail silently if not activated!
+//            $drupal_user->save();
+//            user_login_finalize($drupal_user);
+//        }
+//        else if($this->returning_user_with_different_aeid($ae_user)) {
+//            $drupal_user = $this->fetch_returning_user($ae_user);
+//            $drupal_user->activate();// NOTE: login will fail silently if not activated!
+//            $drupal_user->save();
+//            user_login_finalize($drupal_user);
+//        }
+//        else {
+//            $drupal_user = $this->create_new_drupal_user($ae_user);
+//            $this->create_local_ae_user($drupal_user, $ae_user);
+//            user_login_finalize($drupal_user);
+//        }
+//        $this->add_services_for_user($drupal_user, $ae_user);
+
         exit(0);
     }
 

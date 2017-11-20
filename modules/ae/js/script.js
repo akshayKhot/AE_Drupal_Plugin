@@ -38,8 +38,8 @@ function loginHandler(user,type,sso) {
         url: '/ae/ajax/' + user.data.ID + '/' + createLocalUser + '/' + signInLocalUser,
         method: 'GET',
         success: function(data) {
-//            window.location.reload(true);
-            window.location.href = "http://drupal-plugin.appreciationengine.com/";
+            console.log(data);
+            //window.location.href = "http://drupal-plugin.appreciationengine.com/";
 
         }
     });
