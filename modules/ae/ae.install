@@ -15,42 +15,75 @@ function ae_schema() {
                 'not null' => TRUE,
             ),
             'FirstName' => array(
-                'description' => 'The primary identifier for a drupal user.',
+                'description' => 'First name of the user',
                 'type' => 'varchar',
                 'length' => 32,
             ),
             'SurName' => array(
-                'description' => 'The primary identifier for a drupal user.',
+                'description' => 'Last name of the user',
                 'type' => 'varchar',
                 'length' => 32,
             ),
             'Email' => array(
-                'description' => 'The primary identifier for a drupal user.',
+                'description' => 'Email of the user',
                 'type' => 'varchar',
                 'length' => 32,
             ),
-            'Username' => array(
-                'description' => 'The primary identifier for a drupal user.',
+            'City' => array(
+                'description' => 'Address Info',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'State' => array(
+                'description' => 'Address Info',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'Country' => array(
+                'description' => 'Address Info',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'Postcode' => array(
+                'description' => 'Address Info',
                 'type' => 'varchar',
                 'length' => 32,
             ),
             'MobilePhone' => array(
-                'description' => 'The primary identifier for a drupal user.',
+                'description' => 'Contact Information',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'Website' => array(
+                'description' => 'Webiste for a drupal.',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'Username' => array(
+                'description' => 'Username',
                 'type' => 'varchar',
                 'length' => 32,
             ),
             'VerifiedEmail' => array(
-                'description' => 'The primary identifier for a drupal user.',
+                'description' => 'Contact Information',
                 'type' => 'varchar',
                 'length' => 32,
             ),
-            'Services' => array(
-                'description' => 'The primary identifier for a drupal user.',
+            'Bio' => array(
+                'description' => 'Any information about the user',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'Gender' => array(
+                'description' => 'Gender Information',
+                'type' => 'varchar',
+                'length' => 32,
+            ),
+            'BirthDate' => array(
+                'description' => 'Date of Birth',
                 'type' => 'varchar',
                 'length' => 32,
             )
-
-
         ),
         'indexes' => array(
             'aeid' => array('aeid')
@@ -63,6 +96,7 @@ function ae_schema() {
             )
         )
     );
+
 
     $schema['ae_services'] = array(
         'description' => 'Table to store the services returned by AE',

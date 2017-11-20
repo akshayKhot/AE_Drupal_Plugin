@@ -99,10 +99,17 @@ class LoginController extends ControllerBase {
             'FirstName' => isset($ae_user->data->FirstName) ? $ae_user->data->FirstName: "",
             'SurName' => isset($ae_user->data->SurName) ? $ae_user->data->SurName : "",
             'Email' => isset($ae_user->data->Email) ? $ae_user->data->Email : "",
-            'Username' => isset($ae_user->data->Username) ? $ae_user->data->Username : "",
+            'City' => isset($ae_user->data->City) ? $ae_user->data->City : "",
+            'State' => isset($ae_user->data->State) ? $ae_user->data->State : "",
+            'Country' => isset($ae_user->data->Country) ? $ae_user->data->Country : "",
+            'Postcode' => isset($ae_user->data->PostCode) ? $ae_user->data->PostCode : "",
             'MobilePhone' => isset($ae_user->data->MobilePhone) ? $ae_user->data->MobilePhone : "",
+            'Website' => isset($ae_user->data->Website) ? $ae_user->data->Website : "",
+            'Username' => isset($ae_user->data->Username) ? $ae_user->data->Username : "",
             'VerifiedEmail' => isset($ae_user->data->VerifiedEmail) ? $ae_user->data->VerifiedEmail : "",
-            'Services' => "100,200,300,4000"
+            'Bio' => isset($ae_user->data->Bio) ? $ae_user->data->Bio : "",
+            'Gender' => isset($ae_user->data->Gender) ? $ae_user->data->Gender : "",
+            'BirthDate' => isset($ae_user->data->BirthDate) ? $ae_user->data->BirthDate : "",
         ])->execute();
     }
 
