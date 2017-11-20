@@ -13,27 +13,24 @@ class LoginController extends ControllerBase {
         $createLocalUser = $createlocal == "true";
         $signinLocalUser = $signinlocal == "true";
 
+        $ae_user = $this->fetch_ae_user($aeid);
 
-//        $ae_user = $this->fetch_ae_user($aeid);
-//
-//        if($this->drupal_user_exists($aeid)) {
-//            $drupal_user = $this->fetch_drupal_user($aeid);
-//            $drupal_user->activate();// NOTE: login will fail silently if not activated!
-//            $drupal_user->save();
-//            user_login_finalize($drupal_user);
-//        }
-//        else if($this->returning_user_with_different_aeid($ae_user)) {
-//            $drupal_user = $this->fetch_returning_user($ae_user);
-//            $drupal_user->activate();// NOTE: login will fail silently if not activated!
-//            $drupal_user->save();
-//            user_login_finalize($drupal_user);
-//        }
-//        else {
-//            $drupal_user = $this->create_new_drupal_user($ae_user);
-//            $this->create_local_ae_user($drupal_user, $ae_user);
-//            user_login_finalize($drupal_user);
-//        }
-//        $this->add_services_for_user($drupal_user, $ae_user);
+        if($this->drupal_user_exists($aeid)) {
+            $drupal_user = $this->fetch_drupal_user($aeid);
+        }
+        else if($this->returning_user_with_different_aeid($ae_user)) {
+            $drupal_user = $this->fetch_returning_user($ae_user);
+        }
+        else {
+            if($createLocalUser) {
+                $drupal_user = $this->create_new_drupal_user($ae_user);
+                $this->create_local_ae_user($drupal_user, $ae_user);
+            }
+        }
+        $this->add_services_for_user($drupal_user, $ae_user);
+
+        if($signinLocalUser)
+            $this->sign_in_local_drupal_user($drupal_user);
 
         exit(0);
     }
@@ -59,7 +56,10 @@ class LoginController extends ControllerBase {
 
     private function fetch_drupal_user($aeid) {
         $uid = $this->fetch_uid_from_aeid($aeid);
-        return \Drupal\user\Entity\User::load($uid);
+        $drupal_user = \Drupal\user\Entity\User::load($uid);
+        $drupal_user->activate();
+        $drupal_user->save();
+        return $drupal_user;
     }
 
     private function returning_user_with_different_aeid($ae_user) {
@@ -78,7 +78,10 @@ class LoginController extends ControllerBase {
         foreach ($ae_user->services as $service) {
             $aeid = db_query("SELECT aeid FROM {ae_services} WHERE serviceID = :sid", [':sid' => $service->ID])->fetchField();
             if(isset($aeid)) {
-                return $this->fetch_drupal_user($aeid);
+                $drupal_user = $this->fetch_drupal_user($aeid);
+                $drupal_user->activate();
+                $drupal_user->save();
+                return $drupal_user;
             }
         }
     }
@@ -89,10 +92,13 @@ class LoginController extends ControllerBase {
         $drupal_user->enforceIsNew();
         $drupal_user->setEmail($ae_user->data->Email);
         $drupal_user->setUsername($ae_user->data->Username);
-        $drupal_user->activate();// NOTE: login will fail silently if not activated!
+        $drupal_user->activate();
         $drupal_user->save();
-
         return $drupal_user;
+    }
+
+    private function sign_in_local_drupal_user($drupal_user) {
+        user_login_finalize($drupal_user);
     }
 
     private function create_local_ae_user($drupal_user, $ae_user) {
