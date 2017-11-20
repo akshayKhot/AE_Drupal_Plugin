@@ -13,11 +13,12 @@
                 {% endfor %}
             </div>
 
+            <div id="emailRegistration">
             <div class="panel-heading" style="background: #000; color:#fff; padding: 5px;">Email</div>
             <div class="panel-body" style="padding: 15px 30px;">
                 <form id="email-signup" data-ae-register-form="email" data-ae-type="register" method="post">
                     <div class="form-group">
-                        <label for="email">Email Address</label>
+                        <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email"> <br>
                     </div>
                     <div class="form-group">
@@ -27,6 +28,7 @@
                     <button type="submit" class="btn btn-primary">Sign Up!</button>
                     <button type="button" class="btn btn-primary" id="forgotPasswordButton">Forgot Password?</button>
                 </form>
+            </div>
             </div>
         </div>
 
@@ -111,6 +113,13 @@
   	    return extraFields;
     }
 
+    function toggleEmailRegistration(settings) {
+  	    if(settings.options.social_login)
+  	        $("#emailRegistration").hide();
+  	    else
+            $("#emailRegistration").show();
+    }
+
     function isset(variable) {
   	    return typeof variable === "string";
     }
@@ -124,13 +133,14 @@
 	    var fields = {{ fields|json_encode|raw }};
 	    createLocalUser = !isset(performance_options.options.not_create_user);
 	    signInLocalUser = !isset(performance_options.options.not_sign_in);
+	    toggleEmailRegistration(general_settings);
 
         var options = {
             'auth_window': isset(general_settings.options.auth_window),
             'social_logins': getSocials(),
             'display_error_message': isset(general_settings.options.error_message),
             'device_detect': isset(general_settings.options.auto_detect),
-            'sso': !isset(general_settings.options.multi_site_login),
+            'sso': isset(general_settings.options.multi_site_login) ? 'application' : 'local',
             'no_email': isset(general_settings.options.social_login),
             'verify_email': isset(email_options.options.verify_email),
             'verify_email_for_login': isset(email_options.options.req_email_verify),
@@ -155,10 +165,6 @@
   	            delete options[option];
         }
         return options;
-    }
-
-	function isset(param) {
-  	    return typeof param === "string";
     }
 
     function AEJSReady(aeJS) {
