@@ -17,6 +17,9 @@ function ae_theme($existing, $type, $theme, $path) {
           'variables' => [
               'heading' => 'Default Value'
           ]
+      ],
+      'register' => [
+
       ]
   ];
 }

@@ -29,8 +29,17 @@ class RegisterBlock extends BlockBase{
 
     public function build() {
 
+//        return [
+//            '#markup' => $this->t('First time user? Sign Up <a href="#"  data-ae-register-window="true">here</a><br> Existing User? <a href="#" data-ae-login-window="true">Log In</a>'),
+//        ];
+
         return [
-            '#markup' => $this->t('First time user? Sign Up <a href="#"  data-ae-register-window="true">here</a><br> Existing User? <a href="#" data-ae-login-window="true">Log In</a>'),
+            '#theme' => 'register',
+            '#attached' => [
+                'library' => [
+                    'ae/script',
+                ],
+            ],
         ];
 
     }

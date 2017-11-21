@@ -28,7 +28,6 @@ function flowHandler(event) {
             if(url != '' && url.match("send-email-ok").length > 0)
                 hasVerifiedEmail = true;
             if(!verify_email && !hasVerifiedEmail) {
-                alert("A verification email has been sent to: " + globalAEJS.user.data.Email);
                 globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {
                     'subject': 'Email Subject',
                     'body': 'Body text in email',
@@ -40,14 +39,7 @@ function flowHandler(event) {
     }
 }
 
-function windowHandler(event) {
-    console.log("WINDOW HANDLER");
-    console.log(event);
-}
-
 function loginHandler(user,type,sso) {
-    debugger;
-    var temp = globalAEJS.user.data.hasOwnProperty('VerifiedEmail');
     console.log("LOGIN HANDLER:"+type);
     $.ajax({
         url: '/ae/ajax/' + user.data.ID + '/' + createLocalUser + '/' + signInLocalUser,
@@ -62,10 +54,10 @@ function loginHandler(user,type,sso) {
 
 function userHandler(user,state) {
     console.log("USER HANDLER");
-    console.log(user);
-    console.log(state);
-    $('#signup').hide();
-    $('#loggedin').show();
+    $("#signup").hide();
+    $("#greetUser").toggle();
+    $("#registerlogin").toggle();
+    $("#loggedInUser").text("Akshay");
 
     var $logout = $( "a[data-drupal-link-system-path='user/logout']" );
     $logout
@@ -86,6 +78,16 @@ function userHandler(user,state) {
             reset_email = service.VerifiedEmail;
         }
     })
+
+}
+
+function verificationHandler(step, data) {
+    if(step === 'sent')
+        alert("A verification email has been sent to: " + data.EmailAddress);
+    if(step === 'verified') {
+        alert("Email has been verified successfully..You will be logged in now");
+        console.log("Email verified");
+    }
 
 }
 

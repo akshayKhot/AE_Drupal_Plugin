@@ -25,8 +25,8 @@
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                     </div>
-                    <button type="submit" class="btn btn-primary">Sign Up!</button>
-                    <button type="button" class="btn btn-primary" id="forgotPasswordButton">Forgot Password?</button>
+                    <p><button type="submit" class="btn btn-primary">Sign Up!</button> </p>
+                    <p><a href="#" id="forgotPasswordButton">Forgot Password?</a> </p>
                 </form>
             </div>
             </div>
@@ -61,10 +61,6 @@
                     <button type="button" class="btn btn-primary" onclick="resetPassword()">Update</button>
                 </form>
             </div>
-        </div>
-
-        <div id="loggedin">
-            <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
         </div>
 
 {#
@@ -198,8 +194,9 @@
         aeJS.events.onLogin.addHandler(loginHandler);
         aeJS.events.onUser.addHandler(userHandler);
         aeJS.events.onLogout.addHandler(logoutHandler);
-        aeJS.events.onWindow.addHandler(windowHandler);
+        //aeJS.events.onWindow.addHandler(windowHandler);
         aeJS.events.onPasswordReset.addHandler(passwordHandler);
+        aeJS.events.onEmailVerify.addHandler(verificationHandler);
     }
 
     $("#forgotPasswordButton").click(function() {
