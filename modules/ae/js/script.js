@@ -3,11 +3,16 @@ var createLocalUser;
 var signInLocalUser;
 var state = 'none';
 
+//email verification
+var verify_email;
+var hasVerifiedEmail;
+
 //password reset
 var service_id;
 var reset_email;
 
 function flowHandler(event) {
+    debugger;
     console.log("FLOW HANDLER ");
     console.log(event);
 
@@ -21,9 +26,18 @@ function flowHandler(event) {
     }
 
     if(event.step === 'verify-email') {
-        globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {'subject':'Email Subject',
-            'body':'Body text in email',
-            'label': 'Return link label'});
+        var url = window.location.search;
+        if(url != '' && url.match("send-email-ok").length > 0)
+            hasVerifiedEmail = true;
+        if(!verify_email && !hasVerifiedEmail) {
+            alert("A verification email has been sent to: " + globalAEJS.user.data.Email);
+            globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {
+                'subject': 'Email Subject',
+                'body': 'Body text in email',
+                'label': 'Return link label'
+            });
+            hasVerifiedEmail = true;
+        }
     }
 }
 
@@ -33,6 +47,8 @@ function windowHandler(event) {
 }
 
 function loginHandler(user,type,sso) {
+    debugger;
+    var temp = globalAEJS.user.data.hasOwnProperty('VerifiedEmail');
     console.log("LOGIN HANDLER:"+type);
     $.ajax({
         url: '/ae/ajax/' + user.data.ID + '/' + createLocalUser + '/' + signInLocalUser,

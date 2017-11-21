@@ -30,6 +30,7 @@
                 </form>
             </div>
             </div>
+
         </div>
 
         <div id="additional-data" style="display: none;" data-ae-logout-link="true">
@@ -62,9 +63,9 @@
             </div>
         </div>
 
-        {#<div id="loggedin" style="display: none;">#}
-            {#<a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>#}
-        {#</div>#}
+        <div id="loggedin">
+            <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
+        </div>
 
 {#
 {% endif %}
@@ -133,6 +134,8 @@
 	    var fields = {{ fields|json_encode|raw }};
 	    createLocalUser = !isset(performance_options.options.not_create_user);
 	    signInLocalUser = !isset(performance_options.options.not_sign_in);
+        verify_email = isset(email_options.options.verify_email);
+        request_verification = isset(email_options.options.req_email_verify);
 	    toggleEmailRegistration(general_settings);
 
         var options = {
