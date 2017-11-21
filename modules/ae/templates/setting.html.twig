@@ -1,6 +1,9 @@
+
 <div id="changePassword" style="display: none;">
-    <h1>Update Password</h1>
-    <form method="post">
+
+    <a href="#" id="askForUpdate" onClick="showUpdateForm()">Update Password?</a>
+    <form id="passwordUpdateForm" method="post" style="display: none;">
+        <h1>Update Password</h1>
         <label for="p1">Enter New Password</label>
         <input type="password" id="p1">
         <label for="p2">Confirm Password</label>

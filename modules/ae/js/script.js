@@ -52,27 +52,34 @@ function loginHandler(user,type,sso) {
 
 }
 
-function userHandler(user,state) {
-    console.log("USER HANDLER");
+function updateDisplay() {
     $("#signup").hide();
     $("#greetUser").show();
     $("#registerlogin").hide();
     $("#changePassword").show();
-    $("#loggedInUser").text("Akshay");
+    if (state === 'update')
+        $("#additional-data-form").hide();
 
-    var $logout = $( "a[data-drupal-link-system-path='user/logout']" );
+    var first_name = user.data.FirstName;
+    $("#loggedInUser").text(first_name);
+}
+
+function enableLogout() {
+    var $logout = $("a[data-drupal-link-system-path='user/logout']");
     $logout
-        .removeAttr( "data-drupal-link-system-path" )
+        .removeAttr("data-drupal-link-system-path")
         .attr({
             "data-ae-logout-link": true,
             "href": "#"
         });
     globalAEJS.trigger.attach($logout);
+}
 
-    if (state === 'update') {
-        jQuery("#additional-data-form").hide();
-    }
+function userHandler(user,state) {
+    updateDisplay(first_name);
 
+    enableLogout();
+    
     user.services.forEach(function(service) {
         if(service.Service == 'email') {
             service_id = service.ID;
@@ -94,15 +101,20 @@ function verificationHandler(step, data) {
 
 function passwordHandler() {
     alert("Password was updated successfully..");
+    $("#passwordUpdateForm").hide();
+    $("#askForUpdate").reset();
 }
 
 function logoutHandler(user) {
     window.location =  "http://drupal-plugin.appreciationengine.com/user/logout";
 }
 
-
 function changePassword() {
     var password = document.getElementById('p1').value;
     globalAEJS.trigger.reset_password(service_id, reset_email, password);
 }
 
+function showUpdateForm() {
+    $("#passwordUpdateForm").show();
+    $("#askForUpdate").hide();
+}
