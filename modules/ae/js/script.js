@@ -55,8 +55,9 @@ function loginHandler(user,type,sso) {
 function userHandler(user,state) {
     console.log("USER HANDLER");
     $("#signup").hide();
-    $("#greetUser").toggle();
-    $("#registerlogin").toggle();
+    $("#greetUser").show();
+    $("#registerlogin").hide();
+    $("#changePassword").show();
     $("#loggedInUser").text("Akshay");
 
     var $logout = $( "a[data-drupal-link-system-path='user/logout']" );
