@@ -12,32 +12,31 @@ var service_id;
 var reset_email;
 
 function flowHandler(event) {
-    debugger;
     console.log("FLOW HANDLER ");
     console.log(event);
 
-    if (event.step === 'required-fields') {
-        $('#signup').hide();
-        $('#additional-data').show();
-    }
-
-    if (event.step === 'error') {
-        alert(event.error);
-    }
-
-    if(event.step === 'verify-email') {
-        var url = window.location.search;
-        if(url != '' && url.match("send-email-ok").length > 0)
-            hasVerifiedEmail = true;
-        if(!verify_email && !hasVerifiedEmail) {
-            alert("A verification email has been sent to: " + globalAEJS.user.data.Email);
-            globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {
-                'subject': 'Email Subject',
-                'body': 'Body text in email',
-                'label': 'Return link label'
-            });
-            hasVerifiedEmail = true;
-        }
+    switch (event.step) {
+        case 'required-fields':
+            $('#signup').hide();
+            $('#additional-data').show();
+            break;
+        case 'error':
+            alert(event.error);
+            break;
+        case 'verify-email':
+            var url = window.location.search;
+            if(url != '' && url.match("send-email-ok").length > 0)
+                hasVerifiedEmail = true;
+            if(!verify_email && !hasVerifiedEmail) {
+                alert("A verification email has been sent to: " + globalAEJS.user.data.Email);
+                globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {
+                    'subject': 'Email Subject',
+                    'body': 'Body text in email',
+                    'label': 'Return link label'
+                });
+                hasVerifiedEmail = true;
+            }
+            break;
     }
 }
 
