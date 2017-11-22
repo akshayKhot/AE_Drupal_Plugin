@@ -21,7 +21,7 @@ function flowHandler(event) {
             $('#additional-data').show();
             break;
         case 'error':
-            alert(event.error);
+            handleError(event.error);
             break;
         case 'verify-email':
             var url = window.location.search;
@@ -117,4 +117,9 @@ function changePassword() {
 function showUpdateForm() {
     $("#passwordUpdateForm").show();
     $("#askForUpdate").hide();
+}
+
+function handleError(error) {
+    $("#error_ae").show();
+    $("#error_ae").text(error);
 }

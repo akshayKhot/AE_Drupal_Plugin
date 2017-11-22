@@ -31,6 +31,10 @@
             </div>
             </div>
 
+            <div id="error_ae" style="display: none;">
+                
+            </div>
+
         </div>
 
         <div id="additional-data" style="display: none;" data-ae-logout-link="true">
@@ -186,7 +190,7 @@
         aeJS.settings['sso'] = options.sso;
         aeJS.settings['verify_email'] = options.verify_email;
         aeJS.settings['verify_email_for_login'] = options.verify_email_for_login;
-        //aeJS.settings['display_error_message'] = false;
+        aeJS.settings['display_error_message'] = false;
 
         console.log(aeJS.settings);
 
