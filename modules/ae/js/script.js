@@ -52,7 +52,21 @@ function loginHandler(user,type,sso) {
 
 }
 
-function updateDisplay() {
+function userHandler(user,state) {
+    console.log("User Handler");
+    updateDisplay(user, state);
+    enableLogout();
+
+    user.services.forEach(function(service) {
+        if(service.Service == 'email') {
+            service_id = service.ID;
+            reset_email = service.VerifiedEmail;
+        }
+    })
+
+}
+
+function updateDisplay(user, state) {
     $("#signup").hide();
     $("#greetUser").show();
     $("#registerlogin").hide();
@@ -73,20 +87,6 @@ function enableLogout() {
             "href": "#"
         });
     globalAEJS.trigger.attach($logout);
-}
-
-function userHandler(user,state) {
-    updateDisplay(first_name);
-
-    enableLogout();
-    
-    user.services.forEach(function(service) {
-        if(service.Service == 'email') {
-            service_id = service.ID;
-            reset_email = service.VerifiedEmail;
-        }
-    })
-
 }
 
 function verificationHandler(step, data) {
