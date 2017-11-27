@@ -26,6 +26,7 @@ class HelloBlock extends BlockBase {
         return [
             '#theme' => 'signup',
             '#socials' => $this->getSelectedSocials(),
+            '#framework_url' => $this->state->get('framework_url'),
             '#fields' => $this->state->get('fields'),
             '#general_settings' => $this->state->get('general_settings'),
             '#basic_options' => $this->state->get('basic_options'),

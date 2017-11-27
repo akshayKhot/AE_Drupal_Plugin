@@ -5,6 +5,7 @@ function ae_theme($existing, $type, $theme, $path) {
       'signup' => [
         'variables' => [
             'socials' => [],
+            'framework_url' => NULL,
             'fields' => [],
             'general_settings' => [],
             'basic_options' => [],
