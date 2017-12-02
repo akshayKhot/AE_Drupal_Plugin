@@ -86,7 +86,17 @@
  * );
  * @endcode
  */
- $databases = array();
+$databases = array();
+$databases['default']['default'] = array (
+    'database' => 'ae_drupal8',
+    'username' => 'musichype',
+    'password' => 'AMH23JS9',
+    'host' => 'mysql.appreciationengine.com',
+    'port' => '3306',
+    'driver' => 'mysql',
+    'prefix' => '',
+    'collation' => 'utf8mb4_general_ci',
+);
 
 /**
  * Customizing database settings.
@@ -295,7 +305,7 @@ $config_directories = array();
  *   $settings['hash_salt'] = file_get_contents('/home/example/salt.txt');
  * @endcode
  */
-$settings['hash_salt'] = 'pfcBouTnPFhFABv9WEEOT6syMBkiv_Zy3P3rrBunPQy7sS9j75kE4j4k8BQ9kU1hd_-4mOR5mg';
+$settings['hash_salt'] = 'OXJCeD8votzCTvYMrpQuoxn052wAixahhzYnWRtlmKUPmTEJJQx_rKzfhCsjcZBbmdA7uM-32Q';
 
 /**
  * Deployment identifier.
@@ -745,8 +755,8 @@ $settings['container_yamls'][] = $app_root . '/' . $site_path . '/services.yml';
  * @see \Drupal\Core\Extension\ExtensionDiscovery::scanDirectory()
  */
 $settings['file_scan_ignore_directories'] = [
-  'node_modules',
-  'bower_components',
+    'node_modules',
+    'bower_components',
 ];
 
 /**
@@ -760,18 +770,24 @@ $settings['file_scan_ignore_directories'] = [
  * Keep this code block at the end of this file to take full effect.
  */
 #
- if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
-   include $app_root . '/' . $site_path . '/settings.local.php';
- }
+// if (file_exists($app_root . '/' . $site_path . '/settings.local.php')) {
+//   include $app_root . '/' . $site_path . '/settings.local.php';
+// }
+
+error_reporting(E_ALL);
+ini_set('display_errors', TRUE);
+ini_set('display_startup_errors', TRUE);
+
 $databases['default']['default'] = array (
-  'database' => 'drupal_db',
-  'username' => 'akshay',
-  'password' => 'jughead',
-  'prefix' => '',
-  'host' => 'localhost',
-  'port' => '3306',
-  'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
-  'driver' => 'mysql'
+    'database' => 'ae_drupal8',
+    'username' => 'musichype',
+    'password' => 'AMH23JS9',
+    'prefix' => '',
+    'host' => 'mysql.appreciationengine.com',
+    'port' => '3306',
+    'namespace' => 'Drupal\\Core\\Database\\Driver\\mysql',
+    'driver' => 'mysql',
 );
 $settings['install_profile'] = 'standard';
-$config_directories['sync'] = 'sites/default/files/config_p7WJO8-emk1fENBuXv7tvGMEOlvWsf8ye3cj4Oz4hSm3n10-fmT5CyoYCtTH2cfrVffeLUKg2g/sync';
+$config_directories['sync'] = 'sites/default/files/config_2sbcOQVRWYywLVf0-mPedc7Eea3v4CF1CP6kn7rEAcvDEWbnd_U9jHalxvCBZVL-cvmAcsf2LQ/sync';
+

@@ -55,7 +55,7 @@ function loginHandler(user,type,sso) {
 function userHandler(user,state) {
     console.log("User Handler");
     updateDisplay(user, state);
-    enableLogout();
+    //enableLogout();
 
     user.services.forEach(function(service) {
         if(service.Service == 'email') {

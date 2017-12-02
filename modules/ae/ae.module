@@ -2,26 +2,21 @@
 
 function ae_theme($existing, $type, $theme, $path) {
   return [
-      'signup' => [
-        'variables' => [
-            'socials' => [],
-            'framework_url' => NULL,
-            'fields' => [],
-            'general_settings' => [],
-            'basic_options' => [],
-            'email_options' => [],
-            'text_options' => [],
-            'performance_options' => []
-        ],
-      ],
-      'setting' => [
+      'aemenu' => [
           'variables' => [
-              'heading' => 'Default Value'
-          ]
+              'socials' => [],
+              'framework_url' => NULL,
+              'fields' => [],
+              'general_settings' => [],
+              'basic_options' => [],
+              'email_options' => [],
+              'text_options' => [],
+              'performance_options' => []
+          ],
       ],
-      'register' => [
-
-      ]
+      'signup' => [],
+      'setting' => [],
+      'register' => []
   ];
 }
 

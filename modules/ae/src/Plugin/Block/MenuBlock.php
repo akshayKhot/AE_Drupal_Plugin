@@ -3,18 +3,17 @@
 namespace Drupal\ae\Plugin\Block;
 
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Form\FormStateInterface;
 
 /**
- * Provides a 'Hello' Block.
+ * Provides a 'Header Menu' Block.
  *
  * @Block(
- *   id = "hello_block",
- *   admin_label = @Translation("Sign Up"),
- *   category = @Translation("Hello World"),
+ *   id = "ae_menu",
+ *   admin_label = @Translation("AE Menu"),
+ *   category = @Translation("Menu"),
  * )
  */
-class HelloBlock extends BlockBase {
+class MenuBlock extends BlockBase {
 
     public function __construct()
     {
@@ -24,7 +23,8 @@ class HelloBlock extends BlockBase {
     public function build() {
 
         return [
-            '#theme' => 'signup',
+            '#theme' => 'aemenu',
+
             '#socials' => $this->getSelectedSocials(),
             '#framework_url' => $this->state->get('framework_url'),
             '#fields' => $this->state->get('fields'),
@@ -33,6 +33,7 @@ class HelloBlock extends BlockBase {
             '#email_options' => $this->state->get('email_options'),
             '#text_options' => $this->state->get('text_options'),
             '#performance_options' => $this->state->get('performance_options'),
+
             '#attached' => [
                 'library' => [
                     'ae/script',
@@ -55,4 +56,3 @@ class HelloBlock extends BlockBase {
     }
 
 }
-?>
