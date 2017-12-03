@@ -14,12 +14,14 @@ function ae_theme($existing, $type, $theme, $path) {
               'performance_options' => []
           ],
       ],
-      'signup' => [],
-      'setting' => [],
-      'register' => []
+      'signup' => [
+          'variables' => [
+              'socials' => [],
+              'fields' => [],
+          ],
+      ],
+      'logout' => [
+          'variables' => []
+      ]
   ];
-}
-
-function ae_user_login($account) {
-    drupal_set_message("New user created and logged in");
 }

@@ -24,6 +24,10 @@ class SignupBlock extends BlockBase {
 
         return [
             '#theme' => 'signup',
+
+            '#socials' => $this->getSelectedSocials(),
+            '#fields' => $this->state->get('fields'),
+
             '#attached' => [
                 'library' => [
                     'ae/script',
@@ -31,6 +35,18 @@ class SignupBlock extends BlockBase {
             ],
         ];
 
+    }
+
+    public function getSelectedSocials() {
+        $socials = [];
+
+        $social_networks = $this->state->get('socials')['socials'];
+        foreach($social_networks as $social=>$text) {
+            if($text != 0 || $text != "0")
+                $socials[] = $text;
+        }
+
+        return $socials;
     }
 
 }

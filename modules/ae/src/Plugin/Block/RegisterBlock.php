@@ -11,7 +11,7 @@ namespace Drupal\ae\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 
 /**
- * Provides a 'Settings' Block.
+ * Provides a 'Register/Login' Block.
  *
  * @Block(
  *   id = "register_block",
