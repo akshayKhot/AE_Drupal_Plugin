@@ -19,7 +19,7 @@
                     <input type="password" class="form-control" id="password" name="password" placeholder="Password">
                 </div>
                 <p><button type="submit" class="btn btn-primary">Sign Up!</button> </p>
-                <p><a href="#" id="forgotPasswordButton">Forgot Password?</a> </p>
+                <p><a href="#" id="forgotPasswordButton" onclick="forgotPassword()">Forgot Password?</a> </p>
             </form>
         </div>
     </div>
@@ -43,17 +43,18 @@
         </form>
     </div>
 </div>
-<div id="passwordResetForm" style="display: none;" data-ae-logout-link="true">
-    <div class="panel-heading" style="background: #000; color:#fff;">Reset Password</div>
-    <div class="panel-body" style="padding: 15px 30px;">
-        <form method="post">
-            <label for="email">Email</label>
-            <input type="email" id="email">
-            <label for="newpassword">New Password</label>
-            <input type="password" id="newpassword">
-            <button type="button" class="btn btn-primary" onclick="resetPassword()">Update</button>
-        </form>
-    </div>
-</div>
+
+{#<div id="passwordResetForm" style="display: none;" data-ae-logout-link="true">#}
+    {#<div class="panel-heading" style="background: #000; color:#fff;">Reset Password</div>#}
+    {#<div class="panel-body" style="padding: 15px 30px;">#}
+        {#<form method="post">#}
+            {#<label for="email">Email</label>#}
+            {#<input type="email" id="email">#}
+            {#<label for="newpassword">New Password</label>#}
+            {#<input type="password" id="newpassword">#}
+            {#<button type="button" class="btn btn-primary" onclick="resetPassword()">Update</button>#}
+        {#</form>#}
+    {#</div>#}
+{#</div>#}
 
 

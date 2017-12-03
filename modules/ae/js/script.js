@@ -54,8 +54,6 @@ function loginHandler(user,type,sso) {
 
 function userHandler(user,state) {
     console.log("User Handler");
-    updateDisplay(user, state);
-    //enableLogout();
 
     user.services.forEach(function(service) {
         if(service.Service == 'email') {
@@ -66,28 +64,6 @@ function userHandler(user,state) {
 
 }
 
-function updateDisplay(user, state) {
-    $("#signup").hide();
-    $("#greetUser").show();
-    $("#registerlogin").hide();
-    $("#changePassword").show();
-    if (state === 'update')
-        $("#additional-data-form").hide();
-
-    var first_name = user.data.FirstName;
-    $("#loggedInUser").text(first_name);
-}
-
-function enableLogout() {
-    var $logout = $("a[data-drupal-link-system-path='user/logout']");
-    $logout
-        .removeAttr("data-drupal-link-system-path")
-        .attr({
-            "data-ae-logout-link": true,
-            "href": "#"
-        });
-    globalAEJS.trigger.attach($logout);
-}
 
 function verificationHandler(step, data) {
     if(step === 'sent')
@@ -122,4 +98,66 @@ function showUpdateForm() {
 function handleError(error) {
     $("#error_ae").show();
     $("#error_ae").text(error);
+}
+
+function forgotPassword() {
+    var returnURL = "http://drupal-plugin.appreciationengine.com/";
+    globalAEJS.trigger.verify_reset_password(returnURL);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Review this
+
+function updateDisplay(user, state) {
+    $("#signup").hide();
+    $("#greetUser").show();
+    $("#registerlogin").hide();
+    $("#changePassword").show();
+    if (state === 'update')
+        $("#additional-data-form").hide();
+
+    var first_name = user.data.FirstName;
+    $("#loggedInUser").text(first_name);
+}
+
+function enableLogout() {
+    var $logout = $("a[data-drupal-link-system-path='user/logout']");
+    $logout
+        .removeAttr("data-drupal-link-system-path")
+        .attr({
+            "data-ae-logout-link": true,
+            "href": "#"
+        });
+    globalAEJS.trigger.attach($logout);
 }

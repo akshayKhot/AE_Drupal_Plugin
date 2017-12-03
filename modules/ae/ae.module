@@ -25,3 +25,4 @@ function ae_theme($existing, $type, $theme, $path) {
       ]
   ];
 }
+
