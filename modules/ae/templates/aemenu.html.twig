@@ -134,8 +134,26 @@
         return options;
     }
 
+    $(document).ready(function() {
+        // replace default login and register links
+        var $login = $("a:contains('Log in')");
+        console.log($login);
+        $login
+            .attr({
+                "data-ae-login-window": true,
+                "href": "#"
+            });
 
+        var $register = $("a:contains('register')");
+        console.log($register);
+        $register
+            .attr({
+                "data-ae-register-window": true,
+                "href": "#"
+            });
 
-
+        globalAEJS.trigger.attach($login);
+        globalAEJS.trigger.attach($register);
+    });
 
 </script>

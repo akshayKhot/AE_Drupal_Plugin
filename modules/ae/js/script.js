@@ -24,8 +24,9 @@ function flowHandler(event) {
             handleError(event.error);
             break;
         case 'verify-email':
+            debugger;
             var url = window.location.search;
-            if(url != '' && url.match("send-email-ok").length > 0)
+            if(url != '' && url.match("verify-email-ok").length > 0)
                 hasVerifiedEmail = true;
             if(!verify_email && !hasVerifiedEmail) {
                 globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {
@@ -66,6 +67,7 @@ function userHandler(user,state) {
 
 
 function verificationHandler(step, data) {
+    debugger;
     if(step === 'sent')
         alert("A verification email has been sent to: " + data.EmailAddress);
     if(step === 'verified') {
