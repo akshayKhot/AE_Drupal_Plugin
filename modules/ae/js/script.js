@@ -30,7 +30,7 @@ function flowHandler(event) {
             if(url != '' && url.indexOf("send-email-ok") > -1)
                 hasVerifiedEmail = true;
             if(!verify_email && !hasVerifiedEmail) {
-                globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {
+                globalAEJS.trigger.send_verify_email(window.location.origin, globalAEJS.user.data.Email, {
                     'subject': 'Email Subject',
                     'body': 'Body text in email',
                     'label': 'Return link label'
@@ -48,7 +48,7 @@ function loginHandler(user,type,sso) {
         method: 'GET',
         success: function(data) {
             if(signInLocalUser)
-                window.location.href = "http://drupal-plugin.appreciationengine.com/";
+                window.location.href = window.location.origin;
         }
     });
 
@@ -84,7 +84,7 @@ function passwordHandler() {
 }
 
 function logoutHandler(user) {
-    window.location =  "http://drupal-plugin.appreciationengine.com/user/logout";
+    window.location =  window.location.origin + "/user/logout";
 }
 
 function changePassword() {
@@ -103,8 +103,7 @@ function handleError(error) {
 }
 
 function forgotPassword() {
-    var returnURL = "http://drupal-plugin.appreciationengine.com/";
-    globalAEJS.trigger.verify_reset_password(returnURL);
+    globalAEJS.trigger.verify_reset_password(window.location.origin);
 }
 
 
