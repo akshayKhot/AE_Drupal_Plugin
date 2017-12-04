@@ -31,12 +31,9 @@
         aeJS.events.onLogin.addHandler(loginHandler);
         aeJS.events.onUser.addHandler(userHandler);
         aeJS.events.onLogout.addHandler(logoutHandler);
-        //aeJS.events.onWindow.addHandler(windowHandler);
         aeJS.events.onPasswordReset.addHandler(passwordHandler);
         aeJS.events.onEmailVerify.addHandler(verificationHandler);
     }
-
-
 
     function getSocials() {
         var social_logins = "";
@@ -137,7 +134,6 @@
     $(document).ready(function() {
         // replace default login and register links
         var $login = $("a:contains('Log in')");
-        console.log($login);
         $login
             .attr({
                 "data-ae-login-window": true,
@@ -145,7 +141,6 @@
             });
 
         var $register = $("a:contains('register')");
-        console.log($register);
         $register
             .attr({
                 "data-ae-register-window": true,
