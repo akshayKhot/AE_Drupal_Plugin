@@ -25,7 +25,9 @@ function flowHandler(event) {
             break;
         case 'verify-email':
             var url = window.location.search;
-            if(url != '' && url.match("verify-email-ok").length > 0)
+            if(url != '' && url.indexOf("verify-email-ok") > -1)
+                hasVerifiedEmail = true;
+            if(url != '' && url.indexOf("send-email-ok") > -1)
                 hasVerifiedEmail = true;
             if(!verify_email && !hasVerifiedEmail) {
                 globalAEJS.trigger.send_verify_email("http://drupal-plugin.appreciationengine.com/", globalAEJS.user.data.Email, {
