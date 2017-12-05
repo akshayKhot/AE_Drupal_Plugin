@@ -19,9 +19,6 @@ function ae_theme($existing, $type, $theme, $path) {
               'socials' => [],
               'fields' => [],
           ],
-      ],
-      'logout' => [
-          'variables' => []
       ]
   ];
 }

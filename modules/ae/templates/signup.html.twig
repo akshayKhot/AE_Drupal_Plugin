@@ -1,48 +1,56 @@
 
-<div id="signup">
-    <div class="panel-heading" style="background: #000; color:#fff; padding: 5px;">Social Signup</div>
-    <div class="panel-body" style="padding: 15px 30px;">
-        {% for social in socials %}
-            <a href="#" data-ae-register-link="{{ social|lower }}" class="ae-btn btn btn-default">{{social}}</a>
-        {% endfor %}
-    </div>
-    <div id="emailRegistration">
-        <div class="panel-heading" style="background: #000; color:#fff; padding: 5px;">Email</div>
+{% if not logged_in %}
+
+    <div id="signup">
+        <div class="panel-heading" style="background: #000; color:#fff; padding: 5px;">Social Signup</div>
         <div class="panel-body" style="padding: 15px 30px;">
-            <form id="email-signup" data-ae-register-form="email" data-ae-type="register" method="post">
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
-                </div>
-                <div class="form-group">
-                    <label for="password">Password</label>
-                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
-                </div>
-                <p><button type="submit" class="btn btn-primary">Sign Up!</button> </p>
-                <p><a href="#" id="forgotPasswordButton" onclick="forgotPassword()">Forgot Password?</a> </p>
+            {% for social in socials %}
+                <a href="#" data-ae-register-link="{{ social|lower }}" class="ae-btn btn btn-default">{{social}}</a>
+            {% endfor %}
+        </div>
+        <div id="emailRegistration">
+            <div class="panel-heading" style="background: #000; color:#fff; padding: 5px;">Email</div>
+            <div class="panel-body" style="padding: 15px 30px;">
+                <form id="email-signup" data-ae-register-form="email" data-ae-type="register" method="post">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" aria-describedby="emailHelp" placeholder="Enter email">
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                    </div>
+                    <p><button type="submit" class="btn btn-primary">Sign Up!</button> </p>
+                    <p><a href="#" id="forgotPasswordButton" onclick="forgotPassword()">Forgot Password?</a> </p>
+                </form>
+            </div>
+        </div>
+        <div id="error_ae" style="display: none;">
+
+        </div>
+    </div>
+    <div id="additional-data" style="display: none;" data-ae-logout-link="true">
+        <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
+        <div class="panel-body" style="padding: 15px 30px;">
+            <form id="additional-data-form" data-ae-register-form="email" method="post">
+                {% for field in fields %}
+                    {% if field.enabled == 1 %}
+                        <div class="form-group">
+                            <label for="{{ field.field }}">{{  field.field }} &nbsp;&nbsp;</label>
+                            <input id="{{ field.field }}" name="{{ field.field }}" type="{{ field.type }}">
+                        </div>
+                    {% endif %}
+                {% endfor %}
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
         </div>
     </div>
-    <div id="error_ae" style="display: none;">
 
-    </div>
-</div>
-<div id="additional-data" style="display: none;" data-ae-logout-link="true">
-    <div class="panel-heading" style="background: #000; color:#fff;">Additional Information Required</div>
-    <div class="panel-body" style="padding: 15px 30px;">
-        <form id="additional-data-form" data-ae-register-form="email" method="post">
-            {% for field in fields %}
-                {% if field.enabled == 1 %}
-                    <div class="form-group">
-                        <label for="{{ field.field }}">{{  field.field }} &nbsp;&nbsp;</label>
-                        <input id="{{ field.field }}" name="{{ field.field }}" type="{{ field.type }}">
-                    </div>
-                {% endif %}
-            {% endfor %}
-            <button type="submit" class="btn btn-primary">Submit</button>
-        </form>
-    </div>
-</div>
+{% else %}
+
+    <a href="#" data-ae-logout-link="true" class="btn btn-danger">LOGOUT</a>
+
+{% endif %}
 
 {#<div id="passwordResetForm" style="display: none;" data-ae-logout-link="true">#}
     {#<div class="panel-heading" style="background: #000; color:#fff;">Reset Password</div>#}
