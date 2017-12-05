@@ -1,13 +1,15 @@
 
-<div id="changePassword" style="display: none;">
-
-    <a href="#" id="askForUpdate" onClick="showUpdateForm()">Update Password?</a>
+<div id="changePassword">
+    <button type="button" class="btn btn-primary" id="askForUpdate" onClick="showUpdateForm()">Update Password?</button>
+    <br>
     <form id="passwordUpdateForm" method="post" style="display: none;">
-        <h1>Update Password</h1>
         <label for="p1">Enter New Password</label>
         <input type="password" id="p1">
         <label for="p2">Confirm Password</label>
         <input type="password" id="p2">
-        <button type="button" class="btn btn-primary" onclick="changePassword()">Update</button>
+        <p> </p>
+        <button type="button" class="btn btn-success" onclick="changePassword()">Update</button>
+        <button type="button" class="btn btn-primary" onclick="cancelChangePassword()">Cancel</button>
     </form>
+    <br>
 </div>

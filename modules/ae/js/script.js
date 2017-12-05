@@ -80,7 +80,7 @@ function verificationHandler(step, data) {
 function passwordHandler() {
     alert("Password was updated successfully..");
     $("#passwordUpdateForm").hide();
-    $("#askForUpdate").reset();
+    $("#askForUpdate").show();
 }
 
 function logoutHandler(user) {
@@ -92,9 +92,15 @@ function changePassword() {
     globalAEJS.trigger.reset_password(service_id, reset_email, password);
 }
 
+
 function showUpdateForm() {
     $("#passwordUpdateForm").show();
     $("#askForUpdate").hide();
+}
+
+function cancelChangePassword() {
+    $("#passwordUpdateForm").hide();
+    $("#askForUpdate").show();
 }
 
 function handleError(error) {
@@ -105,8 +111,6 @@ function handleError(error) {
 function forgotPassword() {
     globalAEJS.trigger.verify_reset_password(window.location.origin);
 }
-
-
 
 
 

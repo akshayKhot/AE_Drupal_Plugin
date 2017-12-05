@@ -14,13 +14,13 @@ use Drupal\Core\Block\BlockBase;
  * Provides a 'Settings' Block.
  *
  * @Block(
- *   id = "settings_block",
- *   admin_label = @Translation("Settings"),
- *   category = @Translation("Settings"),
+ *   id = "setting_block",
+ *   admin_label = @Translation("Setting"),
+ *   category = @Translation("Setting"),
  * )
  */
 
-class SettingsBlock extends BlockBase{
+class SettingBlock extends BlockBase{
 
     public function __construct()
     {
@@ -31,13 +31,9 @@ class SettingsBlock extends BlockBase{
 
         return [
             '#theme' => 'setting',
-            '#heading' => 'Change Password',
-            '#attached' => [
-                'library' => [
-                    'ae/script',
-                ],
-            ],
+            '#heading' => 'Change Password'
         ];
 
     }
+
 }
