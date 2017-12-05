@@ -27,12 +27,7 @@ class SignupBlock extends BlockBase {
 
             '#socials' => $this->getSelectedSocials(),
             '#fields' => $this->state->get('fields'),
-
-            '#attached' => [
-                'library' => [
-                    'ae/script',
-                ],
-            ],
+            
         ];
 
     }

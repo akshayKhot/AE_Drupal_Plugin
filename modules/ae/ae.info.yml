@@ -3,3 +3,5 @@ type: module
 description: Appreciation Engine Module - Ak
 core: 8.x
 package: Custom
+libraries:
+  - ae/script

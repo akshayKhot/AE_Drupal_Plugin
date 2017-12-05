@@ -1,3 +1,16 @@
+(function ($, Drupal, drupalSettings) {
+
+    Drupal.behaviors.mybehavior = {
+        attach: function (context, settings) {
+
+            debugger;
+            console.log(drupalSettings.ae.data.foo);
+
+        }
+    };
+
+})(jQuery, Drupal, drupalSettings);
+
 var globalAEJS;
 var createLocalUser;
 var signInLocalUser;

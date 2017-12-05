@@ -35,11 +35,6 @@ class RegisterBlock extends BlockBase{
 
         return [
             '#theme' => 'register',
-            '#attached' => [
-                'library' => [
-                    'ae/script',
-                ],
-            ],
         ];
 
     }

@@ -34,13 +34,7 @@ class MenuBlock extends BlockBase {
             '#text_options' => $this->state->get('text_options'),
             '#performance_options' => $this->state->get('performance_options'),
 
-            '#attached' => [
-                'library' => [
-                    'ae/script',
-                ],
-            ],
         ];
-
     }
 
     public function getSelectedSocials() {

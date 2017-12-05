@@ -126,3 +126,8 @@ function ae_schema() {
 
     return $schema;
 }
+
+function ae_page_attachments_alter(&$page) {
+    $page['#attached']['library'][] = 'ae/script';
+    $page['#attached']['drupalSettings']['ae']['data']['foo'] = 'bar';
+}
