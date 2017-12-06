@@ -30,8 +30,7 @@ class AeUserBlock extends BlockBase{
     public function build() {
 
         return [
-            '#theme' => 'aeusermgmt',
-            '#heading' => 'Change Password'
+            '#theme' => 'aeusermgmt'
         ];
 
     }
