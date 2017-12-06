@@ -51,6 +51,8 @@ class ConfigurationForm extends ConfigFormBase {
         $this->state->set('config', $config);
         $this->state->set('base_url', $base_url);
         $this->state->set('framework_url', $config['Widget']['URL']);
+        $this->state->set('app_name', $config['Slug']);
+
         ksm($config);
     }
 
