@@ -5,7 +5,6 @@ script:
       css/ae_style.css: {}
   js:
     js/script.js: {}
-    js/aesetup.js: {}
   dependencies:
     - core/jquery
     - core/drupalSettings

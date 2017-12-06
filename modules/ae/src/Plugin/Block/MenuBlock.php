@@ -33,7 +33,6 @@ class MenuBlock extends BlockBase {
             '#email_options' => $this->state->get('email_options'),
             '#text_options' => $this->state->get('text_options'),
             '#performance_options' => $this->state->get('performance_options'),
-
         ];
     }
 
@@ -45,7 +44,6 @@ class MenuBlock extends BlockBase {
             if($text != 0 || $text != "0")
                 $socials[] = $text;
         }
-
         return $socials;
     }
 

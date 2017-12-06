@@ -27,3 +27,14 @@ function ae_theme($existing, $type, $theme, $path) {
       ]
   ];
 }
+
+function ae_page_attachments_alter(&$page) {
+$page['#attached']['library'][] = 'ae/script';
+    $page['#attached']['drupalSettings']['ae']['data']['foo'] = 'bar';
+}
+
+function ae_page_attachments(array &$attachments) {
+    drupal_set_message("Adding Javascript");
+    // Unconditionally attach an asset to the page.
+    $attachments['#attached']['library'][] = 'ae/script';
+}
