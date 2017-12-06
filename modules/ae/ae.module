@@ -29,12 +29,59 @@ function ae_theme($existing, $type, $theme, $path) {
 }
 
 function ae_page_attachments_alter(&$page) {
-$page['#attached']['library'][] = 'ae/script';
-    $page['#attached']['drupalSettings']['ae']['data']['foo'] = 'bar';
+    $page['#attached']['library'][] = 'ae/script';
+    $page['#attached']['drupalSettings']['ae'] = getData();
 }
 
-function ae_page_attachments(array &$attachments) {
-    drupal_set_message("Adding Javascript");
-    // Unconditionally attach an asset to the page.
-    $attachments['#attached']['library'][] = 'ae/script';
+function getData() {
+
+    $state = \Drupal::state();
+
+    $data = [
+        'socials' => getSelectedSocials(),
+        'framework_url' => $state->get('framework_url'),
+        'fields' => $state->get('fields'),
+        'general_settings' => $state->get('general_settings'),
+        'basic_options' => $state->get('basic_options'),
+        'email_options' => $state->get('email_options'),
+        'text_options' => $state->get('text_options'),
+        'performance_options' => $state->get('performance_options')
+    ];
+
+    return $data;
 }
+
+function getSelectedSocials() {
+    $socials = [];
+
+    $social_networks = \Drupal::state()->get('socials')['socials'];
+    foreach($social_networks as $social=>$text) {
+        if($text != 0 || $text != "0")
+            $socials[] = $text;
+    }
+    return $socials;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
