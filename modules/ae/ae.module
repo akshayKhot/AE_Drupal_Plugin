@@ -8,10 +8,8 @@ function ae_theme($existing, $type, $theme, $path) {
               'fields' => [],
           ],
       ],
-      'setting' => [
-          'variables' => [
-              'heading' => NULL
-          ],
+      'aeusermgmt' => [
+          'variables' => [],
       ]
   ];
 }

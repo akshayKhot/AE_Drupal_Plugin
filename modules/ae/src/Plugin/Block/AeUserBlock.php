@@ -11,16 +11,16 @@ namespace Drupal\ae\Plugin\Block;
 use Drupal\Core\Block\BlockBase;
 
 /**
- * Provides a 'Settings' Block.
+ * Provides a 'User Management' Block.
  *
  * @Block(
- *   id = "setting_block",
- *   admin_label = @Translation("Setting"),
- *   category = @Translation("Setting"),
+ *   id = "user_mgmt_block",
+ *   admin_label = @Translation("AE User Mgmt."),
+ *   category = @Translation("Forms"),
  * )
  */
 
-class SettingBlock extends BlockBase{
+class AeUserBlock extends BlockBase{
 
     public function __construct()
     {
@@ -30,7 +30,7 @@ class SettingBlock extends BlockBase{
     public function build() {
 
         return [
-            '#theme' => 'setting',
+            '#theme' => 'aeusermgmt',
             '#heading' => 'Change Password'
         ];
 

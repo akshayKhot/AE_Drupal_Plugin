@@ -9,8 +9,8 @@ use Drupal\Core\Block\BlockBase;
  *
  * @Block(
  *   id = "signup_block",
- *   admin_label = @Translation("Sign Up"),
- *   category = @Translation("authentication"),
+ *   admin_label = @Translation("AE Connect"),
+ *   category = @Translation("Forms"),
  * )
  */
 class SignupBlock extends BlockBase {
