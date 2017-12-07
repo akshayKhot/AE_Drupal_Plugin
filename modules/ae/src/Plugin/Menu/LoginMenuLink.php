@@ -79,5 +79,4 @@ class LoginMenuLink extends MenuLinkDefault {
     public function getCacheContexts() {
         return ['user.roles:authenticated'];
     }
-
 }

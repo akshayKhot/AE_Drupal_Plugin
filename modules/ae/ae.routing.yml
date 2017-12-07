@@ -81,3 +81,19 @@ ae.createuser:
   methods: [GET]
   requirements:
     _permission: 'access content'
+
+ae.regroute:
+  path: '/ae/register'
+  defaults:
+    _controller: '\Drupal\ae\Controller\LoginController::say'
+    _title: 'Hello world'
+    name: 'there'
+  requirements:
+    _permission: 'access content'
+
+ae.loginroute:
+  path: '/ae/login'
+  defaults:
+    _controller: '\Drupal\ae\Controller\LoginController::say'
+  requirements:
+    _permission: 'access content'

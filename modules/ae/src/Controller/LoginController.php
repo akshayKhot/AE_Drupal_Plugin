@@ -151,7 +151,12 @@ class LoginController extends ControllerBase {
     }
 
 
-
+    public function say() {
+        return array(
+            '#type' => 'markup',
+            '#markup' => $this->t('Hello Akshay'),
+        );
+    }
 
 
 
