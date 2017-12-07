@@ -81,4 +81,3 @@ ae.createuser:
   methods: [GET]
   requirements:
     _permission: 'access content'
-

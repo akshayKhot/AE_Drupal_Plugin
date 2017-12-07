@@ -5,3 +5,12 @@ ae.admin_settings:
   description: 'Configure AE for your website'
   parent: system.admin_config_system
 
+ae.register:
+  menu_name: account
+  class: Drupal\ae\Plugin\Menu\RegisterMenuLink
+  weight: 100
+
+ae.login:
+  menu_name: account
+  class: Drupal\ae\Plugin\Menu\LoginMenuLink
+  weight: 100
