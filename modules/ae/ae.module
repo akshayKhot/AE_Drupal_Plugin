@@ -10,7 +10,7 @@ function ae_theme($existing, $type, $theme, $path) {
       ],
       'aeusermgmt' => [
           'variables' => [],
-      ],
+      ]
   ];
 }
 
