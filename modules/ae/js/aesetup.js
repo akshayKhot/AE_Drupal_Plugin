@@ -26,7 +26,7 @@ function AEJSReady(aeJS) {
     aeJS.events.onLogout.addHandler(logoutHandler);
     aeJS.events.onPasswordReset.addHandler(passwordHandler);
     aeJS.events.onEmailVerify.addHandler(verificationHandler);
-    replaceLinks(globalAEJS);
+    //replaceLinks(globalAEJS);
 }
 
 
