@@ -26,7 +26,6 @@ function AEJSReady(aeJS) {
     aeJS.events.onLogout.addHandler(logoutHandler);
     aeJS.events.onPasswordReset.addHandler(passwordHandler);
     aeJS.events.onEmailVerify.addHandler(verificationHandler);
-    //replaceLinks(globalAEJS);
 }
 
 
@@ -118,24 +117,4 @@ function parseObject(options) {
             delete options[option];
     }
     return options;
-}
-
-function replaceLinks(globalAEJS) {
-    // replace default login and register links
-    var $login = $("a:contains('Log in')");
-    $login
-        .attr({
-            "data-ae-login-window": true,
-            "href": "#"
-        });
-
-    var $register = $("a:contains('register')");
-    $register
-        .attr({
-            "data-ae-register-window": true,
-            "href": "#"
-        });
-
-    globalAEJS.trigger.attach($login);
-    globalAEJS.trigger.attach($register);
 }
