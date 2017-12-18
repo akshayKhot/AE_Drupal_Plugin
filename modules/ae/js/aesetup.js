@@ -1,6 +1,7 @@
 var $ = jQuery;
 
 function AEJSReady(aeJS) {
+
     var options = getOptions(drupalSettings.ae);
     globalAEJS = aeJS;
     aeJS.settings['auth_window'] = options.auth_window;
@@ -26,9 +27,8 @@ function AEJSReady(aeJS) {
     aeJS.events.onLogout.addHandler(logoutHandler);
     aeJS.events.onPasswordReset.addHandler(passwordHandler);
     aeJS.events.onEmailVerify.addHandler(verificationHandler);
+
 }
-
-
 
 function getGlobalHeaderFooter(text) {
     return {
@@ -63,23 +63,27 @@ function getExtraFields(fields) {
 }
 
 function toggleEmailRegistration(settings) {
+
     if(settings.options.social_login)
         $("#emailRegistration").hide();
     else
         $("#emailRegistration").show();
+
 }
 
 function isset(variable) {
+
     return typeof variable === "string";
+
 }
 
 function getOptions(aeData) {
-    var fields = aeData.fields;//{{ fields|json_encode|raw }};
-    var general_settings =  aeData.general_settings;//{{ general_settings|json_encode|raw }};
-    var basic_options =  aeData.basic_options;//{{ basic_options|json_encode|raw }};
-    var email_options =  aeData.email_options;//{{ email_options|json_encode|raw }};
-    var text_options =  aeData.text_options;//{{ text_options|json_encode|raw }};
-    var performance_options =  aeData.performance_options;//{{ performance_options|json_encode|raw }};
+    var fields = aeData.fields;
+    var general_settings =  aeData.general_settings;
+    var basic_options =  aeData.basic_options;
+    var email_options =  aeData.email_options;
+    var text_options =  aeData.text_options;
+    var performance_options =  aeData.performance_options;
 
     createLocalUser = !isset(performance_options.options.not_create_user);
     signInLocalUser = !isset(performance_options.options.not_sign_in);
@@ -112,9 +116,11 @@ function getOptions(aeData) {
 
 // parses a given object and sets values to null if they are empty string ""
 function parseObject(options) {
+
     for(var option in options) {
         if(options[option] === "")
             delete options[option];
     }
     return options;
+
 }
