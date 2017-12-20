@@ -1,13 +1,9 @@
-
-
 var globalAEJS;
 var createLocalUser;
 var signInLocalUser;
-var state = 'none';
 
 //email verification
 var verify_email;
-var hasVerifiedEmail;
 
 //password reset
 var service_id;
@@ -20,27 +16,28 @@ function flowHandler(event) {
     switch (event.step) {
         case 'required-fields':
             $('#signup').hide();
-            $('#additional-data').show();
+            $('#additional-data').show(500);
             break;
         case 'error':
             handleError(event.error);
             break;
         case 'verify-email':
-            var url = window.location.search;
-            if(url != '' && url.indexOf("verify-email-ok") > -1)
-                hasVerifiedEmail = true;
-            if(url != '' && url.indexOf("send-email-ok") > -1)
-                hasVerifiedEmail = true;
-            if(!verify_email && !hasVerifiedEmail) {
+            if(manualVerificationNeeded()) {
                 globalAEJS.trigger.send_verify_email(window.location.origin, globalAEJS.user.data.Email, {
-                    'subject': 'Email Subject',
-                    'body': 'Body text in email',
-                    'label': 'Return link label'
+                    'subject': 'Email Verification for AE',
+                    'body': 'Please verify your email',
+                    'label': 'Email Verification'
                 });
-                hasVerifiedEmail = true;
             }
             break;
+        case 'verify-email-ok':
+            // handle stuff after email i verified.
+            break;
     }
+}
+
+function manualVerificationNeeded() {
+    return !verify_email && request_verification;
 }
 
 function loginHandler(user,type,sso) {
@@ -57,7 +54,6 @@ function loginHandler(user,type,sso) {
 }
 
 function userHandler(user,state) {
-    console.log("User Handler");
 
     user.services.forEach(function(service) {
         if(service.Service == 'email') {
@@ -68,8 +64,8 @@ function userHandler(user,state) {
 
 }
 
-
 function verificationHandler(step, data) {
+
     if(step === 'sent')
         alert("A verification email has been sent to: " + data.EmailAddress);
     if(step === 'verified') {
@@ -81,8 +77,8 @@ function verificationHandler(step, data) {
 
 function passwordHandler() {
     alert("Password was updated successfully..");
-    $("#passwordUpdateForm").hide();
-    $("#askForUpdate").show();
+    $("#passwordUpdateForm").hide(500);
+    $("#askForUpdate").show(500);
 }
 
 function logoutHandler(user) {
@@ -96,13 +92,13 @@ function changePassword() {
 
 
 function showUpdateForm() {
-    $("#passwordUpdateForm").show();
-    $("#askForUpdate").hide();
+    $("#passwordUpdateForm").show(500);
+    $("#askForUpdate").hide(500);
 }
 
 function cancelChangePassword() {
-    $("#passwordUpdateForm").hide();
-    $("#askForUpdate").show();
+    $("#passwordUpdateForm").hide(500);
+    $("#askForUpdate").show(500);
 }
 
 function handleError(error) {
@@ -146,25 +142,25 @@ function forgotPassword() {
 
 // Review this
 
-function updateDisplay(user, state) {
-    $("#signup").hide();
-    $("#greetUser").show();
-    $("#registerlogin").hide();
-    $("#changePassword").show();
-    if (state === 'update')
-        $("#additional-data-form").hide();
+// function updateDisplay(user, state) {
+//     $("#signup").hide();
+//     $("#greetUser").show();
+//     $("#registerlogin").hide();
+//     $("#changePassword").show();
+//     if (state === 'update')
+//         $("#additional-data-form").hide();
+//
+//     var first_name = user.data.FirstName;
+//     $("#loggedInUser").text(first_name);
+// }
 
-    var first_name = user.data.FirstName;
-    $("#loggedInUser").text(first_name);
-}
-
-function enableLogout() {
-    var $logout = $("a[data-drupal-link-system-path='user/logout']");
-    $logout
-        .removeAttr("data-drupal-link-system-path")
-        .attr({
-            "data-ae-logout-link": true,
-            "href": "#"
-        });
-    globalAEJS.trigger.attach($logout);
-}
+// function enableLogout() {
+//     var $logout = $("a[data-drupal-link-system-path='user/logout']");
+//     $logout
+//         .removeAttr("data-drupal-link-system-path")
+//         .attr({
+//             "data-ae-logout-link": true,
+//             "href": "#"
+//         });
+//     globalAEJS.trigger.attach($logout);
+// }

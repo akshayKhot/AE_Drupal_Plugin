@@ -1,6 +1,11 @@
 var $ = jQuery;
 
+// This file is included on each drupal page, and it sets up aeJS, and the event handlers.
+
 function AEJSReady(aeJS) {
+
+    // drupalSettings is a variable to pass Drupal configuration values from PHP to javascript, defined in ae.module file
+    // for more information check out https://docs.acquia.com/tutorials/fast-track-drupal-8-coding/add-custom-variable-drupalsettings
 
     var options = getOptions(drupalSettings.ae);
     globalAEJS = aeJS;
@@ -20,7 +25,9 @@ function AEJSReady(aeJS) {
     aeJS.settings['verify_email'] = options.verify_email;
     aeJS.settings['verify_email_for_login'] = options.verify_email_for_login;
     aeJS.settings['display_error_message'] = false;
+
     console.log(aeJS.settings);
+
     aeJS.events.onFlow.addHandler(flowHandler);
     aeJS.events.onLogin.addHandler(loginHandler);
     aeJS.events.onUser.addHandler(userHandler);
