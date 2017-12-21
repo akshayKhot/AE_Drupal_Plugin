@@ -1,6 +1,9 @@
-var $ = jQuery;
+/*
+*  This file initializes the AEJS settings.
+*  refer ae.libraries.yml
+* */
 
-// This file is included on each drupal page, and it sets up aeJS, and the event handlers.
+var $ = jQuery;
 
 function AEJSReady(aeJS) {
 

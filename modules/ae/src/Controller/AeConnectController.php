@@ -4,7 +4,8 @@ namespace Drupal\ae\Controller;
 use Drupal\Core\Controller\ControllerBase;
 
 /**
- * Provides route responses for the Example module.
+ * This file displays the AE Connect login/register form,
+ * It's displayed on the Drupal home page as well as when the route is /ae-connect
  */
 class AeConnectController extends ControllerBase {
 

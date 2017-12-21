@@ -8,6 +8,11 @@ use Drupal\user\Entity\User;
 
 class LoginController extends ControllerBase {
 
+    /*
+        Create a local Drupal user based on the ae user.
+        Log in conditionally.
+        If the user already exists, use that account instead of creating new one.
+    */
     public function createuser($aeid, $createlocal, $signinlocal) {
 
         $createLocalUser = $createlocal == "true";

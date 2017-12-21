@@ -66,6 +66,5 @@ class SettingsForm extends ConfigFormBase {
         ksm($this->state->get('general_settings')["options"]);
     }
 
-
 }
 

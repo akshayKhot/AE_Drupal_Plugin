@@ -1,3 +1,7 @@
+/*
+* Includes the event handlers for AEJS.
+* */
+
 var globalAEJS;
 var createLocalUser;
 var signInLocalUser;
@@ -31,7 +35,7 @@ function flowHandler(event) {
             }
             break;
         case 'verify-email-ok':
-            // handle stuff after email i verified.
+            // handle stuff after email is verified.
             break;
     }
 }
